@@ -143,15 +143,26 @@
                 <h3>
                     Video demo
                 </h3>
-
-                <!-- <video id="v0" width="100%" autoplay loop muted>
-                  <source src="img/z_alias_pdf_labeled.m4v" type="video/mp4" />
-                </video> -->
-                <p class="text-justify">
-                    TBD.
+                <video
+                    class="video"
+                    width=100%
+                    id="roomcomp"
+                    loop
+                    playsinline
+                    autoplay
+                    muted
+                    src="./img/room_output.mp4"
+                    onplay="resizeAndPlay(this)"
+                ></video>
+                <canvas height=0 class="videoMerge" id="roomcompMerge"></canvas>
+                <p class="justified">
+                Novel view reconstructions for <strong> 3DGS (left 386MB)</strong> and <strong>our method (right 15MB)</strong>. 
+                Our method can achieve 25x compression rate while maintain similar visual quality.
                 </p>
             </div>
         </div> 
+
+
 
         <!-- <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -238,12 +249,12 @@
                 <h3>
                     Results
                 </h3>
-
+                
                 <!-- <video id="v0" width="100%" autoplay loop muted>
                   <source src="img/z_alias_pdf_labeled.m4v" type="video/mp4" />
                 </video> -->
                 <p class="text-justify">
-                    TBD.
+                    Check 3DGS compression survey: https://survey.3dgs.zip/ 
                 </p>
             </div>
         </div> 
