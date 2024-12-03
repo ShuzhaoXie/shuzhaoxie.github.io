@@ -1,0 +1,263 @@
+
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>SizeGS</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image" content="https://shuzhaoxie.github.io/mesongs/img/nottingham.jpg">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1296">
+    <meta property="og:image:height" content="840">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shuzhaoxie.github.io/sizegs/"/>
+    <meta property="og:title" content="SizeGS: Size-aware Compression of 3D Gaussians with Hierarchical Mixed Precision Quantization" />
+    <meta property="og:description" content="Effective compression technology is crucial for 3DGS to adapt to varying storage and transmission conditions. However, existing methods fail to address size constraints while maintaining optimal quality. In this paper, we introduce SizeGS, a framework that compresses 3DGS within a specified size budget while optimizing visual quality. We start with a size estimator to establish a clear relationship between file size and hyperparameters. Leveraging this estimator, we incorporate mixed precision quantization (MPQ) into 3DGS attributes, structuring MPQ in two hierarchical levels—inter-attribute and intra-attribute—to optimize visual quality under the size constraint. At the inter-attribute level, we assign bit-widths to each attribute channel by formulating the combinatorial optimization as a 0-1 integer linear program, which can be efficiently solved. At the intra-attribute level, we divide each attribute channel into blocks of vectors, quantizing each vector based on the optimal bit-width derived at the inter-attribute level. Dynamic programming determines block lengths. Using the size estimator and MPQ, we develop a calibrated algorithm to identify optimal hyperparameters in just 10 minutes, achieving a 1.69$\times$ efficiency increase with quality comparable to state-of-the-art methods." />
+
+    <!-- <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SizeGS: Size-aware Compression of 3D Gaussians\\with Hierarchical Mixed Precision Quantization" />
+    <meta name="twitter:description" content="3D Gaussian Splatting demonstrates excellent quality and speed in novel view synthesis. Nevertheless, the significant size of the 3D Gaussians presents challenges for transmission and storage. Current approaches employ compact models to compress the substantial volume and attributes of 3D Gaussians, along with intensive training to uphold quality. These endeavors demand considerable finetuning time, presenting formidable hurdles for practical deployment. To this end, we propose MesonGS, a codec for post-training compression of 3D Gaussians. Initially, we introduce a measurement criterion that considers both view-dependent and view-independent factors to assess the impact of each Gaussian point on the rendering output, enabling the removal of insignificant points. Subsequently, we decrease the entropy of attributes through two transformations that complement subsequent entropy coding techniques to enhance the file compression rate. More specifically, we first replace the rotation quaternion with Euler angles; then, we apply region adaptive hierarchical transform (RAHT) to key attributes to reduce entropy. Lastly, we suggest block quantization to control quantization granularity, thereby avoiding excessive information loss caused by quantization. Moreover, a finetune scheme is introduced to restore quality. Extensive experiments demonstrate that MesonGS significantly reduces the size of 3D Gaussians while preserving competitive quality." />
+    <meta name="twitter:image" content="https://shuzhaoxie.github.io/mesongs/img/teaser.jpg" /> -->
+
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    
+    <script src="js/app.js"></script>
+    <script src="js/video_comparison.js"></script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>SizeGS</b>: Size-aware Compression of 3D Gaussians with Hierarchical Mixed Precision Quantization</br> 
+                <!-- <small>
+                ECCV 2024
+                </small> -->
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://shuzhaoxie.github.io">
+                          Shuzhao Xie*
+                        </a>
+                    </li>
+                    <li>
+                        Jiahang Liu*
+                    </li>
+                    <li>
+                          Weixiang Zhang
+                    </li>
+                    <li>
+                        Shijia Ge
+                    </li>
+                    <li>
+                        Sicheng Pan
+                    </li>
+                    <li>
+                        <a href="https://www.chentang.cc">
+                          Chen Tang
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://bbaaii.github.io/">
+                          Yunpeng Bai
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://zwang.inflexionlab.org">
+                          Zhi Wang
+                        </a>
+                    </li>
+                    </br>Tsinghua University, Harbin Institute of Technology (Shenzhen)</br> 
+                    The Chinese University of Hong Kong, The University of Texas at Austin</br>
+                    <small>*equal contribution</small>
+                </ul>
+            </div>
+        </div>
+        
+
+        <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                    <ul class="nav nav-pills nav-justified">
+                        <li>
+                            <a href="../data/24-arxiv-sizegs.pdf">
+                            <image src="img/sizegs_paper_image.png" height="40px">
+                                <h4><strong>Paper</strong></h4>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="../data/24-eccv-mesongs-supp.pdf">
+                            <image src="img/mesongs_paper_image.png" height="40px">
+                                <h4><strong>Supplyment</strong></h4>
+                            </a>
+                        </li> -->
+                        <li>
+                            <a href="https://github.com/ShuzhaoXie/MesonGS">
+                            <image src="img/github.png" height="40px">
+                                <h4><strong>Code (coming soon)</strong></h4>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="">
+                            <image src="img/database_icon.png" height="40px">
+                                <h4><strong>Original .ply files</strong></h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                            <image src="img/database_icon.png" height="40px">
+                                <h4><strong>Evaluation images</strong></h4>
+                            </a>
+                        </li> -->
+                    </ul>
+                </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <b>TL;DR: Automatically Compressing 3DGS into the Desired File Size while Maximizing the Visual Quality.</b>
+            </div>
+          </div>
+        <br>
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <video id="v0" width="100%" autoplay loop muted controls>
+                    <source src="img/room_website.mp4" type="video/mp4" />
+                  </video>
+                <p class="text-justify">
+                Our method consists of two steps: 1) Given a size budget (e.g., 8MB for the <em>room</em> scene), our method can search a set of hyper-parameters to compress the corresponding 3DGS model within 10 minutes while achiving optimal quality. 2) After completing the hyperparameter search, we can employ finetuning to further enhance the visual quality. Note that durning finetuning, the compressed file size remains unchanged. The videos above show the visual results after different numbers of fine-tuning iterations. Typically, 100 iterations of fine-tuning are sufficient.
+                </p>
+            </div>
+        </div> 
+          
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    Effective compression technology is crucial for 3DGS to adapt to varying storage and transmission conditions. However, existing methods fail to address size constraints while maintaining optimal quality. In this paper, we introduce SizeGS, a framework that compresses 3DGS within a specified size budget while optimizing visual quality. We start with a size estimator to establish a clear relationship between file size and hyperparameters. Leveraging this estimator, we incorporate mixed precision quantization (MPQ) into 3DGS attributes, structuring MPQ in two hierarchical levels—inter-attribute and intra-attribute—to optimize visual quality under the size constraint. At the inter-attribute level, we assign bit-widths to each attribute channel by formulating the combinatorial optimization as a 0-1 integer linear program, which can be efficiently solved. At the intra-attribute level, we divide each attribute channel into blocks of vectors, quantizing each vector based on the optimal bit-width derived at the inter-attribute level. Dynamic programming determines block lengths. Using the size estimator and MPQ, we develop a calibrated algorithm to identify optimal hyperparameters in just 10 minutes, achieving a 1.69x efficiency increase with quality comparable to state-of-the-art methods.
+                </p>
+            </div>
+        </div>
+  
+<br>
+        <!-- <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Hyperparameter Search Algorithm
+                </h3>
+                
+				<table style="width: 100%; border-collapse: collapse;">
+				  <tr>
+				    <td style="text-align: center;">
+		                <image  src="img/mesongs_framework.png" width="100%"></image>
+					</td>
+				  </tr>
+				</table>
+                <br>
+                <p class="text-justify">
+                    1) We prune insignificant Gaussians by considering both view-dependent and view-independent factors. 2) Geometry compression is performed using an octree to generate voxelized coordinates for future transformations. 3) We replace rotation quaternions with Euler angles. 4) Applying RAHT and 5) block quantization to important attributes. Notably, RAHT is not applied to the scales when the quantization bit is 8 (<em>see dashed arrow</em>). 6) To significantly compress the remained SH coefficients, vector quantization is employed. 7) All components are packed by <em>zip</em>.
+                </p>
+            </div>
+        </div>
+<br> -->
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Main Performance
+                </h3>
+                <img width="100%" src="./img/sizegs_main_exp.png"/>
+                <p class="text-justify">
+                    <b>End-to-end performance in size-aware compression.</b> Our method can search out better hyper-parameters to compress the 3DGS into desired file size with less time consumption. “Mip-NeRF 360 - 18.33 MB” refers to “dataset - size budget”. 
+                </p>
+            </div>
+        </div> 
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Visualization
+                </h3>
+                <p class="text-justify">
+                    Qualitative results of 3DGS, ScaffoldGS, HAC, and SizeGS (our method). Models we used to render the following views are <b>the same as</b> the above "End-to-end performance" table. 
+                </p>
+
+                <img width="100%" src="./img/vis/360_v2_bicycle.png"/>
+                <p class="text-justify" style="text-align: center;">
+                    <em>Bicycle</em> (MipNeRF-360)
+                </p>
+
+                <img width="100%" src="./img/vis/360_v2_flowers.png"/>
+                <p class="text-justify" style="text-align: center;">
+                    <em>Flowers</em> (MipNeRF-360)
+                </p>
+                
+                <img width="100%" src="./img/vis/db_drjohnson.png"/>
+                <p class="text-justify" style="text-align: center;">
+                    <em>Drjohnson</em> (Deep Blending)
+                </p>
+
+                <img width="100%" src="./img/vis/tandt_truck.png"/>
+                <p class="text-justify" style="text-align: center;">
+                    <em>Truck</em> (Tank & Temples)
+                </p>
+            </div>
+        </div> 
+
+        
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@article{xie2024sizegs,
+    title={SizeGS: Size-aware Compression of 3D Gaussians with Hierarchical Mixed Precision Quantization},
+    author={Xie, Shuzhao and Liu, Jiahang and Zhang, Weixiang and Ge, Shijia and Sicheng, Pan and Tang, Chen and Bai, Yunpeng and Wang, Zhi},
+    journal={arXiv},
+    year={2024}
+}
+                </textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Acknowledgments
+                </h3>
+                <p class="text-justify">
+                    This work is supported in part by National Key Research and Development Project of China (Grant No. 2023YFF0905502), Shenzhen Science and Technology Program (Grant No. JCYJ20220818101014030). We thank the valuable advices from anonymous ICLR reviewers.
+                    <br><br>
+                The website template was borrowed from <a href="http://mgharbi.com/">Michaël Gharbi</a>, <a href="http://mgharbi.com/">Ref-NeRF</a>, and <a href="https://jonbarron.info/zipnerf/">Zip-NeRF</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
