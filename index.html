@@ -1,738 +1,372 @@
-<!DOCTYPE HTML>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shuzhao Xie</title>
-  
   <meta name="author" content="Shuzhao Xie">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-	<!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>"> -->
   <link rel="icon" type="image/png" href="images/steel_ball.png">
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "outline-variant": "#e0e0e0",
+            "border-subtle": "#e0e0e0",
+            "surface-container-low": "#fafafa",
+            "surface-container": "#f5f5f5",
+            "background": "#ffffff",
+            "surface": "#ffffff",
+            "on-surface": "#1b1b1b",
+            "on-surface-variant": "#616161",
+            "outline": "#9e9e9e",
+            "primary": "#000000",
+            "on-primary": "#ffffff",
+            "secondary": "#424242",
+            "tertiary": "#616161",
+            "accent": "#005da7"
+          },
+          borderRadius: {
+            DEFAULT: "0.125rem",
+            lg: "0.25rem",
+            xl: "0.5rem"
+          },
+          spacing: {
+            "margin-mobile": "20px",
+            "margin-desktop": "64px",
+            "gutter": "24px",
+            "stack-lg": "64px",
+            "stack-md": "32px",
+            "stack-sm": "16px"
+          },
+          fontFamily: {
+            sans: ["Nunito Sans", "sans-serif"],
+            label: ["Arimo", "sans-serif"]
+          },
+          fontSize: {
+            "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+            "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+            "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            "label-md": ["14px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }],
+            "label-sm": ["12px", { lineHeight: "14px", letterSpacing: "0.05em", fontWeight: "500" }],
+            "caption": ["12px", { lineHeight: "1.4", fontWeight: "400" }]
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #1b1b1b;
+      font-family: 'Nunito Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    .link-minimal {
+      position: relative;
+      display: inline-block;
+    }
+    .link-minimal::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      bottom: -1px;
+      left: 0;
+      background-color: currentColor;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease-out;
+    }
+    .link-minimal:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+    .paper-title {
+      font-weight: 600;
+      color: #000000;
+    }
+    .paper-link {
+      color: #000000;
+      font-weight: 600;
+      transition: opacity 0.2s ease;
+    }
+    .paper-link:hover {
+      opacity: 0.6;
+      text-decoration: underline;
+    }
+    .inline-link {
+      color: #000000;
+      text-decoration: underline;
+      text-decoration-color: #c0c0c0;
+      text-underline-offset: 2px;
+      transition: text-decoration-color 0.2s ease;
+    }
+    .inline-link:hover {
+      text-decoration-color: #000000;
+    }
+  </style>
 </head>
 
-<body>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:63%;vertical-align:middle">
-              <p style="text-align:center">
-                <name>Shuzhao Xie</name>
-              </p>
-              <p>I am a PhD student at <a href="https://www.sigs.tsinghua.edu.cn">Tsinghua SIGS</a>, 
-                working with Prof. <a href ="http://zwang.inflexionlab.org">Zhi Wang</a> on 3D Vision and Embodied AI. 
-                I received my Master's degree in Computer Technology from <a href="https://www.tsinghua.edu.cn">Tsinghua University</a> in 2023
-                and my Bachelor's degree in Computer Science and Technology from <a href="https://en.wikipedia.org/wiki/Beijing_Normal_University">Beijing Normal University</a> in 2020.
-              </p>
-              <p style="text-align:center">
-                <a href="mailto:xiesz99@gmail.com">Email</a> &nbsp/&nbsp
-                <a href="data/ShuzhaoXie-CV.pdf">CV [2025.07]</a> &nbsp/&nbsp
-                <a href="https://scholar.google.com/citations?user=_2QNPGYAAAAJ&hl=en">Google Scholar</a> &nbsp/&nbsp
-                <a href="https://github.com/ShuzhaoXie/">Github</a> &nbsp/&nbsp
-                <a href="https://x.com/xiesz99">Twitter</a> &nbsp/&nbsp
-                <a href="https://calendar.google.com/calendar/u/0?cid=eGllc3o5OUBnbWFpbC5jb20">Calendar</a>
-              </p>
-            </td>
-            <td style="padding:2.5%;width:40%;max-width:40%">
-              <a href="images/ShuzhaoXie_v2.png"><img style="width:100%;max-width:100%" alt="profile photo" src="images/ShuzhaoXie_v2.png" class="hoverZoomLink"></a>
-            </td>
-            <!-- <td style="padding:2.5%;width:40%;max-width:40%">
-              <a href="images/ShuzhaoXie_v2.png" class="hover-img-wrapper">
-                <img src="images/ShuzhaoXie_v2.png" style="width:100%;max-width:100%" alt="profile photo" class="img-normal">
-                <img src="images/ShuzhaoXie.jpg" style="width:100%;max-width:100%" alt="hover photo" class="img-hover">
-              </a>
-            </td>             -->
-          </tr>
-        </tbody></table>
+<body class="selection:bg-primary selection:text-white">
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-            <td style="padding:20px;width:100%;vertical-align:middle">
-              <heading>Research Interests</heading>
-              <p>
-                My research focuses on computer graphics and computer vision, particularly on 3D reconstruction and simulation techniques that facilitate effective robot learning.
-              </p>
-              <!-- <p>
-                My research is in the area of novel view synthesis, generative models, and serving system. 
-                I'm interested in designing systems to efficiently utilize deep learning models/services and exploiting deep learning techniques to empower network systems.
-                I have experience in machine learning cloud services, reinforcement learning algorithms, and edge hardwares (e.g., Jetson Nano, Raspberry Pi).
-              </p> -->
-              <!-- <p>
-                <span class="highlight">I will graduate in 2023, and am currently looking for a PhD position working on network/system.</span>
-              </p> -->
-            </td>
-          </tr>
-        </tbody></table>
-        
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr>
-          <td style="padding:20px;width:100%;vertical-align:middle">
-            <heading>Publications</heading>
-          </td>
-        </tr>
-      </tbody></table>
+  <!-- Top Navigation -->
+  <nav class="fixed top-0 z-50 w-full bg-background border-b border-border-subtle">
+    <div class="max-w-[800px] mx-auto px-margin-mobile flex justify-between items-center h-16">
+      <a href="#home" class="text-headline-md font-bold tracking-tight text-primary">Shuzhao Xie</a>
+      <div class="hidden md:flex items-center gap-stack-sm">
+        <a class="text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#home">Home</a>
+        <a class="text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#publications">Publications</a>
+        <a class="text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#service">Service</a>
+        <a class="ml-4 px-4 py-2 bg-primary text-on-primary text-label-sm rounded-lg hover:opacity-80 transition-opacity" href="mailto:xiesz99@gmail.com">Contact</a>
+      </div>
+      <a class="md:hidden material-symbols-outlined text-primary" href="mailto:xiesz99@gmail.com">mail</a>
+    </div>
+  </nav>
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <!-- <tr onmouseout="mlaas_stop()" onmouseover="mlaas_start()"> -->
+  <main class="max-w-[800px] mx-auto px-margin-mobile pt-32 pb-stack-lg">
 
-            <tr>
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <img src='images/25-nips-feainr.png' width="160">
-              </td>
-              <td style="padding:20px;width:75%;vertical-align:middle">
-                <a href="">
-                  <papertitle>Understanding Bias Terms in Neural Representation</papertitle>
-                </a>
-                <br>
-                <a href="https://weixiang-zhang.github.io">Weixiang Zhang</a>, 
-                Boxi Li,
-                <strong>Shuzhao Xie</strong>,
-                Chengwei Ren, 
-                Yuan Xue, 
-                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-                <br>
-                <em>NeurIPS</em>, 2025
-                <br>
-                <a href="./data/25-nips-feainr.pdf">paper</a>
-                /
-                <!-- <a href="">video</a> -->
-                <!-- / -->
-                <a href="https://github.com/zwx-open/Featuring-INR">code</a>
-                <p></p>
-                <!-- <p>
-                Post-training 3D Gaussians Compression. 
-                </p> -->
-              </td>
-            </tr>
+    <!-- Header / Intro -->
+    <header id="home" class="mb-stack-lg flex flex-col md:flex-row gap-gutter items-start">
+      <div class="flex-1 order-2 md:order-1">
+        <h1 class="text-display-lg mb-stack-sm text-primary">Shuzhao Xie</h1>
+        <p class="text-body-lg text-on-surface mb-stack-sm leading-relaxed">
+          I am a PhD student at <a class="inline-link" href="https://www.sigs.tsinghua.edu.cn">Tsinghua SIGS</a>,
+          working with Prof. <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a> on 3D Vision.
+          Previously M.E. at <a class="inline-link" href="https://www.tsinghua.edu.cn">Tsinghua</a> (2023) and B.S. at <a class="inline-link" href="https://en.wikipedia.org/wiki/Beijing_Normal_University">BNU</a> (2020).
+        </p>
+        <div class="flex flex-wrap gap-x-5 gap-y-2 mt-stack-sm text-label-sm text-on-surface-variant">
+          <a class="link-minimal" href="mailto:xiesz99@gmail.com">Email</a>
+          <a class="link-minimal" href="data/ShuzhaoXie-CV.pdf">CV [2025.07]</a>
+          <a class="link-minimal" href="https://scholar.google.com/citations?user=_2QNPGYAAAAJ&hl=en">Google Scholar</a>
+          <a class="link-minimal" href="https://github.com/ShuzhaoXie/">Github</a>
+          <a class="link-minimal" href="https://x.com/xiesz99">Twitter</a>
+          <a class="link-minimal" href="https://calendar.google.com/calendar/u/0?cid=eGllc3o5OUBnbWFpbC5jb20">Calendar</a>
+        </div>
+      </div>
+      <div class="w-48 md:w-[230px] shrink-0 order-1 md:order-2">
+        <a href="images/ShuzhaoXie_v2.png">
+          <img class="w-full h-auto rounded-xl shadow-sm" alt="Shuzhao Xie" src="images/ShuzhaoXie_v2.png">
+        </a>
+      </div>
+    </header>
 
-            <tr>
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <img src='images/25-mm-sizegs.png' width="160">
-              </td>
-              <td style="padding:20px;width:75%;vertical-align:middle">
-                <a href="">
-                  <papertitle>SizeGS: Size-aware Compression of 3D Gaussian Splatting via Mixed Integer Programming</papertitle>
-                </a>
-                <br>
-                <strong>Shuzhao Xie*</strong>,
-                Jiahang Liu*,
-                <a href="https://weixiang-zhang.github.io">Weixiang Zhang</a>, 
-                Shijia Ge,
-                Sicheng Pan,
-                <a href="https://www.chentang.cc">Chen Tang</a>,
-                <a href="https://bbaaii.github.io/">Yunpeng Bai</a>,
-                <a href="https://scholar.google.com/citations?user=hTBtRI0AAAAJ&hl=en">Cong Zhang</a>,
-                <a href="https://scholar.google.com/citations?hl=en&user=z2EohmgAAAAJ&view_op=list_works&sortby=pubdate">Xiaoyi Fan</a>,
-                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-                <br>
-                *Equal contribution
-                <br>
-                <em>ACM Multimedia</em>, 2025 &nbsp; <font color="red"><strong>Best Paper Candidate (Top 0.5%)</strong></font>
-                <br>
-                <a href="./data/25-mm-sizegs.pdf">paper</a>
-                /
-                <a href="https://shuzhaoxie.github.io/sizegs/">project page</a>
-                /
-                <!-- <a href="">video</a> -->
-                <!-- / -->
-                <a href="https://github.com/mmlab-sigs/sizegs">code</a>
-                <p></p>
-                <!-- <p>
-                Post-training 3D Gaussians Compression. 
-                </p> -->
-              </td>
-            </tr>
-
-            <tr>
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <img src='images/25-iccv-souldance.png' width="160">
-              </td>
-              <td style="padding:20px;width:75%;vertical-align:middle">
-                <a href="">
-                <papertitle>Music-Aligned Holistic 3D Dance Generation via Hierarchical Motion Modeling
-                </papertitle>
-                </a>
-                <br>
-                Xiaojie Li,
-                Ronghui Li,
-                Shukai Fang,
-                <strong>Shuzhao Xie</strong>,
-                Xiaoyang Guo,
-                Jiaqing Zhou,
-                Junkun Peng, 
-                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-                <br>
-                <em>International Conference on Computer Vision (ICCV)</em>, 2025
-                <br>
-                <a href="">paper</a>
-                <!-- /
-                <a href="data/24-cvpr-rfquant-supp.pdf">supp</a>
-                /
-                <a href="data/24-cvpr-rfquant-poster.pdf">poster</a>
-                /
-                <a href="https://github.com/1hunters/retraining-free-quantization/">code</a> -->
-                <p></p>
-                <p>
-                  
-                </p>
-              </td>
-            </tr>
-
-            
-            <tr>
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <img src='images/24-arxiv-expansion.png' width="160">
-              </td>
-              <td style="padding:20px;width:75%;vertical-align:middle">
-                <a href="">
-                  <papertitle>Expansive Supervision for Neural Radiance Field</papertitle>
-                </a>
-                <br>
-                <a href="https://weixiang-zhang.github.io">Weixiang Zhang</a>, 
-                Wei Yao,
-                <strong>Shuzhao Xie</strong>,
-                Shijia Ge,
-                <a href="https://www.chentang.cc">Chen Tang</a>,
-                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-                <br>
-                <em>IEEE International Conference on Multimedia & Expo (ICME)</em>, 2025
-                <br>
-                <a href="data/24-arxiv-expansive.pdf">paper</a> /
-                <a href="https://github.com/zwx-open/Expansive-Supervision">code</a>
-
-              </td>
-            </tr>
-
-            <tr>
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <img src='images/25-cvpr-evos.png' width="160">
-              </td>
-              <td style="padding:20px;width:75%;vertical-align:middle">
-                <a href="">
-                  <papertitle>EVOS: Efficient Implicit Neural Training via EVOlutionary Selector</papertitle>
-                </a>
-                <br>
-                <a href="https://weixiang-zhang.github.io">Weixiang Zhang</a>, 
-                <strong>Shuzhao Xie</strong>, 
-                Chengwei Ren, 
-                Shiyi Xie, 
-                <a href="https://www.chentang.cc">Chen Tang</a>,
-                Shijia Ge,
-                Mingzi Wang,
-                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-                <br>
-                <em>IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, 2025
-                <br>
-                <a href="https://arxiv.org/pdf/2412.10153">paper</a>
-                /
-                <a href="https://weixiang-zhang.github.io/proj-evos/">project page</a>
-                /
-                <a href="https://github.com/zwx-open/EVOS-INR">code</a>
-              </td>
-            </tr>
-
-            <tr>
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <img src='images/textir.png' width="160">
-              </td>
-              <td style="padding:20px;width:75%;vertical-align:middle">
-                <a href="">
-                <papertitle>TextIR: A Simple Framework for Text-based Editable Image Restoration</papertitle>
-                </a>
-                <br>
-                <a href="https://bbaaii.github.io/">Yunpeng Bai</a>,
-                Cairong Wang,
-                <strong>Shuzhao Xie</strong>,
-                Chao Dong,
-                Chun Yuan,
-                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-                <br>
-                <em>IEEE Transactions on Visualization and Computer Graphics (TVCG)</em>, 2025
-                <br>
-                <a href="https://arxiv.org/abs/2302.14736">paper</a>
-                <p></p>
-                <p>
-                  In this work, we design an effective framework that allows the user to control the restoration process of degraded images with text descriptions. We use the text-image feature compatibility of the CLIP to alleviate the difficulty of fusing text and image features. Our framework can be used for various image restoration tasks, including image inpainting, image super-resolution, and image colorization.
-                </p>
-              </td>
-            </tr>
-
-            <tr>
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <img src='images/25-icassp-lungmix.png' width="160">
-              </td>
-              <td style="padding:20px;width:75%;vertical-align:middle">
-                <a href="">
-                  <papertitle>Lungmix: A Mixup-Based Strategy for Generalization in Respiratory Sound Classification</papertitle>
-                </a>
-                <br>
-                Shijia Ge, 
-                <a href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
-                <strong>Shuzhao Xie</strong>, 
-                Baixu Yan,
-                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-                <br>
-                <em>IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP)</em>, 2025
-                <br>
-                <a href="./data/25-icassp-lungmix.pdf">paper</a>
-                <!-- /
-                <a href="https://shuzhaoxie.github.io/mesongs/">project page</a>
-                / -->
-                <!-- <a href="">video</a> -->
-                <!-- / -->
-                <!-- <a href="https://github.com/zwx-open/Symmetric-Power-Transformation-INR">code</a> -->
-                <!-- <p></p> -->
-                <!-- <p>
-                Post-training 3D Gaussians Compression. 
-                </p> -->
-              </td>
-            </tr>
-            <tr>
-              <td style="padding:20px;width:25%;vertical-align:middle">
-                <img src='images/25-icassp-pulmoscan.png' width="160">
-              </td>
-              <td style="padding:20px;width:75%;vertical-align:middle">
-                <a href="">
-                  <papertitle>PulmoScan: A Practical Pulmonary Disease Pre-Screening System</papertitle>
-                </a>
-                <br>
-                Baixu Yan,
-                Shijia Ge,
-                Meizi Lu,
-                <a href="https://weixiang-zhang.github.io">Weixiang Zhang</a>, 
-                <strong>Shuzhao Xie</strong>, 
-                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-                <br>
-                <em>IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP)</em>, 2025
-                <br>
-                <a href="./data/25-icassp-pulmoscan.pdf">paper</a>
-                <!-- /
-                <a href="https://shuzhaoxie.github.io/mesongs/">project page</a>
-                / -->
-                <!-- <a href="">video</a> -->
-                <!-- / -->
-                <!-- <a href="https://github.com/zwx-open/Symmetric-Power-Transformation-INR">code</a> -->
-                <!-- <p></p> -->
-                <!-- <p>
-                Post-training 3D Gaussians Compression. 
-                </p> -->
-              </td>
-            </tr>
-          <tr>
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <img src='images/25-aaai-sym.png' width="160">
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="">
-                <papertitle>Enhancing Implicit Neural Representations via Symmetric Power Transformation</papertitle>
-              </a>
-              <br>
-              <a href="https://weixiang-zhang.github.io">Weixiang Zhang</a>, 
-              <strong>Shuzhao Xie</strong>, 
-              Chengwei Ren, 
-              Shijia Ge, 
-              Mingzi Wang, 
-              <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-              <br>
-              <em>The 39th Annual AAAI Conference on Artificial Intelligence (AAAI)</em>, 2025
-              <br>
-              <a href="https://arxiv.org/abs/2412.09213">paper</a>
-              /
-              <a href="https://weixiang-zhang.github.io/proj-symtrans/">project page</a>
-              /
-              <a href="https://github.com/zwx-open/Symmetric-Power-Transformation-INR">code</a>
-              <!-- <p></p> -->
-              <!-- <p>
-              Post-training 3D Gaussians Compression. 
-              </p> -->
-            </td>
-          </tr>
-
-          <tr>
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <img src='images/24-eccv-mesongs.png' width="160">
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="">
-                <papertitle>MesonGS: Post-training Compression of 3D Gaussians via Efficient Attribute Transformation</papertitle>
-              </a>
-              <br>
-              <strong>Shuzhao Xie</strong>,
-              <a href="https://weixiang-zhang.github.io">Weixiang Zhang</a>, 
-							<a href="https://www.chentang.cc">Chen Tang</a>,
-              <a href="https://bbaaii.github.io/">Yunpeng Bai</a>,
-              <a href="">Rongwei Lu</a>,
-              Shijia Ge,
-              <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-              <br>
-              <em>European Conference on Computer Vision (ECCV)</em>, 2024
-              <br>
-              <a href="data/24-eccv-mesongs.pdf">paper</a>
-              /
-              <a href="https://shuzhaoxie.github.io/mesongs/">project page</a>
-              /
-              <!-- <a href="">video</a> -->
-              <!-- / -->
-              <a href="https://github.com/ShuzhaoXie/MesonGS">code</a>
-              <p></p>
-              <!-- <p>
-              Post-training 3D Gaussians Compression. 
-              </p> -->
-            </td>
-          </tr>
-
-          <tr>
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <img src='images/2024-tmm-skyml.png' width="160">
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="">
-                <papertitle>SkyML: A MLaaS Federation Design for Multicloud-based Multimedia Analytics</papertitle>
-              </a>
-              <br>
-              <strong>Shuzhao Xie</strong>,
-              Yuan Xue, 
-							Yifei Zhu,
-              <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-              <br>
-              <em>IEEE Transactions on Multimedia (TMM) </em>, 2024
-              <br>
-              <a href="data/24-tmm-skyml.pdf">paper</a>
-              /
-              <!-- /
-              <a href="https://shuzhaoxie.github.io/mesongs/">project page</a>
-              / -->
-              <!-- <a href="">video</a> -->
-              <!-- / -->
-              <a href="https://github.com/ShuzhaoXie/Armol">code</a>
-              <p></p>
-              <!-- <p>
-              Post-training 3D Gaussians Compression. 
-              </p> -->
-            </td>
-          </tr>
-          
-          
-
-          <tr>
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <img src='images/24-arxiv-visctrl.png' width="160">
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="">
-              <papertitle>Tuning-Free Visual Customization via View Iterative Self-Attention Control</papertitle>
-              </a>
-              <br>
-              Xiaojie Li,
-              Chenghao Gu,
-              <strong>Shuzhao Xie</strong>,
-              <a href="https://bbaaii.github.io/">Yunpeng Bai</a>,
-              <a href="https://weixiang-zhang.github.io">Weixiang Zhang</a>, 
-              <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-              <br>
-              <em>arXiv</em>, 2024
-              <br>
-              <a href="data/24-arxiv-visctrl.pdf">paper</a>
-              <!-- /
-              <a href="data/24-cvpr-rfquant-supp.pdf">supp</a>
-              /
-              <a href="data/24-cvpr-rfquant-poster.pdf">poster</a>
-              /
-              <a href="https://github.com/1hunters/retraining-free-quantization/">code</a> -->
-              <p></p>
-              <p>
-                
-              </p>
-            </td>
-          </tr>
-
-          <tr>
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <img src='images/24-cvpr-rfquant.png' width="160">
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="">
-              <papertitle>RFQuant: Retraining-free Model Quantization via One-Shot Weight-Coupling Learning</papertitle>
-              </a>
-              <br>
-              <a href="https://www.chentang.cc">Chen Tang*</a>,
-              Yuan Meng*,
-              Jiacheng Jiang,
-              <strong>Shuzhao Xie</strong>,
-              Rongwei Lu, 
-              Xinzhu Ma, 
-              <a href="http://zwang.inflexionlab.org">Zhi Wang</a>, 
-              Wenwu Zhu
-              <br>
-              <em>IEEE Conference on Computer Vision and Pattern Recognition (CVPR)</em>, 2024
-              <br>
-              <a href="data/24-cvpr-rfquant.pdf">paper</a>
-              /
-              <a href="data/24-cvpr-rfquant-supp.pdf">supp</a>
-              /
-              <a href="data/24-cvpr-rfquant-poster.pdf">poster</a>
-              /
-              <a href="https://github.com/1hunters/retraining-free-quantization/">code</a>
-              <p></p>
-              <p>
-                
-              </p>
-            </td>
-          </tr>
-          
-          <tr>
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <img src='images/24-europar.png' width="160">
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="">
-              <papertitle>A Joint Approach to Local Updating and Gradient Compression for Efficient Asynchronous Federated Learning</papertitle>
-              </a>
-              <br>
-              Jiajun Song,
-              Jiajun Luo, 
-              Rongwei Lu,
-              <strong>Shuzhao Xie</strong>,
-              Bin Chen,
-              <a href="http://zwang.inflexionlab.org">Zhi Wang</a>, 
-              Wenwu Zhu
-              <br>
-              <em>International European Conference on Parallel and Distributed Computing (Euro-Par)</em>, 2024
-              <br>
-              <a href="https://arxiv.org/abs/2407.05125">paper</a>
-              <p></p>
-              <p>
-                
-              </p>
-            </td>
-          </tr>
-
-          
-
-          <tr>
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <img src='images/22-infocom-armol.png' width="160">
-            </td>
-            <!-- <td style="padding:20px;width:25%;vertical-align:middle">
-              <div class="one">
-                <div class="two" id='mlaas_image'>
-                  <video  width=100% height=100% muted autoplay loop>
-                    <source src="images/mlaas_en.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </div>
-              <script type="text/javascript">
-                function mlaas_start() {
-                  document.getElementById('mlaas_image').style.opacity = "1";
-                }
-
-                function mlaas_stop() {
-                  document.getElementById('mlaas_image').style.opacity = "1";
-                }
-              </script>
-            </td> -->
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="data/22-infocom-armol.pdf">
-                <papertitle>Cost Effective MLaaS Federation: A Combinatorial Reinforcement Learning Approach</papertitle>
-              </a>
-              <br>
-              <strong>Shuzhao Xie</strong>,
-              Yuan Xue, 
-							<a href="https://sites.ji.sjtu.edu.cn/yifei-zhu/">Yifei Zhu</a>,
-              <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-              <br>
-              <em>INFOCOM</em>, 2022
-              <br>
-              <a href="data/22-infocom-armol.pdf">paper</a>
-              /
-              <a href="https://mmlabsigs.notion.site/Cost-Effective-MLaaS-Federation-A-Combinatorial-Reinforcement-Learning-Approach-fd27b02a403240f3b55ec26ad5ba00db">project page</a>
-              /
-              <!-- <a href="">video</a> -->
-              <!-- / -->
-              <a href="https://github.com/ShuzhaoXie/Armol">code</a>
-              <p></p>
-              <p>
-              As naively using multiple ML APIs can lead to lower analytical accuracy and poor user experience,
-                we employ reinforcement learning to select the optimal combination of MLaaSes, thus maximizing accuracy while minimizing cost. 
-              </p>
-            </td>
-          </tr>
-				
-	
-  <!-- <tr>
-    <td style="padding:20px;width:25%;vertical-align:middle">
-      <img src='images/openassl.png' width="160">
-    </td>
-    <td style="padding:20px;width:75%;vertical-align:middle">
-      <a href="https://shuzhaoxie.github.io">
-        <papertitle>Open-World Recognition via Semi-Supervised Learning with Unseen Neuron</papertitle>
-      </a>
-      <br>
-      Zeming Chen*,
-      <strong>Shuzhao Xie*</strong>,
-      Shiji Zhou,
-			<a href="http://zwang.inflexionlab.org">Zhi Wang</a>,
-			Tao Dai,
-      Yuan Xue <br> (* equal contribution)
-      <br>
-			<em>In submission</em>
-      <br>
-      <p></p>
-      <p>
-      Discoverying unseen classes and classifying seen classes via an additional neuron at last layer under open-world recognition settings.
+    <!-- Research Interests -->
+    <section class="mb-stack-lg pt-stack-md border-t border-border-subtle">
+      <h2 class="text-headline-lg text-primary mb-stack-sm">Research Interests</h2>
+      <p class="text-body-md text-on-surface leading-relaxed">
+        My research focuses on computer graphics and computer vision, particularly on 3D reconstruction and simulation techniques that facilitate effective robot learning.
       </p>
-    </td>
-  </tr>
+    </section>
 
-  <tr>
-    <td style="padding:20px;width:25%;vertical-align:middle">
-      <img src='images/mdls_v1.png' width="160">
-    </td>
-    <td style="padding:20px;width:75%;vertical-align:middle">
-      <a href="https://shuzhaoxie.github.io">
-        <papertitle>A Manual-Free Label Alignment Approach for Multi-Dataset Abnormal Respiratory Sound Classification</papertitle>
-      </a>
-      <br>
-      <strong>Shuzhao Xie</strong>,
-      Yujie Yang,
-      Yunpeng Bai,
-      Nanyang Du,
-      <a href="https://thuhcsi.github.io/zywu.html">Zhiyong Wu</a>,
-			<a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-      <br>
-			<em>In submission</em>
-      <br>
-      <p></p>
-      <p>
-      We reduce the NP-hard dataset-specific labels merging problem into a 0-1 integer linear programming problem, which is solvable in tolerable complexity.
-      </p>
-    </td>
-  </tr> -->
+    <!-- Publications -->
+    <section id="publications" class="mb-stack-lg pt-stack-md border-t border-border-subtle">
+      <div class="flex justify-between items-baseline mb-stack-md gap-4 flex-wrap">
+        <h2 class="text-headline-lg text-primary">Selected Publications</h2>
+        <a href="publications.html" class="text-label-sm text-on-surface-variant uppercase tracking-wider link-minimal">Full Publications &nbsp;→</a>
+      </div>
+      <p class="text-caption text-on-surface-variant mb-stack-md uppercase tracking-wider">Selected First-Author Works</p>
 
-  <!-- <tr>
-    <td style="padding:20px;width:25%;vertical-align:middle">
-      <img src='images/textir_v1.png' width="160">
-    </td>
-    <td style="padding:20px;width:75%;vertical-align:middle">
-      <a href="https://shuzhaoxie.github.io">
-        <papertitle>TextIR: A Simple Framework for Text-based Editable Image Restoration</papertitle>
-      </a>
-      <br>
-      Yunpeng Bai,
-      <strong>Shuzhao Xie</strong>,
-      Cairong Wang,
-      <a href="http://xpixel.group/2010/01/20/chaodong.html">Chao Dong</a>,
-      Chun Yuan,
-			<a href="http://zwang.inflexionlab.org">Zhi Wang</a>
-      <br>
-			<em>In submission</em>
-      <br>
-      <p></p>
-      <p>
-        we design an effective framework that allows the user to control the restoration process of degraded images with text descriptions. This new framework provides a good starting point for the text-based image restoration task.
-      </p>
-    </td>
-  </tr>
-	 -->
+      <div class="divide-y divide-border-subtle">
 
-      <!-- <table width="100%" align="center" border="0" cellspacing="0" cellpadding="10">
-        <tbody>
-          <tr>
-            <td style="padding:20px;width:100%;vertical-align:middle">
-              <heading>Industry Experience</heading>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <!-- ACM MM 2025 - SizeGS -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/25-mm-sizegs.png" alt="SizeGS">
+          </div>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-1">
+              <span class="text-caption text-on-surface-variant uppercase tracking-wider">ACM Multimedia, 2025</span>
+              <span class="px-2 py-0.5 bg-primary text-on-primary text-[10px] uppercase tracking-wider rounded-lg">Best Paper Candidate · Top 0.5%</span>
+            </div>
+            <h3 class="text-headline-md paper-title mb-2">SizeGS: Size-aware Compression of 3D Gaussian Splatting via Mixed Integer Programming</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <span class="font-bold text-on-surface">Shuzhao Xie*</span>,
+              Jiahang Liu*,
+              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+              Shijia Ge, Sicheng Pan,
+              <a class="inline-link" href="https://www.chentang.cc">Chen Tang</a>,
+              <a class="inline-link" href="https://bbaaii.github.io/">Yunpeng Bai</a>,
+              <a class="inline-link" href="https://scholar.google.com/citations?user=hTBtRI0AAAAJ&hl=en">Cong Zhang</a>,
+              <a class="inline-link" href="https://scholar.google.com/citations?hl=en&user=z2EohmgAAAAJ&view_op=list_works&sortby=pubdate">Xiaoyi Fan</a>,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+              <span class="text-caption block mt-1">*Equal contribution</span>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="./data/25-mm-sizegs.pdf">[paper]</a>
+              <a class="paper-link" href="https://shuzhaoxie.github.io/sizegs/">[project]</a>
+              <a class="paper-link" href="https://github.com/mmlab-sigs/sizegs">[code]</a>
+            </div>
+          </div>
+        </article>
 
-      <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-        <tbody>
-          <tr>
-            <td style="padding:20px;width:25%;vertical-align:middle">
-                <img src='images/tencent_youtu_logo.jpg' width="160">
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <strong>Tencent Youtu Lab</strong>, Shanghai, China
-              <br>
-              Research Intern
-              <br>
-              <i>Jan - May 2022</i>
-              <br>
-              <p>
-                <li>Deployed Faster-RCNN into CPU environments with C++.</li>
-                <li>Analyzed model performance under heterogeneous environments.</li>
-              </p>
-            </td>
-          </tr>
-        </tbody>
-      </table> -->
+        <!-- ECCV 2024 - MesonGS -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/24-eccv-mesongs.png" alt="MesonGS">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">ECCV, 2024</span>
+            <h3 class="text-headline-md paper-title mb-2">MesonGS: Post-training Compression of 3D Gaussians via Efficient Attribute Transformation</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+              <a class="inline-link" href="https://www.chentang.cc">Chen Tang</a>,
+              <a class="inline-link" href="https://bbaaii.github.io/">Yunpeng Bai</a>,
+              Rongwei Lu, Shijia Ge,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="data/24-eccv-mesongs.pdf">[paper]</a>
+              <a class="paper-link" href="https://shuzhaoxie.github.io/mesongs/">[project]</a>
+              <a class="paper-link" href="https://github.com/ShuzhaoXie/MesonGS">[code]</a>
+            </div>
+          </div>
+        </article>
 
+        <!-- TMM 2024 - SkyML -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/2024-tmm-skyml.png" alt="SkyML">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">TMM, 2024</span>
+            <h3 class="text-headline-md paper-title mb-2">SkyML: A MLaaS Federation Design for Multicloud-based Multimedia Analytics</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Yuan Xue, Yifei Zhu,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="data/24-tmm-skyml.pdf">[paper]</a>
+              <a class="paper-link" href="https://github.com/ShuzhaoXie/Armol">[code]</a>
+            </div>
+          </div>
+        </article>
 
+        <!-- INFOCOM 2022 -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/22-infocom-armol.png" alt="Armol">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">INFOCOM, 2022</span>
+            <h3 class="text-headline-md paper-title mb-2">Cost Effective MLaaS Federation: A Combinatorial Reinforcement Learning Approach</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Yuan Xue,
+              <a class="inline-link" href="https://sites.ji.sjtu.edu.cn/yifei-zhu/">Yifei Zhu</a>,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm mb-3">
+              <a class="paper-link" href="data/22-infocom-armol.pdf">[paper]</a>
+              <a class="paper-link" href="https://mmlabsigs.notion.site/Cost-Effective-MLaaS-Federation-A-Combinatorial-Reinforcement-Learning-Approach-fd27b02a403240f3b55ec26ad5ba00db">[project]</a>
+              <a class="paper-link" href="https://github.com/ShuzhaoXie/Armol">[code]</a>
+            </div>
+            <p class="text-body-sm text-on-surface-variant leading-relaxed">
+              As naively using multiple ML APIs can lead to lower analytical accuracy and poor user experience, we employ reinforcement learning to select the optimal combination of MLaaSes, thus maximizing accuracy while minimizing cost.
+            </p>
+          </div>
+        </article>
 
+      </div>
 
-        <table width="100%" align="center" border="0" cellspacing="0" cellpadding="20"><tbody>
-          <tr>
-            <td>
-              <heading>Professional Service and Teaching</heading>
-            </td>
-          </tr>
-        </tbody></table>
+      <div class="pt-stack-sm text-right">
+        <a href="publications.html" class="text-label-sm text-on-surface-variant uppercase tracking-wider link-minimal">View Full Publications List &nbsp;→</a>
+      </div>
+    </section>
 
-        <table width="100%" align="center" border="0" cellpadding="20">
-          
-          <tbody>
-					
-          <table width="90%" align="center" border="0" cellpadding="0">
-            <tbody>
-              <tr>
-                <td width="100%" valign="center">
-                  <strong>Journal and Conference Reviewer</strong>
-                  <li>CVPR: 2025</li>
-                  <li>ICCV: 2025</li>
-                  <li>ACM MM: 2024 - 2025</li>
-                  <li>ICASSP: 2023 - 2025</li>  
-                  <li>IJCNN: 2025</li> 
-                </td>
-              </tr>
-            </tbody>
-          </table>
+    <!-- Professional Service & Teaching -->
+    <section id="service" class="mb-stack-lg pt-stack-md border-t border-border-subtle">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
 
-          <table width="90%" align="center" border="0" cellpadding="0">
-            <tbody>
-              <tr>
-                <td width="100%" valign="center">
-                  <strong>Teaching Assistant</strong>
-                  <li>Big Data System (B), Tsinghua University, Fall 2021</li>  
-                  <li>Distributed Machine Learning, Tsinghua University, Fall 2024</li>  
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div>
+          <h2 class="text-headline-lg text-primary mb-stack-sm">Service</h2>
+          <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-3">Journal & Conference Reviewer</p>
+          <ul class="space-y-2">
+            <li class="flex items-baseline gap-4">
+              <span class="text-label-sm text-on-surface-variant w-24 uppercase tracking-wider">CVPR</span>
+              <span class="text-body-md">2025</span>
+            </li>
+            <li class="flex items-baseline gap-4">
+              <span class="text-label-sm text-on-surface-variant w-24 uppercase tracking-wider">ICCV</span>
+              <span class="text-body-md">2025</span>
+            </li>
+            <li class="flex items-baseline gap-4">
+              <span class="text-label-sm text-on-surface-variant w-24 uppercase tracking-wider">ACM MM</span>
+              <span class="text-body-md">2024 – 2025</span>
+            </li>
+            <li class="flex items-baseline gap-4">
+              <span class="text-label-sm text-on-surface-variant w-24 uppercase tracking-wider">ICASSP</span>
+              <span class="text-body-md">2023 – 2025</span>
+            </li>
+            <li class="flex items-baseline gap-4">
+              <span class="text-label-sm text-on-surface-variant w-24 uppercase tracking-wider">IJCNN</span>
+              <span class="text-body-md">2025</span>
+            </li>
+          </ul>
+        </div>
 
-        </tbody>
-      </table>
+        <div>
+          <h2 class="text-headline-lg text-primary mb-stack-sm">Teaching</h2>
+          <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-3">Teaching Assistant</p>
+          <ul class="space-y-4">
+            <li class="flex flex-col">
+              <span class="text-body-md font-bold">Big Data System (B)</span>
+              <span class="text-caption text-on-surface-variant">Tsinghua University · Fall 2021</span>
+            </li>
+            <li class="flex flex-col">
+              <span class="text-body-md font-bold">Distributed Machine Learning</span>
+              <span class="text-caption text-on-surface-variant">Tsinghua University · Fall 2024</span>
+            </li>
+          </ul>
+        </div>
 
-      <table width="100%" align="center" border="0" cellpadding="20">
-        <table width="90%" align="center" border="0" cellpadding="0">
-          <tbody>
-            <tr>
-              <td width="100%" valign="center">
-                <br>
-                <p style="text-align:center;font-size:small;">
-                  Template from <a href="https://jonbarron.info">Jon Barron</a>. Last updated in July 2025.
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </table>
+      </div>
+    </section>
 
-      </td>
-    </tr>
-  </table>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-background border-t border-border-subtle py-stack-md">
+    <div class="max-w-[800px] mx-auto px-margin-mobile flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
+      <div class="text-label-md uppercase tracking-widest text-primary font-bold">© 2025 Shuzhao Xie</div>
+      <div class="flex gap-4 text-caption text-on-surface-variant">
+        <span>Last updated: July 2025</span>
+        <span>Tsinghua SIGS</span>
+        <span>Template inspired by <a class="inline-link" href="https://jonbarron.info">Jon Barron</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href.length > 1) {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+  </script>
 </body>
-
 </html>

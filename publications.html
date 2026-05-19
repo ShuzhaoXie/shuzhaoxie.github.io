@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publications · Shuzhao Xie</title>
+  <meta name="author" content="Shuzhao Xie">
+  <link rel="icon" type="image/png" href="images/steel_ball.png">
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "outline-variant": "#e0e0e0",
+            "border-subtle": "#e0e0e0",
+            "surface-container-low": "#fafafa",
+            "surface-container": "#f5f5f5",
+            "background": "#ffffff",
+            "surface": "#ffffff",
+            "on-surface": "#1b1b1b",
+            "on-surface-variant": "#616161",
+            "outline": "#9e9e9e",
+            "primary": "#000000",
+            "on-primary": "#ffffff",
+            "secondary": "#424242",
+            "tertiary": "#616161",
+            "accent": "#005da7"
+          },
+          borderRadius: {
+            DEFAULT: "0.125rem",
+            lg: "0.25rem",
+            xl: "0.5rem"
+          },
+          spacing: {
+            "margin-mobile": "20px",
+            "margin-desktop": "64px",
+            "gutter": "24px",
+            "stack-lg": "64px",
+            "stack-md": "32px",
+            "stack-sm": "16px"
+          },
+          fontFamily: {
+            sans: ["Nunito Sans", "sans-serif"],
+            label: ["Arimo", "sans-serif"]
+          },
+          fontSize: {
+            "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }],
+            "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }],
+            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+            "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+            "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            "label-md": ["14px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }],
+            "label-sm": ["12px", { lineHeight: "14px", letterSpacing: "0.05em", fontWeight: "500" }],
+            "caption": ["12px", { lineHeight: "1.4", fontWeight: "400" }]
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #ffffff;
+      color: #1b1b1b;
+      font-family: 'Nunito Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    .link-minimal {
+      position: relative;
+      display: inline-block;
+    }
+    .link-minimal::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 1px;
+      bottom: -1px;
+      left: 0;
+      background-color: currentColor;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease-out;
+    }
+    .link-minimal:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+    .paper-title {
+      font-weight: 600;
+      color: #000000;
+    }
+    .paper-link {
+      color: #000000;
+      font-weight: 600;
+      transition: opacity 0.2s ease;
+    }
+    .paper-link:hover {
+      opacity: 0.6;
+      text-decoration: underline;
+    }
+    .inline-link {
+      color: #000000;
+      text-decoration: underline;
+      text-decoration-color: #c0c0c0;
+      text-underline-offset: 2px;
+      transition: text-decoration-color 0.2s ease;
+    }
+    .inline-link:hover {
+      text-decoration-color: #000000;
+    }
+  </style>
+</head>
+
+<body class="selection:bg-primary selection:text-white">
+
+  <!-- Top Navigation -->
+  <nav class="fixed top-0 z-50 w-full bg-background border-b border-border-subtle">
+    <div class="max-w-[800px] mx-auto px-margin-mobile flex justify-between items-center h-16">
+      <a href="index.html" class="text-headline-md font-bold tracking-tight text-primary">Shuzhao Xie</a>
+      <div class="hidden md:flex items-center gap-stack-sm">
+        <a class="text-body-md text-on-surface-variant hover:text-primary transition-colors" href="index.html">Home</a>
+        <a class="text-body-md text-primary border-b-2 border-primary pb-1" href="publications.html">Publications</a>
+        <a class="text-body-md text-on-surface-variant hover:text-primary transition-colors" href="index.html#service">Service</a>
+        <a class="ml-4 px-4 py-2 bg-primary text-on-primary text-label-sm rounded-lg hover:opacity-80 transition-opacity" href="mailto:xiesz99@gmail.com">Contact</a>
+      </div>
+      <a class="md:hidden material-symbols-outlined text-primary" href="index.html">arrow_back</a>
+    </div>
+  </nav>
+
+  <main class="max-w-[800px] mx-auto px-margin-mobile pt-32 pb-stack-lg">
+
+    <!-- Header -->
+    <header class="mb-stack-lg">
+      <a href="index.html" class="text-label-sm text-on-surface-variant uppercase tracking-wider link-minimal mb-stack-sm inline-block">← Back to Home</a>
+      <h1 class="text-display-lg mb-stack-sm text-primary">Publications</h1>
+      <p class="text-body-lg text-on-surface-variant leading-relaxed">
+        Full list of publications. For a curated selection of first-author works, see the <a class="inline-link" href="index.html#publications">homepage</a>.
+        Also available on <a class="inline-link" href="https://scholar.google.com/citations?user=_2QNPGYAAAAJ&hl=en">Google Scholar</a>.
+      </p>
+    </header>
+
+    <!-- Publications -->
+    <section class="mb-stack-lg pt-stack-md border-t border-border-subtle">
+
+      <div class="divide-y divide-border-subtle">
+
+        <!-- CVPR 2026 - IGen -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/26-cvpr-igen.png" alt="IGen">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">CVPR, 2026</span>
+            <h3 class="text-headline-md paper-title mb-2">IGen: Scalable Data Generation for Robot Learning from Open-World Images</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              Chenghao Gu, Haolan Kang, Junchao Lin, Jinghe Wang, Duo Wu,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Fanding Huang, Junchen Ge, Ziyang Gong, Letian Li, Hongying Zheng, Changwei Lv,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="data/26-cvpr-igen.pdf">[paper]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- CVPR Findings 2026 - Splatwizard -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/26-cvprf-splatwizard.png" alt="Splatwizard">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">CVPR Findings, 2026</span>
+            <h3 class="text-headline-md paper-title mb-2">Splatwizard: A Benchmark Toolkit for 3D Gaussian Splatting Compression</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              Xiang Liu, Yimin Zhou, Jinxiang Wang, Yujun Huang,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Shiyu Qin, Mingyao Hong, Jiawei Li, Yaowei Wang,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>,
+              Shu-Tao Xia, Bin Chen
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="data/26-cvprf-splatwizard.pdf">[paper]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- NeurIPS 2025 -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/25-nips-feainr.png" alt="Understanding Bias Terms in Neural Representation">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">NeurIPS, 2025</span>
+            <h3 class="text-headline-md paper-title mb-2">Understanding Bias Terms in Neural Representation</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+              Boxi Li,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Chengwei Ren, Yuan Xue,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="./data/25-nips-feainr.pdf">[paper]</a>
+              <a class="paper-link" href="https://github.com/zwx-open/Featuring-INR">[code]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ACM MM 2025 - SizeGS -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/25-mm-sizegs.png" alt="SizeGS">
+          </div>
+          <div class="flex-1">
+            <div class="flex flex-wrap items-center gap-2 mb-1">
+              <span class="text-caption text-on-surface-variant uppercase tracking-wider">ACM Multimedia, 2025</span>
+              <span class="px-2 py-0.5 bg-primary text-on-primary text-[10px] uppercase tracking-wider rounded-lg">Best Paper Candidate · Top 0.5%</span>
+            </div>
+            <h3 class="text-headline-md paper-title mb-2">SizeGS: Size-aware Compression of 3D Gaussian Splatting via Mixed Integer Programming</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <span class="font-bold text-on-surface">Shuzhao Xie*</span>,
+              Jiahang Liu*,
+              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+              Shijia Ge, Sicheng Pan,
+              <a class="inline-link" href="https://www.chentang.cc">Chen Tang</a>,
+              <a class="inline-link" href="https://bbaaii.github.io/">Yunpeng Bai</a>,
+              <a class="inline-link" href="https://scholar.google.com/citations?user=hTBtRI0AAAAJ&hl=en">Cong Zhang</a>,
+              <a class="inline-link" href="https://scholar.google.com/citations?hl=en&user=z2EohmgAAAAJ&view_op=list_works&sortby=pubdate">Xiaoyi Fan</a>,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+              <span class="text-caption block mt-1">*Equal contribution</span>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="./data/25-mm-sizegs.pdf">[paper]</a>
+              <a class="paper-link" href="https://shuzhaoxie.github.io/sizegs/">[project]</a>
+              <a class="paper-link" href="https://github.com/mmlab-sigs/sizegs">[code]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ICCV 2025 -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/25-iccv-souldance.png" alt="Music-Aligned Holistic 3D Dance Generation">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">ICCV, 2025</span>
+            <h3 class="text-headline-md paper-title mb-2">Music-Aligned Holistic 3D Dance Generation via Hierarchical Motion Modeling</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              Xiaojie Li, Ronghui Li, Shukai Fang,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Xiaoyang Guo, Jiaqing Zhou, Junkun Peng,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="">[paper]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ICME 2025 -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/24-arxiv-expansion.png" alt="Expansive Supervision for Neural Radiance Field">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">ICME, 2025</span>
+            <h3 class="text-headline-md paper-title mb-2">Expansive Supervision for Neural Radiance Field</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+              Wei Yao,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Shijia Ge,
+              <a class="inline-link" href="https://www.chentang.cc">Chen Tang</a>,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="data/24-arxiv-expansive.pdf">[paper]</a>
+              <a class="paper-link" href="https://github.com/zwx-open/Expansive-Supervision">[code]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- CVPR 2025 - EVOS -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/25-cvpr-evos.png" alt="EVOS">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">CVPR, 2025</span>
+            <h3 class="text-headline-md paper-title mb-2">EVOS: Efficient Implicit Neural Training via EVOlutionary Selector</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Chengwei Ren, Shiyi Xie,
+              <a class="inline-link" href="https://www.chentang.cc">Chen Tang</a>,
+              Shijia Ge, Mingzi Wang,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="https://arxiv.org/pdf/2412.10153">[paper]</a>
+              <a class="paper-link" href="https://weixiang-zhang.github.io/proj-evos/">[project]</a>
+              <a class="paper-link" href="https://github.com/zwx-open/EVOS-INR">[code]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- TVCG 2025 - TextIR -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/textir.png" alt="TextIR">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">TVCG, 2025</span>
+            <h3 class="text-headline-md paper-title mb-2">TextIR: A Simple Framework for Text-based Editable Image Restoration</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <a class="inline-link" href="https://bbaaii.github.io/">Yunpeng Bai</a>,
+              Cairong Wang,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Chao Dong, Chun Yuan,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm mb-3">
+              <a class="paper-link" href="https://arxiv.org/abs/2302.14736">[paper]</a>
+            </div>
+            <p class="text-body-sm text-on-surface-variant leading-relaxed">
+              An effective framework that allows the user to control the restoration process of degraded images with text descriptions, using the text-image feature compatibility of CLIP. Supports image inpainting, super-resolution, and colorization.
+            </p>
+          </div>
+        </article>
+
+        <!-- ICASSP 2025 - Lungmix -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/25-icassp-lungmix.png" alt="Lungmix">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">ICASSP, 2025</span>
+            <h3 class="text-headline-md paper-title mb-2">Lungmix: A Mixup-Based Strategy for Generalization in Respiratory Sound Classification</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              Shijia Ge,
+              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Baixu Yan,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="./data/25-icassp-lungmix.pdf">[paper]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ICASSP 2025 - PulmoScan -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/25-icassp-pulmoscan.png" alt="PulmoScan">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">ICASSP, 2025</span>
+            <h3 class="text-headline-md paper-title mb-2">PulmoScan: A Practical Pulmonary Disease Pre-Screening System</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              Baixu Yan, Shijia Ge, Meizi Lu,
+              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="./data/25-icassp-pulmoscan.pdf">[paper]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- AAAI 2025 -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/25-aaai-sym.png" alt="Symmetric Power Transformation">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">AAAI, 2025</span>
+            <h3 class="text-headline-md paper-title mb-2">Enhancing Implicit Neural Representations via Symmetric Power Transformation</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Chengwei Ren, Shijia Ge, Mingzi Wang,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="https://arxiv.org/abs/2412.09213">[paper]</a>
+              <a class="paper-link" href="https://weixiang-zhang.github.io/proj-symtrans/">[project]</a>
+              <a class="paper-link" href="https://github.com/zwx-open/Symmetric-Power-Transformation-INR">[code]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- ECCV 2024 - MesonGS -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/24-eccv-mesongs.png" alt="MesonGS">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">ECCV, 2024</span>
+            <h3 class="text-headline-md paper-title mb-2">MesonGS: Post-training Compression of 3D Gaussians via Efficient Attribute Transformation</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+              <a class="inline-link" href="https://www.chentang.cc">Chen Tang</a>,
+              <a class="inline-link" href="https://bbaaii.github.io/">Yunpeng Bai</a>,
+              Rongwei Lu, Shijia Ge,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="data/24-eccv-mesongs.pdf">[paper]</a>
+              <a class="paper-link" href="https://shuzhaoxie.github.io/mesongs/">[project]</a>
+              <a class="paper-link" href="https://github.com/ShuzhaoXie/MesonGS">[code]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- TMM 2024 - SkyML -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/2024-tmm-skyml.png" alt="SkyML">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">TMM, 2024</span>
+            <h3 class="text-headline-md paper-title mb-2">SkyML: A MLaaS Federation Design for Multicloud-based Multimedia Analytics</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Yuan Xue, Yifei Zhu,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="data/24-tmm-skyml.pdf">[paper]</a>
+              <a class="paper-link" href="https://github.com/ShuzhaoXie/Armol">[code]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- arXiv 2024 - VisCtrl -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/24-arxiv-visctrl.png" alt="VisCtrl">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">arXiv, 2024</span>
+            <h3 class="text-headline-md paper-title mb-2">Tuning-Free Visual Customization via View Iterative Self-Attention Control</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              Xiaojie Li, Chenghao Gu,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              <a class="inline-link" href="https://bbaaii.github.io/">Yunpeng Bai</a>,
+              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="data/24-arxiv-visctrl.pdf">[paper]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- CVPR 2024 - RFQuant -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/24-cvpr-rfquant.png" alt="RFQuant">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">CVPR, 2024</span>
+            <h3 class="text-headline-md paper-title mb-2">RFQuant: Retraining-free Model Quantization via One-Shot Weight-Coupling Learning</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <a class="inline-link" href="https://www.chentang.cc">Chen Tang*</a>,
+              Yuan Meng*, Jiacheng Jiang,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Rongwei Lu, Xinzhu Ma,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>,
+              Wenwu Zhu
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="data/24-cvpr-rfquant.pdf">[paper]</a>
+              <a class="paper-link" href="data/24-cvpr-rfquant-supp.pdf">[supp]</a>
+              <a class="paper-link" href="data/24-cvpr-rfquant-poster.pdf">[poster]</a>
+              <a class="paper-link" href="https://github.com/1hunters/retraining-free-quantization/">[code]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Euro-Par 2024 -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/24-europar.png" alt="Euro-Par 2024">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">Euro-Par, 2024</span>
+            <h3 class="text-headline-md paper-title mb-2">A Joint Approach to Local Updating and Gradient Compression for Efficient Asynchronous Federated Learning</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              Jiajun Song, Jiajun Luo, Rongwei Lu,
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Bin Chen,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>,
+              Wenwu Zhu
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm">
+              <a class="paper-link" href="https://arxiv.org/abs/2407.05125">[paper]</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- INFOCOM 2022 -->
+        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
+          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
+            <img class="w-full h-auto object-cover" src="images/22-infocom-armol.png" alt="Armol">
+          </div>
+          <div class="flex-1">
+            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">INFOCOM, 2022</span>
+            <h3 class="text-headline-md paper-title mb-2">Cost Effective MLaaS Federation: A Combinatorial Reinforcement Learning Approach</h3>
+            <p class="text-body-md text-on-surface-variant mb-3">
+              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
+              Yuan Xue,
+              <a class="inline-link" href="https://sites.ji.sjtu.edu.cn/yifei-zhu/">Yifei Zhu</a>,
+              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
+            </p>
+            <div class="flex flex-wrap gap-x-4 text-label-sm mb-3">
+              <a class="paper-link" href="data/22-infocom-armol.pdf">[paper]</a>
+              <a class="paper-link" href="https://mmlabsigs.notion.site/Cost-Effective-MLaaS-Federation-A-Combinatorial-Reinforcement-Learning-Approach-fd27b02a403240f3b55ec26ad5ba00db">[project]</a>
+              <a class="paper-link" href="https://github.com/ShuzhaoXie/Armol">[code]</a>
+            </div>
+            <p class="text-body-sm text-on-surface-variant leading-relaxed">
+              As naively using multiple ML APIs can lead to lower analytical accuracy and poor user experience, we employ reinforcement learning to select the optimal combination of MLaaSes, thus maximizing accuracy while minimizing cost.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="pt-stack-md text-center">
+      <a href="index.html" class="text-label-sm text-on-surface-variant uppercase tracking-wider link-minimal">← Back to Home</a>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-background border-t border-border-subtle py-stack-md">
+    <div class="max-w-[800px] mx-auto px-margin-mobile flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
+      <div class="text-label-md uppercase tracking-widest text-primary font-bold">© 2025 Shuzhao Xie</div>
+      <div class="flex gap-4 text-caption text-on-surface-variant">
+        <span>Last updated: July 2025</span>
+        <span>Tsinghua SIGS</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
