@@ -1,0 +1,2261 @@
+{
+  "scene": "67d702f2e8",
+  "dataset": "ScanNet++ · 67d702f2e8",
+  "model": "scene.glb",
+  "units": {
+    "mass": "kg",
+    "length": "m",
+    "density": "kg/m^3",
+    "modulus": "Pa",
+    "angle": "rad",
+    "curvature": "1/m",
+    "pressure": "Pa"
+  },
+  "simulation": {
+    "robots": [
+      {
+        "name": "Franka",
+        "model": "Affine body",
+        "rigidity_penalty": 100000000.0
+      }
+    ]
+  },
+  "objects": {
+    "floor": {
+      "label": "Floor",
+      "type": "static",
+      "friction": 0.5
+    },
+    "wall_left": {
+      "label": "Wall",
+      "type": "static",
+      "friction": 0.4
+    },
+    "wall_right": {
+      "label": "Wall",
+      "type": "static",
+      "friction": 0.4
+    },
+    "wall_rear": {
+      "label": "Wall",
+      "type": "static",
+      "friction": 0.4
+    },
+    "wall_window": {
+      "label": "Wall",
+      "type": "static",
+      "friction": 0.4
+    },
+    "ceiling": {
+      "label": "Ceiling",
+      "type": "static",
+      "friction": 0.4
+    },
+    "window": {
+      "label": "Window",
+      "type": "articulated",
+      "fixed_base": true,
+      "mass": 35,
+      "friction": 0.4,
+      "joints": [
+        {
+          "name": "sash0",
+          "child": "sash0",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.34
+          ]
+        },
+        {
+          "name": "sash1",
+          "child": "sash1",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.34
+          ]
+        },
+        {
+          "name": "handle",
+          "child": "handle",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    "radiator": {
+      "label": "Radiator",
+      "type": "static",
+      "friction": 0.4
+    },
+    "cable_trunking": {
+      "label": "Cable Trunking",
+      "type": "static",
+      "friction": 0.5
+    },
+    "ceiling_lamp": {
+      "label": "Ceiling Lamp",
+      "type": "static",
+      "friction": 0.4,
+      "components": [
+        {
+          "part": "cable_ceiling_lamp_01",
+          "type": "curve",
+          "material": {
+            "name": "effective steel suspension wire",
+            "model": "Discrete elastic rod",
+            "youngs_modulus": 100000000000.0,
+            "poisson_ratio": 0.3,
+            "density": 7800,
+            "radius": 0.0023
+          },
+          "nodes": [
+            "ceiling_lamp__part_001"
+          ],
+          "centerline": "cable_ceiling_lamp_01_centerline",
+          "derived_mass": 0.1171
+        },
+        {
+          "part": "cable_ceiling_lamp_02",
+          "type": "curve",
+          "material": {
+            "name": "effective steel suspension wire",
+            "model": "Discrete elastic rod",
+            "youngs_modulus": 100000000000.0,
+            "poisson_ratio": 0.3,
+            "density": 7800,
+            "radius": 0.0023
+          },
+          "nodes": [
+            "ceiling_lamp__part_002"
+          ],
+          "centerline": "cable_ceiling_lamp_02_centerline",
+          "derived_mass": 0.1033
+        }
+      ],
+      "nodes": [
+        "cable_ceiling_lamp_01_ceiling_anchor",
+        "cable_ceiling_lamp_02_ceiling_anchor"
+      ]
+    },
+    "ceiling_lamp_rear": {
+      "label": "Ceiling Lamp",
+      "type": "static",
+      "friction": 0.4,
+      "components": [
+        {
+          "part": "cable_ceiling_lamp_rear_01",
+          "type": "curve",
+          "material": {
+            "name": "effective steel suspension wire",
+            "model": "Discrete elastic rod",
+            "youngs_modulus": 100000000000.0,
+            "poisson_ratio": 0.3,
+            "density": 7800,
+            "radius": 0.0023
+          },
+          "nodes": [
+            "ceiling_lamp_rear__part_001"
+          ],
+          "centerline": "cable_ceiling_lamp_rear_01_centerline",
+          "derived_mass": 0.1033
+        },
+        {
+          "part": "cable_ceiling_lamp_rear_02",
+          "type": "curve",
+          "material": {
+            "name": "effective steel suspension wire",
+            "model": "Discrete elastic rod",
+            "youngs_modulus": 100000000000.0,
+            "poisson_ratio": 0.3,
+            "density": 7800,
+            "radius": 0.0023
+          },
+          "nodes": [
+            "ceiling_lamp_rear__part_002"
+          ],
+          "centerline": "cable_ceiling_lamp_rear_02_centerline",
+          "derived_mass": 0.1033
+        }
+      ],
+      "nodes": [
+        "cable_ceiling_lamp_rear_01_ceiling_anchor",
+        "cable_ceiling_lamp_rear_02_ceiling_anchor"
+      ]
+    },
+    "rear_vent": {
+      "label": "Air Vent",
+      "type": "static",
+      "friction": 0.4
+    },
+    "rear_sensor": {
+      "label": "Ceiling Sensor",
+      "type": "static",
+      "friction": 0.4
+    },
+    "door_rear": {
+      "label": "Door",
+      "type": "articulated",
+      "fixed_base": true,
+      "mass": 25,
+      "friction": 0.4,
+      "joints": [
+        {
+          "name": "hinge",
+          "child": "leaf",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.48
+          ]
+        },
+        {
+          "name": "handle",
+          "child": "handle",
+          "type": "revolute",
+          "limit": [
+            -0.4,
+            0.0
+          ]
+        }
+      ]
+    },
+    "door_left": {
+      "label": "Door",
+      "type": "articulated",
+      "fixed_base": true,
+      "mass": 25,
+      "friction": 0.4,
+      "joints": [
+        {
+          "name": "hinge",
+          "child": "leaf",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.07
+          ]
+        },
+        {
+          "name": "handle",
+          "child": "handle",
+          "type": "revolute",
+          "limit": [
+            -0.4,
+            0.0
+          ]
+        }
+      ]
+    },
+    "board_left": {
+      "label": "Wall Board",
+      "type": "static",
+      "friction": 0.4,
+      "nodes": [
+        "paper_board_logo_left_01",
+        "paper_board_logo_right_01",
+        "label_board_instruction_01",
+        "tape_board_green_left_01",
+        "tape_board_green_right_01",
+        "tape_board_orange_top_01",
+        "tape_board_orange_bottom_01",
+        "tape_board_green_top_01",
+        "tape_board_red_top_01",
+        "tape_board_yellow_top_01",
+        "label_board_key_01",
+        "label_board_key_02",
+        "label_board_key_03",
+        "label_board_key_04",
+        "label_board_key_05",
+        "label_board_key_06",
+        "label_board_key_07",
+        "label_board_key_08"
+      ]
+    },
+    "board_right": {
+      "label": "Wall Board",
+      "type": "static",
+      "friction": 0.4
+    },
+    "switch_rear": {
+      "label": "Light Switch",
+      "type": "articulated",
+      "fixed_base": true,
+      "mass": 0.12,
+      "friction": 0.4,
+      "joints": [
+        {
+          "name": "rocker",
+          "child": "rocker",
+          "type": "revolute",
+          "limit": [
+            -0.025,
+            0.025
+          ]
+        }
+      ]
+    },
+    "wall_shelf": {
+      "label": "Wall Shelf",
+      "type": "static",
+      "friction": 0.4
+    },
+    "desk_left": {
+      "label": "Desk",
+      "type": "rigid",
+      "mass": 28,
+      "friction": 0.5
+    },
+    "desk_right": {
+      "label": "Desk",
+      "type": "rigid",
+      "mass": 28,
+      "friction": 0.5
+    },
+    "pedestal_left": {
+      "label": "Drawer Pedestal",
+      "type": "articulated",
+      "mass": 18,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "drawer*",
+          "count": 3,
+          "type": "prismatic",
+          "limit": [
+            0.0,
+            0.22
+          ]
+        }
+      ]
+    },
+    "pedestal_right": {
+      "label": "Drawer Pedestal",
+      "type": "articulated",
+      "mass": 18,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "drawer*",
+          "count": 3,
+          "type": "prismatic",
+          "limit": [
+            0.0,
+            0.22
+          ]
+        }
+      ]
+    },
+    "bookcase": {
+      "label": "Bookcase",
+      "type": "rigid",
+      "mass": 28,
+      "friction": 0.5
+    },
+    "cabinet_tall": {
+      "label": "Tall Cabinet",
+      "type": "articulated",
+      "mass": 55,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "hinge0",
+          "child": "door0",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            1.1
+          ]
+        },
+        {
+          "name": "hinge1",
+          "child": "door1",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            1.1
+          ]
+        }
+      ]
+    },
+    "corkboard": {
+      "label": "Corkboard",
+      "type": "rigid",
+      "mass": 1.8,
+      "friction": 0.5
+    },
+    "mouse_left": {
+      "label": "Computer Mouse",
+      "type": "articulated",
+      "mass": 0.09,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "button0",
+          "child": "button0",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.018
+          ]
+        },
+        {
+          "name": "button1",
+          "child": "button1",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.018
+          ]
+        },
+        {
+          "name": "scroll",
+          "child": "wheel",
+          "type": "revolute",
+          "limit": [
+            -3.141592653589793,
+            3.141592653589793
+          ]
+        }
+      ]
+    },
+    "mouse_right": {
+      "label": "Computer Mouse",
+      "type": "articulated",
+      "mass": 0.09,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "button0",
+          "child": "button0",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.018
+          ]
+        },
+        {
+          "name": "button1",
+          "child": "button1",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.018
+          ]
+        },
+        {
+          "name": "scroll",
+          "child": "wheel",
+          "type": "revolute",
+          "limit": [
+            -3.141592653589793,
+            3.141592653589793
+          ]
+        }
+      ]
+    },
+    "plant_right": {
+      "label": "Potted Plant",
+      "type": "rigid",
+      "mass": 1.5,
+      "friction": 0.4
+    },
+    "lamp_right": {
+      "label": "Desk Lamp",
+      "type": "articulated",
+      "mass": 2.5,
+      "friction": 0.4,
+      "joints": [
+        {
+          "name": "lower_follower",
+          "child": "lower_follower",
+          "type": "revolute",
+          "limit": [
+            -0.14,
+            0.12
+          ],
+          "mimic": "lower_swing",
+          "mimic_multiplier": 1,
+          "mimic_offset": 0.0
+        },
+        {
+          "name": "lower_swing",
+          "child": "lower_main",
+          "type": "revolute",
+          "limit": [
+            -0.14,
+            0.12
+          ]
+        },
+        {
+          "name": "lower_counter",
+          "child": "elbow",
+          "type": "revolute",
+          "limit": [
+            -0.12,
+            0.14
+          ],
+          "mimic": "lower_swing",
+          "mimic_multiplier": -1,
+          "mimic_offset": 0.0
+        },
+        {
+          "name": "upper_follower",
+          "child": "upper_follower",
+          "type": "revolute",
+          "limit": [
+            -0.025,
+            0.15
+          ],
+          "mimic": "upper_swing",
+          "mimic_multiplier": 1,
+          "mimic_offset": 0.0
+        },
+        {
+          "name": "upper_swing",
+          "child": "upper_main",
+          "type": "revolute",
+          "limit": [
+            -0.025,
+            0.15
+          ]
+        },
+        {
+          "name": "upper_counter",
+          "child": "end",
+          "type": "revolute",
+          "limit": [
+            -0.15,
+            0.025
+          ],
+          "mimic": "upper_swing",
+          "mimic_multiplier": -1,
+          "mimic_offset": 0.0
+        },
+        {
+          "name": "head_tilt",
+          "child": "shade",
+          "type": "revolute",
+          "limit": [
+            -0.2,
+            0.02
+          ]
+        }
+      ]
+    },
+    "pen_cup_right": {
+      "label": "Pen Cup",
+      "type": "rigid",
+      "mass": 0.1,
+      "friction": 0.4,
+      "material": {
+        "model": "Affine body",
+        "rigidity_penalty": 1000000000.0
+      },
+      "rest": "Settled under gravity",
+      "sim_geometry": [
+        "QIPC_ABD_pen_cup_right"
+      ]
+    },
+    "cup_pen_1": {
+      "label": "Pen",
+      "type": "rigid",
+      "mass": 0.008,
+      "friction": 0.4,
+      "material": {
+        "model": "Affine body",
+        "rigidity_penalty": 1000000000.0
+      },
+      "rest": "Settled under gravity",
+      "sim_geometry": [
+        "QIPC_ABD_cup_pen_1"
+      ]
+    },
+    "cup_pen_2": {
+      "label": "Pen",
+      "type": "rigid",
+      "mass": 0.008,
+      "friction": 0.4,
+      "material": {
+        "model": "Affine body",
+        "rigidity_penalty": 1000000000.0
+      },
+      "rest": "Settled under gravity",
+      "sim_geometry": [
+        "QIPC_ABD_cup_pen_2"
+      ]
+    },
+    "cup_pen_3": {
+      "label": "Pen",
+      "type": "rigid",
+      "mass": 0.008,
+      "friction": 0.4,
+      "material": {
+        "model": "Affine body",
+        "rigidity_penalty": 1000000000.0
+      },
+      "rest": "Settled under gravity",
+      "sim_geometry": [
+        "QIPC_ABD_cup_pen_3"
+      ]
+    },
+    "cup_pen_4": {
+      "label": "Pen",
+      "type": "rigid",
+      "mass": 0.008,
+      "friction": 0.4,
+      "material": {
+        "model": "Affine body",
+        "rigidity_penalty": 1000000000.0
+      },
+      "rest": "Settled under gravity",
+      "sim_geometry": [
+        "QIPC_ABD_cup_pen_4"
+      ]
+    },
+    "cup_pen_5": {
+      "label": "Pen",
+      "type": "rigid",
+      "mass": 0.008,
+      "friction": 0.4,
+      "material": {
+        "model": "Affine body",
+        "rigidity_penalty": 1000000000.0
+      },
+      "rest": "Settled under gravity",
+      "sim_geometry": [
+        "QIPC_ABD_cup_pen_5"
+      ]
+    },
+    "cup_pen_6": {
+      "label": "Pen",
+      "type": "rigid",
+      "mass": 0.008,
+      "friction": 0.4,
+      "material": {
+        "model": "Affine body",
+        "rigidity_penalty": 1000000000.0
+      },
+      "rest": "Settled under gravity",
+      "sim_geometry": [
+        "QIPC_ABD_cup_pen_6"
+      ]
+    },
+    "cup_pen_7": {
+      "label": "Pen",
+      "type": "rigid",
+      "mass": 0.008,
+      "friction": 0.4,
+      "material": {
+        "model": "Affine body",
+        "rigidity_penalty": 1000000000.0
+      },
+      "rest": "Settled under gravity",
+      "sim_geometry": [
+        "QIPC_ABD_cup_pen_7"
+      ]
+    },
+    "dock_right": {
+      "label": "Docking Station",
+      "type": "rigid",
+      "mass": 0.18,
+      "friction": 0.5
+    },
+    "bottle_cola": {
+      "label": "Cola Bottle",
+      "type": "rigid",
+      "mass": 0.45,
+      "friction": 0.4
+    },
+    "bottle_small": {
+      "label": "Toy Traffic Light",
+      "type": "rigid",
+      "mass": 0.12,
+      "friction": 0.4
+    },
+    "yellow_book": {
+      "label": "Book",
+      "type": "rigid",
+      "mass": 0.2,
+      "friction": 0.5
+    },
+    "box_left": {
+      "label": "Hinged Box",
+      "type": "articulated",
+      "mass": 0.18,
+      "friction": 0.4,
+      "joints": [
+        {
+          "name": "hinge",
+          "child": "lid",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            1.05
+          ]
+        }
+      ]
+    },
+    "paper_trays": {
+      "label": "Paper Tray Stack",
+      "type": "rigid",
+      "mass": 0.65,
+      "friction": 0.4
+    },
+    "tray_papers_1": {
+      "label": "Paper Stack",
+      "type": "rigid",
+      "mass": 0.75,
+      "friction": 0.5
+    },
+    "tray_papers_2": {
+      "label": "Paper Stack",
+      "type": "rigid",
+      "mass": 0.75,
+      "friction": 0.5
+    },
+    "tray_papers_3": {
+      "label": "Paper Stack",
+      "type": "rigid",
+      "mass": 0.75,
+      "friction": 0.5
+    },
+    "tray_papers_4": {
+      "label": "Paper Stack",
+      "type": "rigid",
+      "mass": 1.5,
+      "friction": 0.5
+    },
+    "mug_left": {
+      "label": "Mug",
+      "type": "rigid",
+      "mass": 0.3,
+      "friction": 0.4
+    },
+    "pump_left": {
+      "label": "Pump Bottle",
+      "type": "articulated",
+      "mass": 0.35,
+      "friction": 0.4,
+      "joints": [
+        {
+          "name": "press",
+          "child": "plunger",
+          "type": "prismatic",
+          "limit": [
+            0.0,
+            0.006
+          ]
+        }
+      ]
+    },
+    "note_left": {
+      "label": "Sticky Note",
+      "type": "rigid",
+      "mass": 0.02,
+      "friction": 0.5
+    },
+    "pen_left": {
+      "label": "Pen",
+      "type": "rigid",
+      "mass": 0.01,
+      "friction": 0.4
+    },
+    "markers_left": {
+      "label": "Markers",
+      "type": "rigid",
+      "mass": 0.075,
+      "friction": 0.4
+    },
+    "headset_left": {
+      "label": "Headset",
+      "type": "articulated",
+      "mass": 0.22,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "cup0",
+          "child": "cup0",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.04
+          ]
+        },
+        {
+          "name": "microphone",
+          "child": "microphone",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.2
+          ]
+        },
+        {
+          "name": "cup1",
+          "child": "cup1",
+          "type": "revolute",
+          "limit": [
+            -0.055,
+            0.055
+          ]
+        }
+      ],
+      "components": [
+        {
+          "part": "earpad_1",
+          "type": "volume",
+          "material": {
+            "name": "effective headset skin-and-foam",
+            "model": "Stable Neo-Hookean solid",
+            "youngs_modulus": 50000.0,
+            "poisson_ratio": 0.25,
+            "density": 60.0
+          },
+          "rest": "Settled under gravity",
+          "nodes": [
+            "headset_left__part_000"
+          ],
+          "sim_geometry": [
+            "QIPC_earpad_1"
+          ]
+        },
+        {
+          "part": "earpad_2",
+          "type": "volume",
+          "material": {
+            "name": "effective headset skin-and-foam",
+            "model": "Stable Neo-Hookean solid",
+            "youngs_modulus": 50000.0,
+            "poisson_ratio": 0.25,
+            "density": 60.0
+          },
+          "rest": "Settled under gravity",
+          "nodes": [
+            "headset_left__part_001"
+          ],
+          "sim_geometry": [
+            "QIPC_earpad_2"
+          ]
+        },
+        {
+          "part": "headband_pad",
+          "type": "volume",
+          "material": {
+            "name": "effective headset skin-and-foam",
+            "model": "Stable Neo-Hookean solid",
+            "youngs_modulus": 50000.0,
+            "poisson_ratio": 0.25,
+            "density": 60.0
+          },
+          "rest": "Settled under gravity",
+          "nodes": [
+            "headset_left__part_002"
+          ],
+          "sim_geometry": [
+            "QIPC_headband_pad"
+          ]
+        }
+      ],
+      "rest": "Settled under gravity, free base",
+      "sim_geometry": [
+        "QIPC_free_headset_collision"
+      ]
+    },
+    "bin_rear": {
+      "label": "Waste Bin",
+      "type": "rigid",
+      "friction": 0.4,
+      "fixed": true,
+      "material": {
+        "model": "Affine body",
+        "density": 700,
+        "rigidity_penalty": 1000000000.0
+      }
+    },
+    "bin_window": {
+      "label": "Waste Bin",
+      "type": "rigid",
+      "mass": 0.75,
+      "friction": 0.4
+    },
+    "cup_window": {
+      "label": "Cup",
+      "type": "rigid",
+      "mass": 0.15,
+      "friction": 0.4
+    },
+    "brown_pack_1": {
+      "label": "Storage Pack",
+      "type": "surface",
+      "mass": 0.00824189041600288,
+      "friction": 0.5,
+      "material": {
+        "model": "StVK shell, discrete-shell bending",
+        "youngs_modulus": 500000000.0,
+        "bending_youngs_modulus": 500000000.0,
+        "poisson_ratio": 0.3,
+        "density": 910.0,
+        "thickness": 0.0001
+      },
+      "gas": {
+        "model": "Sealed-volume gas",
+        "p_atm_pa": 101325.0,
+        "p_gauge0_pa": 0.0,
+        "gamma": 1.0,
+        "reference_volume_m3": 0.0017555303550715051,
+        "reference": "closed source mesh at authored puffed shape"
+      },
+      "mass_note": "film only, contents not modelled"
+    },
+    "brown_pack_2": {
+      "label": "Storage Pack",
+      "type": "surface",
+      "mass": 0.008241917265393752,
+      "friction": 0.5,
+      "material": {
+        "model": "StVK shell, discrete-shell bending",
+        "youngs_modulus": 500000000.0,
+        "bending_youngs_modulus": 500000000.0,
+        "poisson_ratio": 0.3,
+        "density": 910.0,
+        "thickness": 0.0001
+      },
+      "gas": {
+        "model": "Sealed-volume gas",
+        "p_atm_pa": 101325.0,
+        "p_gauge0_pa": 0.0,
+        "gamma": 1.0,
+        "reference_volume_m3": 0.0017566875836684589,
+        "reference": "closed source mesh at authored puffed shape"
+      },
+      "mass_note": "film only, contents not modelled"
+    },
+    "brown_pack_3": {
+      "label": "Storage Pack",
+      "type": "surface",
+      "mass": 0.008241896150515245,
+      "friction": 0.5,
+      "material": {
+        "model": "StVK shell, discrete-shell bending",
+        "youngs_modulus": 500000000.0,
+        "bending_youngs_modulus": 500000000.0,
+        "poisson_ratio": 0.3,
+        "density": 910.0,
+        "thickness": 0.0001
+      },
+      "gas": {
+        "model": "Sealed-volume gas",
+        "p_atm_pa": 101325.0,
+        "p_gauge0_pa": 0.0,
+        "gamma": 1.0,
+        "reference_volume_m3": 0.0017552203862283634,
+        "reference": "closed source mesh at authored puffed shape"
+      },
+      "mass_note": "film only, contents not modelled"
+    },
+    "brown_pack_5": {
+      "label": "Storage Pack",
+      "type": "surface",
+      "mass": 0.007708099229293916,
+      "friction": 0.5,
+      "material": {
+        "model": "StVK shell, discrete-shell bending",
+        "youngs_modulus": 500000000.0,
+        "bending_youngs_modulus": 500000000.0,
+        "poisson_ratio": 0.3,
+        "density": 910.0,
+        "thickness": 0.0001
+      },
+      "gas": {
+        "model": "Sealed-volume gas",
+        "p_atm_pa": 101325.0,
+        "p_gauge0_pa": 0.0,
+        "gamma": 1.0,
+        "reference_volume_m3": 0.0014722609676039956,
+        "reference": "closed source mesh at authored puffed shape"
+      },
+      "mass_note": "film only, contents not modelled"
+    },
+    "brown_pack_6": {
+      "label": "Storage Pack",
+      "type": "surface",
+      "mass": 0.007707436955553294,
+      "friction": 0.5,
+      "material": {
+        "model": "StVK shell, discrete-shell bending",
+        "youngs_modulus": 500000000.0,
+        "bending_youngs_modulus": 500000000.0,
+        "poisson_ratio": 0.3,
+        "density": 910.0,
+        "thickness": 0.0001
+      },
+      "gas": {
+        "model": "Sealed-volume gas",
+        "p_atm_pa": 101325.0,
+        "p_gauge0_pa": 0.0,
+        "gamma": 1.0,
+        "reference_volume_m3": 0.001471361871130679,
+        "reference": "closed source mesh at authored puffed shape"
+      },
+      "mass_note": "film only, contents not modelled"
+    },
+    "green_pack_1": {
+      "label": "Storage Pack",
+      "type": "surface",
+      "mass": 0.007315438824238517,
+      "friction": 0.5,
+      "material": {
+        "model": "StVK shell, discrete-shell bending",
+        "youngs_modulus": 500000000.0,
+        "bending_youngs_modulus": 500000000.0,
+        "poisson_ratio": 0.3,
+        "density": 910.0,
+        "thickness": 0.0001
+      },
+      "gas": {
+        "model": "Sealed-volume gas",
+        "p_atm_pa": 101325.0,
+        "p_gauge0_pa": 0.0,
+        "gamma": 1.0,
+        "reference_volume_m3": 0.001291388128373802,
+        "reference": "closed source mesh at authored puffed shape"
+      },
+      "mass_note": "film only, contents not modelled"
+    },
+    "green_pack_2": {
+      "label": "Storage Pack",
+      "type": "surface",
+      "mass": 0.0073286940012468,
+      "friction": 0.5,
+      "material": {
+        "model": "StVK shell, discrete-shell bending",
+        "youngs_modulus": 500000000.0,
+        "bending_youngs_modulus": 500000000.0,
+        "poisson_ratio": 0.3,
+        "density": 910.0,
+        "thickness": 0.0001
+      },
+      "gas": {
+        "model": "Sealed-volume gas",
+        "p_atm_pa": 101325.0,
+        "p_gauge0_pa": 0.0,
+        "gamma": 1.0,
+        "reference_volume_m3": 0.0012945038133800452,
+        "reference": "closed source mesh at authored puffed shape"
+      },
+      "mass_note": "film only, contents not modelled"
+    },
+    "green_pack_3": {
+      "label": "Storage Pack",
+      "type": "surface",
+      "mass": 0.0073116629063907975,
+      "friction": 0.5,
+      "material": {
+        "model": "StVK shell, discrete-shell bending",
+        "youngs_modulus": 500000000.0,
+        "bending_youngs_modulus": 500000000.0,
+        "poisson_ratio": 0.3,
+        "density": 910.0,
+        "thickness": 0.0001
+      },
+      "gas": {
+        "model": "Sealed-volume gas",
+        "p_atm_pa": 101325.0,
+        "p_gauge0_pa": 0.0,
+        "gamma": 1.0,
+        "reference_volume_m3": 0.0012906135975512126,
+        "reference": "closed source mesh at authored puffed shape"
+      },
+      "mass_note": "film only, contents not modelled"
+    },
+    "green_pack_4": {
+      "label": "Storage Pack",
+      "type": "surface",
+      "mass": 0.007589708617596736,
+      "friction": 0.5,
+      "material": {
+        "model": "StVK shell, discrete-shell bending",
+        "youngs_modulus": 500000000.0,
+        "bending_youngs_modulus": 500000000.0,
+        "poisson_ratio": 0.3,
+        "density": 910.0,
+        "thickness": 0.0001
+      },
+      "gas": {
+        "model": "Sealed-volume gas",
+        "p_atm_pa": 101325.0,
+        "p_gauge0_pa": 0.0,
+        "gamma": 1.0,
+        "reference_volume_m3": 0.001440985019576813,
+        "reference": "closed source mesh at authored puffed shape"
+      },
+      "mass_note": "film only, contents not modelled"
+    },
+    "green_pack_5": {
+      "label": "Storage Pack",
+      "type": "surface",
+      "mass": 0.00818481990812347,
+      "friction": 0.5,
+      "material": {
+        "model": "StVK shell, discrete-shell bending",
+        "youngs_modulus": 500000000.0,
+        "bending_youngs_modulus": 500000000.0,
+        "poisson_ratio": 0.3,
+        "density": 910.0,
+        "thickness": 0.0001
+      },
+      "gas": {
+        "model": "Sealed-volume gas",
+        "p_atm_pa": 101325.0,
+        "p_gauge0_pa": 0.0,
+        "gamma": 1.0,
+        "reference_volume_m3": 0.001825296613725327,
+        "reference": "closed source mesh at authored puffed shape"
+      },
+      "mass_note": "film only, contents not modelled"
+    },
+    "green_pack_6": {
+      "label": "Storage Pack",
+      "type": "surface",
+      "mass": 0.007394938582045229,
+      "friction": 0.5,
+      "material": {
+        "model": "StVK shell, discrete-shell bending",
+        "youngs_modulus": 500000000.0,
+        "bending_youngs_modulus": 500000000.0,
+        "poisson_ratio": 0.3,
+        "density": 910.0,
+        "thickness": 0.0001
+      },
+      "gas": {
+        "model": "Sealed-volume gas",
+        "p_atm_pa": 101325.0,
+        "p_gauge0_pa": 0.0,
+        "gamma": 1.0,
+        "reference_volume_m3": 0.0013455308768367637,
+        "reference": "closed source mesh at authored puffed shape"
+      },
+      "mass_note": "film only, contents not modelled"
+    },
+    "binder_1": {
+      "label": "Binder",
+      "type": "rigid",
+      "mass": 0.75,
+      "friction": 0.5
+    },
+    "binder_2": {
+      "label": "Binder",
+      "type": "rigid",
+      "mass": 0.75,
+      "friction": 0.5
+    },
+    "binder_3": {
+      "label": "Binder",
+      "type": "rigid",
+      "mass": 0.75,
+      "friction": 0.5
+    },
+    "binder_4": {
+      "label": "Binder",
+      "type": "rigid",
+      "mass": 0.75,
+      "friction": 0.5
+    },
+    "binder_5": {
+      "label": "Binder",
+      "type": "rigid",
+      "mass": 0.75,
+      "friction": 0.5
+    },
+    "binder_6": {
+      "label": "Binder",
+      "type": "rigid",
+      "mass": 0.75,
+      "friction": 0.5
+    },
+    "shelf_book_1": {
+      "label": "Book",
+      "type": "rigid",
+      "mass": 0.28,
+      "friction": 0.5
+    },
+    "shelf_book_2": {
+      "label": "Book",
+      "type": "rigid",
+      "mass": 0.28,
+      "friction": 0.5
+    },
+    "shelf_book_3": {
+      "label": "Book",
+      "type": "rigid",
+      "mass": 0.33,
+      "friction": 0.5
+    },
+    "shelf_book_4": {
+      "label": "Book",
+      "type": "rigid",
+      "mass": 0.32,
+      "friction": 0.5
+    },
+    "shelf_book_5": {
+      "label": "Book",
+      "type": "rigid",
+      "mass": 0.3,
+      "friction": 0.5
+    },
+    "shelf_book_6": {
+      "label": "Book",
+      "type": "rigid",
+      "mass": 0.37,
+      "friction": 0.5
+    },
+    "shelf_book_7": {
+      "label": "Book",
+      "type": "rigid",
+      "mass": 0.34,
+      "friction": 0.5
+    },
+    "shelf_book_8": {
+      "label": "Book",
+      "type": "rigid",
+      "mass": 0.4,
+      "friction": 0.5
+    },
+    "shelf_file": {
+      "label": "Magazine File",
+      "type": "rigid",
+      "mass": 0.6,
+      "friction": 0.4
+    },
+    "shelf_case": {
+      "label": "Case",
+      "type": "rigid",
+      "mass": 0.25,
+      "friction": 0.4
+    },
+    "shelf_adapter": {
+      "label": "Power Adapter",
+      "type": "rigid",
+      "mass": 0.25,
+      "friction": 0.4
+    },
+    "shelf_box": {
+      "label": "Storage Box",
+      "type": "rigid",
+      "mass": 0.15,
+      "friction": 0.4
+    },
+    "shelf_device": {
+      "label": "Lidded Device",
+      "type": "articulated",
+      "mass": 1.8,
+      "friction": 0.4,
+      "joints": [
+        {
+          "name": "lid",
+          "child": "lid",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.2
+          ]
+        }
+      ]
+    },
+    "bottom_blue_box": {
+      "label": "Storage Box",
+      "type": "rigid",
+      "mass": 0.35,
+      "friction": 0.4
+    },
+    "bottom_adapter": {
+      "label": "Power Adapter",
+      "type": "rigid",
+      "mass": 0.45,
+      "friction": 0.4
+    },
+    "card_left": {
+      "label": "Card",
+      "type": "surface",
+      "friction": 0.4,
+      "nodes": [
+        "card_left__part_000"
+      ],
+      "material": {
+        "name": "paper card",
+        "model": "StVK membrane, plastic hinges",
+        "youngs_modulus": 2250000000.0,
+        "poisson_ratio": 0.15,
+        "density": 761.9,
+        "thickness": 0.00035,
+        "yield_curvature": 25
+      },
+      "contact_distance": 0.0005,
+      "derived_mass": 0.0009717
+    },
+    "paper_left": {
+      "label": "Paper Sheet",
+      "type": "surface",
+      "friction": 0.4,
+      "nodes": [
+        "paper_left__part_000"
+      ],
+      "material": {
+        "name": "paper",
+        "model": "StVK membrane, plastic hinges",
+        "youngs_modulus": 2250000000.0,
+        "poisson_ratio": 0.15,
+        "density": 761.9,
+        "thickness": 0.000105,
+        "yield_curvature": 25
+      },
+      "contact_distance": 0.0005,
+      "derived_mass": 0.0004314
+    },
+    "loose_cable_right": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0015
+      },
+      "nodes": [
+        "loose_cable_right_start_plug",
+        "loose_cable_right_mesh"
+      ],
+      "centerline": "loose_cable_right_centerline",
+      "derived_mass": 0.008324
+    },
+    "wall_adapter_right": {
+      "label": "Wall Adapter",
+      "type": "static",
+      "friction": 0.4
+    },
+    "orange_item_right_1": {
+      "label": "Small Orange Item",
+      "type": "rigid",
+      "mass": 0.004,
+      "friction": 0.4
+    },
+    "orange_item_right_2": {
+      "label": "Small Orange Item",
+      "type": "rigid",
+      "mass": 0.004,
+      "friction": 0.4
+    },
+    "hat_left": {
+      "label": "Hard Hat",
+      "type": "rigid",
+      "mass": 0.35,
+      "friction": 0.35
+    },
+    "hat_right": {
+      "label": "Hard Hat",
+      "type": "rigid",
+      "mass": 0.35,
+      "friction": 0.35
+    },
+    "keyboard_left": {
+      "label": "Keyboard",
+      "type": "articulated",
+      "mass": 0.7,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "press_*",
+          "count": 104,
+          "type": "prismatic",
+          "limit": [
+            0.0,
+            0.0018
+          ]
+        }
+      ]
+    },
+    "keyboard_right": {
+      "label": "Keyboard",
+      "type": "articulated",
+      "mass": 0.65,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "press_*",
+          "count": 104,
+          "type": "prismatic",
+          "limit": [
+            0.0,
+            0.0018
+          ]
+        }
+      ]
+    },
+    "monitor_left": {
+      "label": "Monitor",
+      "type": "articulated",
+      "mass": 4.5,
+      "friction": 0.4,
+      "joints": [
+        {
+          "name": "tilt",
+          "child": "panel",
+          "type": "revolute",
+          "limit": [
+            -0.12,
+            0.0
+          ]
+        }
+      ]
+    },
+    "monitor_right": {
+      "label": "Monitor",
+      "type": "articulated",
+      "mass": 5.0,
+      "friction": 0.4,
+      "joints": [
+        {
+          "name": "tilt",
+          "child": "panel",
+          "type": "revolute",
+          "limit": [
+            -0.12,
+            0.1
+          ]
+        }
+      ]
+    },
+    "phone_left": {
+      "label": "Desk Telephone",
+      "type": "articulated",
+      "mass": 0.75,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "press_*",
+          "count": 27,
+          "type": "prismatic",
+          "limit": [
+            0.0,
+            0.0012
+          ]
+        }
+      ],
+      "components": [
+        {
+          "part": "coiled_receiver_cord",
+          "type": "curve",
+          "material": {
+            "name": "effective flexible insulated cable",
+            "model": "Discrete elastic rod",
+            "youngs_modulus": 40000000.0,
+            "bending_youngs_modulus": 40000000.0,
+            "twist_youngs_modulus": 40000000.0,
+            "poisson_ratio": 0.35,
+            "density": 1600,
+            "radius": 0.00115,
+            "naturally_curved": true
+          },
+          "representation": "rod",
+          "friction": 0.6,
+          "contact_distance": 0.00015,
+          "rest": "Settled under gravity, ends fixed to the devices",
+          "nodes": [
+            "phone_left__coiled_receiver_cord"
+          ],
+          "sim_geometry": [
+            "QIPC_phone_left_span_0"
+          ],
+          "centerline": "cable_phone_left_01_centerline",
+          "derived_mass": 0.01417
+        }
+      ]
+    },
+    "phone_right": {
+      "label": "Desk Telephone",
+      "type": "articulated",
+      "mass": 0.75,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "press_*",
+          "count": 27,
+          "type": "prismatic",
+          "limit": [
+            0.0,
+            0.0012
+          ]
+        }
+      ],
+      "components": [
+        {
+          "part": "coiled_receiver_cord",
+          "type": "curve",
+          "material": {
+            "name": "effective flexible insulated cable",
+            "model": "Discrete elastic rod",
+            "youngs_modulus": 40000000.0,
+            "bending_youngs_modulus": 40000000.0,
+            "twist_youngs_modulus": 40000000.0,
+            "poisson_ratio": 0.35,
+            "density": 1600,
+            "radius": 0.0013,
+            "naturally_curved": true
+          },
+          "representation": "rod",
+          "friction": 0.6,
+          "contact_distance": 0.00015,
+          "rest": "Settled under gravity, ends fixed to the devices",
+          "nodes": [
+            "phone_right__coiled_receiver_cord"
+          ],
+          "sim_geometry": [
+            "QIPC_phone_right_span_0"
+          ],
+          "centerline": "cable_phone_right_01_centerline",
+          "derived_mass": 0.02344
+        }
+      ]
+    },
+    "yellow_book_lower": {
+      "label": "Book",
+      "type": "rigid",
+      "mass": 0.18,
+      "friction": 0.5
+    },
+    "chair_left": {
+      "label": "Office Chair",
+      "type": "articulated",
+      "mass": 14,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "caster*_steer",
+          "count": 5,
+          "type": "revolute",
+          "limit": [
+            -3.141592653589793,
+            3.141592653589793
+          ]
+        },
+        {
+          "name": "caster*_wheel*",
+          "count": 10,
+          "type": "revolute",
+          "limit": [
+            -3.141592653589793,
+            3.141592653589793
+          ]
+        },
+        {
+          "name": "swivel_lift",
+          "type": "cylindrical",
+          "limit": [
+            -0.06,
+            0.06,
+            0.0,
+            0.012
+          ]
+        },
+        {
+          "name": "seat_tilt",
+          "child": "seat",
+          "type": "revolute",
+          "limit": [
+            -0.025,
+            0.025
+          ]
+        },
+        {
+          "name": "arm0_height",
+          "child": "arm0",
+          "type": "prismatic",
+          "limit": [
+            0.0,
+            0.008
+          ]
+        },
+        {
+          "name": "arm_button0",
+          "child": "arm_button0",
+          "type": "prismatic",
+          "limit": [
+            0.0,
+            0.001
+          ]
+        },
+        {
+          "name": "arm1_height",
+          "child": "arm1",
+          "type": "prismatic",
+          "limit": [
+            0.0,
+            0.008
+          ]
+        },
+        {
+          "name": "arm_button1",
+          "child": "arm_button1",
+          "type": "prismatic",
+          "limit": [
+            0.0,
+            0.001
+          ]
+        },
+        {
+          "name": "height_release_lever",
+          "child": "height_lever",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.16
+          ]
+        },
+        {
+          "name": "tension0",
+          "child": "tension0",
+          "type": "screw",
+          "limit": [
+            -3.141592653589793,
+            3.141592653589793,
+            -0.00075,
+            0.00075
+          ],
+          "pitch_m_per_turn": 0.0015
+        }
+      ],
+      "components": [
+        {
+          "part": "seat_cushion",
+          "type": "volume",
+          "material": {
+            "name": "effective upholstered polyurethane foam",
+            "model": "StVK–Hencky solid",
+            "youngs_modulus": 30000.0,
+            "poisson_ratio": 0.2,
+            "density": 100
+          },
+          "friction": 0.4,
+          "contact_distance": 0.0005,
+          "nodes": [
+            "chair_left__part_000"
+          ]
+        },
+        {
+          "part": "backrest_cushion",
+          "type": "volume",
+          "material": {
+            "name": "effective upholstered polyurethane foam",
+            "model": "StVK–Hencky solid",
+            "youngs_modulus": 30000.0,
+            "poisson_ratio": 0.2,
+            "density": 100
+          },
+          "friction": 0.4,
+          "contact_distance": 0.0005,
+          "nodes": [
+            "chair_left__part_001"
+          ]
+        }
+      ]
+    },
+    "chair_right": {
+      "label": "Office Chair",
+      "type": "articulated",
+      "mass": 15,
+      "friction": 0.5,
+      "joints": [
+        {
+          "name": "caster*_steer",
+          "count": 5,
+          "type": "revolute",
+          "limit": [
+            -3.141592653589793,
+            3.141592653589793
+          ]
+        },
+        {
+          "name": "caster*_wheel*",
+          "count": 10,
+          "type": "revolute",
+          "limit": [
+            -3.141592653589793,
+            3.141592653589793
+          ]
+        },
+        {
+          "name": "swivel_lift",
+          "type": "cylindrical",
+          "limit": [
+            -0.24,
+            0.24,
+            0.0,
+            0.045
+          ]
+        },
+        {
+          "name": "seat_tilt",
+          "child": "seat",
+          "type": "revolute",
+          "limit": [
+            -0.055,
+            0.055
+          ]
+        },
+        {
+          "name": "backrest",
+          "child": "backrest",
+          "type": "revolute",
+          "limit": [
+            -0.045,
+            0.06
+          ]
+        },
+        {
+          "name": "height_release_lever",
+          "child": "height_lever",
+          "type": "revolute",
+          "limit": [
+            0.0,
+            0.16
+          ]
+        },
+        {
+          "name": "tension0",
+          "child": "tension0",
+          "type": "screw",
+          "limit": [
+            -3.141592653589793,
+            3.141592653589793,
+            -0.00075,
+            0.00075
+          ],
+          "pitch_m_per_turn": 0.0015
+        }
+      ],
+      "components": [
+        {
+          "part": "seat_cushion",
+          "type": "volume",
+          "material": {
+            "name": "effective upholstered polyurethane foam",
+            "model": "StVK–Hencky solid",
+            "youngs_modulus": 30000.0,
+            "poisson_ratio": 0.2,
+            "density": 100
+          },
+          "friction": 0.4,
+          "contact_distance": 0.0005,
+          "nodes": [
+            "chair_right__part_000"
+          ]
+        },
+        {
+          "part": "backrest_cushion",
+          "type": "volume",
+          "material": {
+            "name": "effective upholstered polyurethane foam",
+            "model": "StVK–Hencky solid",
+            "youngs_modulus": 30000.0,
+            "poisson_ratio": 0.2,
+            "density": 100
+          },
+          "friction": 0.4,
+          "contact_distance": 0.0005,
+          "nodes": [
+            "chair_right__part_001"
+          ]
+        }
+      ]
+    },
+    "chair_guest": {
+      "label": "Guest Chair",
+      "type": "rigid",
+      "mass": 5.0,
+      "friction": 0.5,
+      "components": [
+        {
+          "part": "seat_cushion",
+          "type": "volume",
+          "material": {
+            "name": "effective upholstered polyurethane foam",
+            "model": "StVK–Hencky solid",
+            "youngs_modulus": 30000.0,
+            "poisson_ratio": 0.2,
+            "density": 100
+          },
+          "friction": 0.4,
+          "contact_distance": 0.0005,
+          "nodes": [
+            "chair_guest__seat_upholstery"
+          ]
+        },
+        {
+          "part": "backrest_cushion",
+          "type": "volume",
+          "material": {
+            "name": "effective upholstered polyurethane foam",
+            "model": "StVK–Hencky solid",
+            "youngs_modulus": 30000.0,
+            "poisson_ratio": 0.2,
+            "density": 100
+          },
+          "friction": 0.4,
+          "contact_distance": 0.0005,
+          "nodes": [
+            "chair_guest__backrest_upholstery"
+          ]
+        }
+      ]
+    },
+    "bag_bin_window_01": {
+      "label": "Plastic Bin Liner",
+      "type": "surface",
+      "mass": 0.044,
+      "friction": 0.45,
+      "material": {
+        "name": "translucent polyethylene film",
+        "model": "StVK membrane, hinge bending",
+        "youngs_modulus": 60000000.0,
+        "poisson_ratio": 0.45,
+        "density": 920,
+        "thickness": 8e-05
+      },
+      "inside": "bin_window",
+      "nodes": [
+        "bag_bin_window_01__liner_shell"
+      ]
+    },
+    "bag_paper_left_01": {
+      "label": "Paper Bag",
+      "type": "surface",
+      "friction": 0.4,
+      "material": {
+        "name": "uncoated folded paper",
+        "model": "StVK membrane, plastic hinges",
+        "youngs_modulus": 2250000000.0,
+        "poisson_ratio": 0.15,
+        "density": 761.9,
+        "thickness": 0.00055,
+        "yield_curvature": 25
+      },
+      "components": [
+        {
+          "part": "cord_bag_left_handle_01",
+          "type": "curve",
+          "material": {
+            "name": "effective braided textile cord",
+            "model": "Discrete elastic rod",
+            "youngs_modulus": 20000000.0,
+            "poisson_ratio": 0.3,
+            "density": 700,
+            "radius": 0.001495
+          },
+          "nodes": [
+            "cord_bag_left_handle_01_mesh"
+          ],
+          "centerline": "cord_bag_left_handle_01_centerline",
+          "derived_mass": 0.0009042
+        },
+        {
+          "part": "cord_bag_left_handle_02",
+          "type": "curve",
+          "material": {
+            "name": "effective braided textile cord",
+            "model": "Discrete elastic rod",
+            "youngs_modulus": 20000000.0,
+            "poisson_ratio": 0.3,
+            "density": 700,
+            "radius": 0.001495
+          },
+          "nodes": [
+            "cord_bag_left_handle_02_mesh"
+          ],
+          "centerline": "cord_bag_left_handle_02_centerline",
+          "derived_mass": 0.0009113
+        }
+      ],
+      "nodes": [
+        "bag_paper_left_01__paper_shell"
+      ],
+      "contact_distance": 0.0005,
+      "derived_mass": 0.05506
+    },
+    "phone_left_handset": {
+      "label": "Telephone Handset",
+      "type": "rigid",
+      "mass": 0.2,
+      "friction": 0.5
+    },
+    "phone_right_handset": {
+      "label": "Telephone Handset",
+      "type": "rigid",
+      "mass": 0.2,
+      "friction": 0.5
+    },
+    "paper_carton_window_01": {
+      "label": "Paper Carton",
+      "type": "rigid",
+      "mass": 0.035,
+      "friction": 0.5
+    },
+    "bag_bin_rear_01": {
+      "label": "Plastic Bin Liner",
+      "type": "surface",
+      "friction": 0.45,
+      "material": {
+        "name": "polyethylene film",
+        "model": "StVK membrane, hinge bending",
+        "youngs_modulus": 60000000.0,
+        "poisson_ratio": 0.45,
+        "density": 920,
+        "thickness": 3e-05
+      },
+      "nodes": [
+        "bag_bin_rear_01__liner"
+      ],
+      "inside": "bin_rear",
+      "pinned": false,
+      "derived_mass": 0.0113
+    },
+    "cable_mouse_left_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0012
+      },
+      "nodes": [
+        "cable_mouse_left_01_end_plug",
+        "cable_mouse_left_01_mesh"
+      ],
+      "centerline": "cable_mouse_left_01_centerline",
+      "derived_mass": 0.003477
+    },
+    "cable_keyboard_left_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.00115
+      },
+      "nodes": [
+        "cable_keyboard_left_01_end_plug",
+        "cable_keyboard_left_01_mesh"
+      ],
+      "centerline": "cable_keyboard_left_01_centerline",
+      "derived_mass": 0.002738
+    },
+    "cable_mouse_right_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0012
+      },
+      "nodes": [
+        "cable_mouse_right_01_mesh",
+        "cable_mouse_right_01_inline_ferrule"
+      ],
+      "centerline": "cable_mouse_right_01_centerline",
+      "derived_mass": 0.00693
+    },
+    "cable_keyboard_right_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.00115
+      },
+      "nodes": [
+        "cable_keyboard_right_01_mesh"
+      ],
+      "centerline": "cable_keyboard_right_01_centerline",
+      "derived_mass": 0.006338
+    },
+    "cable_headset_left_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "bending_youngs_modulus": 20000000.0,
+        "twist_youngs_modulus": 0.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0014,
+        "naturally_curved": false
+      },
+      "nodes": [
+        "cable_headset_left_01_mesh",
+        "cable_headset_left_01_end_plug",
+        "cable_headset_left_01_inline_controller"
+      ],
+      "rest": "Settled under gravity with the headset",
+      "sim_geometry": [
+        "QIPC_headset_span_0",
+        "QIPC_headset_span_1"
+      ],
+      "centerline": "cable_headset_left_01_centerline",
+      "derived_mass": 0.009282
+    },
+    "cable_display_dock_right_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0018
+      },
+      "nodes": [
+        "cable_display_dock_right_01_mesh"
+      ],
+      "centerline": "cable_display_dock_right_01_centerline",
+      "derived_mass": 0.009529
+    },
+    "cable_wall_power_dock_right_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0021
+      },
+      "nodes": [
+        "cable_wall_power_dock_right_01_mesh"
+      ],
+      "centerline": "cable_wall_power_dock_right_01_centerline",
+      "derived_mass": 0.05313
+    },
+    "cable_wall_power_lamp_right_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.00145
+      },
+      "nodes": [
+        "cable_wall_power_lamp_right_01_mesh"
+      ],
+      "centerline": "cable_wall_power_lamp_right_01_centerline",
+      "derived_mass": 0.01927
+    },
+    "cable_wall_data_free_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0012
+      },
+      "nodes": [
+        "cable_wall_data_free_01_end_plug",
+        "cable_wall_data_free_01_mesh"
+      ],
+      "centerline": "cable_wall_data_free_01_centerline",
+      "derived_mass": 0.002536
+    },
+    "cable_floor_light_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0021
+      },
+      "nodes": [
+        "cable_floor_light_01_start_plug",
+        "cable_floor_light_01_mesh"
+      ],
+      "centerline": "cable_floor_light_01_centerline",
+      "derived_mass": 0.06569
+    },
+    "cable_floor_dark_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.00165
+      },
+      "nodes": [
+        "cable_floor_dark_01_start_plug",
+        "cable_floor_dark_01_mesh"
+      ],
+      "centerline": "cable_floor_dark_01_centerline",
+      "derived_mass": 0.04076
+    },
+    "cable_shelf_lower_power_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0032
+      },
+      "nodes": [
+        "cable_shelf_lower_power_01_mesh",
+        "cable_shelf_lower_power_01_start_connector",
+        "cable_shelf_lower_power_01_end_connector"
+      ],
+      "centerline": "cable_shelf_lower_power_01_centerline",
+      "derived_mass": 0.06609
+    },
+    "cable_shelf_lower_dc_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0026
+      },
+      "nodes": [
+        "cable_shelf_lower_dc_01_mesh",
+        "cable_shelf_lower_dc_01_start_connector",
+        "cable_shelf_lower_dc_01_end_connector"
+      ],
+      "centerline": "cable_shelf_lower_dc_01_centerline",
+      "derived_mass": 0.04118
+    },
+    "cable_shelf_lower_usb_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0025
+      },
+      "nodes": [
+        "cable_shelf_lower_usb_01_mesh",
+        "cable_shelf_lower_usb_01_start_connector",
+        "cable_shelf_lower_usb_01_end_connector"
+      ],
+      "centerline": "cable_shelf_lower_usb_01_centerline",
+      "derived_mass": 0.03362
+    },
+    "cable_shelf_bottom_dc_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0028
+      },
+      "nodes": [
+        "cable_shelf_bottom_dc_01_end_connector",
+        "cable_shelf_bottom_dc_01_mesh"
+      ],
+      "centerline": "cable_shelf_bottom_dc_01_centerline",
+      "derived_mass": 0.05162
+    },
+    "cable_shelf_bottom_power_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.003
+      },
+      "nodes": [
+        "cable_shelf_bottom_power_01_mesh",
+        "cable_shelf_bottom_power_01_end_connector"
+      ],
+      "centerline": "cable_shelf_bottom_power_01_centerline",
+      "derived_mass": 0.04517
+    },
+    "cable_shelf_upper_adapter_01": {
+      "label": "Cable",
+      "type": "curve",
+      "friction": 0.5,
+      "material": {
+        "name": "effective flexible insulated cable",
+        "model": "Discrete elastic rod",
+        "youngs_modulus": 20000000.0,
+        "poisson_ratio": 0.4,
+        "density": 1500,
+        "radius": 0.0027
+      },
+      "nodes": [
+        "cable_shelf_upper_adapter_01_end_connector",
+        "cable_shelf_upper_adapter_01_mesh"
+      ],
+      "centerline": "cable_shelf_upper_adapter_01_centerline",
+      "derived_mass": 0.04073
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "codimrecon-page",
+      "runtimeExecutable": "/bin/sh",
+      "runtimeArgs": ["-c", "cd /private/tmp/claude-501/-Users-szxie-Documents-shuzhaoxie-github-io-CoDimRecon/8d33522c-dfdd-4ff2-b4ee-85ff7292d132/scratchpad/site && exec /usr/bin/python3 -u ../serve.py 8765"],
+      "port": 8765
+    }
+  ]
+}

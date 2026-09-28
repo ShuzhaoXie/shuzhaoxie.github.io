@@ -1,0 +1,1034 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CoDimRecon: Agentic Reconstruction of Sim-Ready 3D Scenes with Deformable Curves, Surfaces, and Volumes</title>
+  <meta name="description" content="CoDimRecon is an agentic framework that reconstructs editable, simulation-ready scenes with rigid, articulated, and deformable objects — curves, surfaces, and volumes — from multi-view RGB observations.">
+  <meta name="theme-color" content="#fbfaf7">
+  <meta property="og:title" content="CoDimRecon: Agentic Reconstruction of Sim-Ready 3D Scenes with Deformable Curves, Surfaces, and Volumes">
+  <meta property="og:description" content="Agentic reconstruction of sim-ready indoor scenes with rigid, articulated, and deformable curves, surfaces, and volumes from multi-view RGB.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="static/images/teaser.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="static/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="static/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="static/css/style.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./static/vendor/three/build/three.module.min.js",
+        "three/addons/": "./static/vendor/three/addons/"
+      }
+    }
+  </script>
+</head>
+<body>
+
+<!-- ======================= Navigation ======================= -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="CoDimRecon — back to top">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#1a1d24"/>
+        <rect x="7" y="8" width="18" height="2.2" rx="1.1" fill="#e07a41"/>
+        <rect x="7" y="13" width="18" height="4" rx="1.4" fill="#8a74dc"/>
+        <rect x="7" y="19.6" width="18" height="5.6" rx="1.6" fill="#2fa487"/>
+      </svg>
+      CoDimRecon
+    </a>
+    <nav aria-label="Page sections">
+      <ul class="nav-links">
+        <li><a href="#abstract">Abstract</a></li>
+        <!-- <li><a href="#explore">Interactive</a></li> -->
+        <li><a href="#physics">Physics</a></li>
+        <li><a href="#deformables">Deformables</a></li>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#results">Results</a></li>
+        <!-- <li><a href="#scenes">3D Scenes</a></li> -->
+        <!-- <li><a href="#ablations">Ablations</a></li> -->
+        <li><a href="#bibtex">BibTeX</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ======================= Hero ======================= -->
+<section class="hero">
+  <div class="container">
+    <span class="badge"><span class="badge-dots" aria-hidden="true"><i></i><i></i><i></i></span>Rigid · Articulated · Deformable — sim-ready scenes from multi-view RGB</span>
+
+    <h1 class="title">
+      <span class="title-name">CoDimRecon:</span>
+      <span class="title-sub">Agentic Reconstruction of Sim-Ready 3D Scenes with Deformable Curves, Surfaces, and Volumes</span>
+    </h1>
+
+    <ul class="authors" aria-label="Authors">
+      <li>Shuzhao Xie<sup>1,2*</sup></li>
+      <li>Lelin Wang<sup>2*</sup></li>
+      <li>Guying Lin<sup>2</sup></li>
+      <li>Zhi Wang<sup>1†</sup></li>
+      <li>Minchen Li<sup>2,3†</sup></li>
+    </ul>
+    <ul class="affiliations" aria-label="Affiliations">
+      <li><sup>1</sup>SIGS, Tsinghua University</li>
+      <li><sup>2</sup>School of Computer Science, Carnegie Mellon University</li>
+      <li><sup>3</sup>Genesis AI</li>
+    </ul>
+    <p class="author-notes"><sup>*</sup>Equal contribution. &nbsp;<sup>†</sup>Corresponding authors.</p>
+
+    <div class="links">
+      <!-- Replace each "is-soon" span with an <a class="pill" href="..."> once the link is public. -->
+      <span class="pill is-soon" title="Coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/></svg>
+        Paper <span class="soon">Soon</span>
+      </span>
+      <span class="pill is-soon" title="Coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+        arXiv <span class="soon">Soon</span>
+      </span>
+      <span class="pill is-soon" title="Coming soon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 6l-6 6 6 6M16 6l6 6-6 6"/></svg>
+        Code <span class="soon">Soon</span>
+      </span>
+      <a class="pill" href="#physics">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 22V12M21 7l-9 5-9-5"/></svg>
+        Interactive Demo
+      </a>
+      <a class="pill" href="#deformables">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M10 8.5v7l6-3.5z" fill="currentColor"/></svg>
+        Videos
+      </a>
+      <a class="pill is-ghost" href="#bibtex">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        BibTeX
+      </a>
+    </div>
+
+    <!-- One simulated clip per codimension -->
+    <div class="reel" aria-label="Simulated robot interactions with reconstructed deformables">
+      <figure class="reel-item curve">
+        <video autoplay muted loop playsinline preload="metadata" poster="static/images/posters/phone_franka_rod_friction_closeup.webp" aria-label="Robot lifts a telephone handset, extending the reconstructed coiled cord">
+          <source src="videos/phone_franka_rod_friction_closeup.mp4" type="video/mp4">
+        </video>
+        <figcaption><span class="reel-label"><i>1D</i>Curve <small>· telephone cord → rod</small></span></figcaption>
+      </figure>
+      <figure class="reel-item surface">
+        <video autoplay muted loop playsinline preload="metadata" poster="static/images/posters/bin_bag_detail.webp" aria-label="Robot pulls a reconstructed plastic bag out of a rigid bin">
+          <source src="videos/bin_bag_detail.mp4" type="video/mp4">
+        </video>
+        <figcaption><span class="reel-label"><i>2D</i>Surface <small>· plastic bag → shell</small></span></figcaption>
+      </figure>
+      <figure class="reel-item volume">
+        <video autoplay muted loop playsinline preload="metadata" poster="static/images/posters/chair_left_enhanced.webp" aria-label="Robot presses the reconstructed chair cushion at three locations">
+          <source src="videos/chair_left_enhanced.mp4" type="video/mp4">
+        </video>
+        <figcaption><span class="reel-label"><i>3D</i>Volume <small>· chair cushion → solid</small></span></figcaption>
+      </figure>
+    </div>
+
+    <figure class="figure reveal" id="teaser">
+      <div class="figure-frame">
+        <img class="zoomable" src="static/images/teaser.webp" width="2600" height="1115" alt="Teaser: input views of an office (left), the reconstructed sim-ready scene with a chair cushion, telephone cord, plastic bag in a rigid bin, and a sliding drawer (center), and robot interactions with the curve, surface, and volume (right)." fetchpriority="high">
+      </div>
+      <figcaption class="caption"><strong>CoDimRecon reconstructs a simulation-ready scene from multi-view RGB images.</strong> Left: input views of an office. Center: top-down reconstruction with an articulated drawer and deformable examples — a coiled telephone cord (curve), plastic bag (surface), and chair cushion (volume). The bin and the bag are separate objects, rigid and deformable, respectively. Right: robot interactions with the reconstructed cord, plastic bag, and cushion.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ======================= Abstract ======================= -->
+<section class="section" id="abstract">
+  <div class="container narrow abstract">
+    <h2>Abstract</h2>
+    <p>Reconstructing simulation-ready 3D scenes from real-world observations enables robotics, gaming, and immersive applications, yet existing methods largely assume rigid objects. This leaves an important gap for deformables, whose simulation-ready geometry depends on dimensionality — curves, surfaces, or volumes — and whose behavior may require models beyond elasticity.</p>
+    <p>We present <strong>CoDimRecon</strong>, an agentic framework that reconstructs editable scenes containing rigid, articulated, and deformable objects from multi-view RGB observations. Scene-level geometric priors ground scale and layout, while object-level generated meshes guide the agent toward detailed, compact geometry; articulated rigid objects are decomposed into movable parts with explicit joints. For deformables, category-wise agent sessions reconstruct <em>curves</em> as centerlines with radii, <em>surfaces</em> as manifold shells with thickness, and <em>volumes</em> as watertight solids for volumetric meshing. Reusable simulator skills initialize compatible physical models and parameters, while agent-guided behavioral tests expose mismatches and trigger targeted revisions of motion, geometry, numerics, or material modeling.</p>
+    <p>On evaluated Replica and ScanNet++ scenes, CoDimRecon achieves competitive compositional reconstruction accuracy while additionally producing deformable assets for rod, shell, and solid simulation. We further demonstrate robot interactions across all three representations, including a controlled paper-folding case in which behavioral testing motivates plastic bending.</p>
+
+    <!-- Stats cards temporarily hidden
+    <div class="stats">
+      <div class="stat reveal">
+        <span class="stat-value">1D – 3D</span>
+        <span class="stat-label">curves, surfaces &amp; volumes reconstructed for rod, shell &amp; solid simulation</span>
+      </div>
+      <div class="stat reveal">
+        <span class="stat-value">6 scenes</span>
+        <span class="stat-label">evaluated on Replica and ScanNet++, lowest CD and highest NC on both</span>
+      </div>
+      <div class="stat reveal">
+        <span class="stat-value">97.5%</span>
+        <span class="stat-label">of dynamic objects stay in place on Replica (Stable-All), vs. 49.4% for HoloScene</span>
+      </div>
+      <div class="stat reveal">
+        <span class="stat-value">92.5%</span>
+        <span class="stat-label">of the paper fold is retained with plastic hinges, vs. 3.7% with elastic bending</span>
+      </div>
+    </div>
+    -->
+  </div>
+</section>
+
+<!-- ======================= Interactive articulated scene ======================= -->
+<!-- Articulated office viewer temporarily hidden (its script call in static/js/viewers.js is commented out too)
+<section class="section band" id="explore">
+  <div class="container">
+    <p class="eyebrow">Interactive reconstruction · Scene 067-D</p>
+    <h2>Make the reconstruction move</h2>
+    <p class="section-intro">Every persistent object in a CoDimRecon scene is an editable asset, and movable rigid parts carry explicit joints. Orbit the reconstructed office below, drag either office chair across the floor, open the cabinet doors and drawers, swing the room doors, and pose the desk lamp — all driven by the recovered articulation hierarchy.</p>
+
+    <div class="explore">
+      <div class="stage">
+        <div class="stage-canvas" id="art-canvas" aria-label="Interactive 3D reconstruction of an office with articulated furniture">
+          <div class="loader" id="art-loader" role="status">
+            <strong data-loader-text>Preparing the reconstructed scene</strong>
+            <div class="loader-bar"><i data-loader-bar></i></div>
+            <small data-loader-sub>Loads when you scroll here · 7.5 MB · Draco-compressed glTF</small>
+          </div>
+          <div class="stage-hover" id="art-hover"></div>
+          <div class="stage-stamp" aria-hidden="true">
+            <strong>1,342</strong><span>MESHES</span>
+            <strong>208</strong><span>MATERIALS</span>
+          </div>
+        </div>
+        <div class="stage-toolbar">
+          <span class="hint"><span>↔ Drag to orbit</span><span>＋ Scroll to zoom</span><span>◉ Hold a chair to move it</span><span>☝ Click a part to actuate</span></span>
+          <span class="tool-btns">
+            <button class="tool-btn" type="button" id="art-overview">Overview</button>
+            <button class="tool-btn" type="button" id="art-cutaway" aria-pressed="false">Show complete room</button>
+          </span>
+        </div>
+      </div>
+
+      <aside class="deck" aria-label="Articulation controls">
+        <div class="deck-head">
+          <p class="eyebrow">7 articulated groups</p>
+          <h3>Try the controls</h3>
+          <p>Move and rotate both chairs, open storage, and pose the desk lamp. Clicking a part in the scene does the same.</p>
+        </div>
+        <ul class="deck-list" id="art-deck">
+          <li class="deck-item" data-item="chairLeft">
+            <button class="deck-btn" type="button" data-panel="chairLeft" aria-expanded="false" disabled>
+              <span class="deck-num c1">01</span>
+              <span class="deck-copy"><strong>Left office chair</strong><small>Drag to move · casters roll</small></span>
+              <span class="deck-action">Adjust</span>
+            </button>
+            <div class="deck-panel" hidden>
+              <label class="range"><span>Swivel</span><input type="range" min="0" max="360" step="1" value="0" data-chair="left"><output>0°</output></label>
+            </div>
+          </li>
+          <li class="deck-item" data-item="chairRight">
+            <button class="deck-btn" type="button" data-panel="chairRight" aria-expanded="false" disabled>
+              <span class="deck-num c2">02</span>
+              <span class="deck-copy"><strong>Right office chair</strong><small>Drag to move · casters roll</small></span>
+              <span class="deck-action">Adjust</span>
+            </button>
+            <div class="deck-panel" hidden>
+              <label class="range"><span>Swivel</span><input type="range" min="0" max="360" step="1" value="0" data-chair="right"><output>0°</output></label>
+            </div>
+          </li>
+          <li class="deck-item" data-item="cabinetLeft">
+            <button class="deck-btn" type="button" data-toggle="cabinetLeft" aria-pressed="false" disabled>
+              <span class="deck-num c3">03</span>
+              <span class="deck-copy"><strong>Left cabinet door</strong><small>Tall cabinet · revolute hinge</small></span>
+              <span class="deck-action" data-on="Close" data-off="Open door">Open door</span>
+            </button>
+          </li>
+          <li class="deck-item" data-item="cabinetRight">
+            <button class="deck-btn" type="button" data-toggle="cabinetRight" aria-pressed="false" disabled>
+              <span class="deck-num c4">04</span>
+              <span class="deck-copy"><strong>Right cabinet door</strong><small>Tall cabinet · revolute hinge</small></span>
+              <span class="deck-action" data-on="Close" data-off="Open door">Open door</span>
+            </button>
+          </li>
+          <li class="deck-item" data-item="drawers">
+            <button class="deck-btn" type="button" data-panel="drawers" aria-expanded="false" disabled>
+              <span class="deck-num c2">05</span>
+              <span class="deck-copy"><strong>Drawer units</strong><small>Two pedestals · prismatic joints</small></span>
+              <span class="deck-action">Adjust</span>
+            </button>
+            <div class="deck-panel" hidden>
+              <div class="deck-group">
+                <strong>Left unit</strong>
+                <label class="range"><span>Top</span><input type="range" min="0" max="100" step="1" value="0" data-drawer="left" data-index="2"><output>0%</output></label>
+                <label class="range"><span>Middle</span><input type="range" min="0" max="100" step="1" value="0" data-drawer="left" data-index="1"><output>0%</output></label>
+                <label class="range"><span>Bottom</span><input type="range" min="0" max="100" step="1" value="0" data-drawer="left" data-index="0"><output>0%</output></label>
+              </div>
+              <div class="deck-group">
+                <strong>Right unit</strong>
+                <label class="range"><span>Top</span><input type="range" min="0" max="100" step="1" value="0" data-drawer="right" data-index="2"><output>0%</output></label>
+                <label class="range"><span>Middle</span><input type="range" min="0" max="100" step="1" value="0" data-drawer="right" data-index="1"><output>0%</output></label>
+                <label class="range"><span>Bottom</span><input type="range" min="0" max="100" step="1" value="0" data-drawer="right" data-index="0"><output>0%</output></label>
+              </div>
+            </div>
+          </li>
+          <li class="deck-item" data-item="doors">
+            <button class="deck-btn" type="button" data-toggle="doors" aria-pressed="false" disabled>
+              <span class="deck-num c4">06</span>
+              <span class="deck-copy"><strong>Room doors</strong><small>Two hinged doors · open outward</small></span>
+              <span class="deck-action" data-on="Close both" data-off="Open both">Open both</span>
+            </button>
+          </li>
+          <li class="deck-item" data-item="lamp">
+            <button class="deck-btn" type="button" data-panel="lamp" aria-expanded="false" disabled>
+              <span class="deck-num c1">07</span>
+              <span class="deck-copy"><strong>Desk lamp joints</strong><small>Lower arm, upper arm, and head</small></span>
+              <span class="deck-action">Adjust</span>
+            </button>
+            <div class="deck-panel" hidden>
+              <label class="range"><span>Lower arm</span><input type="range" min="-10" max="30" step="1" value="0" data-lamp="lower"><output>0°</output></label>
+              <label class="range"><span>Upper arm</span><input type="range" min="-2" max="9" step="1" value="0" data-lamp="upper"><output>0°</output></label>
+              <label class="range"><span>Lamp head</span><input type="range" min="-12" max="1" step="1" value="0" data-lamp="head"><output>0°</output></label>
+            </div>
+          </li>
+        </ul>
+        <div class="deck-foot">
+          <button class="tool-btn" type="button" id="art-reset" disabled>Reset all</button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- ======================= Physical-property inspector ======================= -->
+<section class="section band" id="physics">
+  <div class="container">
+    <p class="eyebrow">Simulation-ready assets · Scene 067-D</p>
+    <h2>Inspect the physical properties</h2>
+    <p class="section-intro">Every object in the reconstructed office is handed to the simulator with a physical description. <strong>Click</strong> any object to see its category, mass, friction, and joints, and for deformable curves, surfaces, and volumes, the constitutive model and parameters used in simulation.</p>
+
+    <div class="phys">
+      <div class="phys-stage">
+        <div class="phys-canvas" id="phys-canvas" aria-label="Interactive 3D view of the reconstructed office; click an object to inspect its physical properties">
+          <div class="loader" id="phys-loader" role="status">
+            <strong data-loader-text>Preparing the reconstructed scene</strong>
+            <div class="loader-bar"><i data-loader-bar></i></div>
+            <small data-loader-sub>Loads when you scroll here</small>
+          </div>
+          <div class="stage-hover" id="phys-hover"></div>
+        </div>
+        <div class="stage-toolbar phys-toolbar">
+          <span class="phys-filter" role="group" aria-label="Highlight objects by category" id="phys-filter">
+            <span class="phys-filter-label">Highlight</span>
+            <button class="phys-chip artic" type="button" data-filter="articulated" aria-pressed="false" disabled>Articulated <small></small></button>
+            <button class="phys-chip curve" type="button" data-filter="curve" aria-pressed="false" disabled>Curves <small></small></button>
+            <button class="phys-chip surface" type="button" data-filter="surface" aria-pressed="false" disabled>Surfaces <small></small></button>
+            <button class="phys-chip volume" type="button" data-filter="volume" aria-pressed="false" disabled>Volumes <small></small></button>
+          </span>
+          <span class="tool-btns">
+            <button class="tool-btn" type="button" id="phys-overview">Overview</button>
+          </span>
+        </div>
+      </div>
+
+      <aside class="phys-panel" aria-label="Selected object">
+        <p class="eyebrow">Selected object</p>
+        <h3 class="phys-name" id="phys-name">Click an object</h3>
+        <div class="phys-tags" id="phys-tags"></div>
+        <dl class="phys-facts" id="phys-facts"></dl>
+        <div class="phys-preview" id="phys-preview">
+          <div class="phys-preview-btns">
+            <button class="phys-pbtn" type="button" data-overlay="inertia" aria-pressed="false" hidden>Inertia</button>
+            <button class="phys-pbtn" type="button" data-overlay="sim" aria-pressed="false" hidden>Sim geometry</button>
+            <button class="phys-pbtn is-icon" type="button" data-fullscreen aria-label="Show the preview full screen">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            </button>
+          </div>
+          <p class="phys-overlay-note" id="phys-overlay-note" hidden></p>
+        </div>
+        <div class="phys-sections" id="phys-sections"></div>
+        <p class="phys-note">Effective simulation parameters, not measured material properties. Joint ranges are in-situ, collision-free ranges. Masses marked ≈ are derived from density and the reconstructed geometry.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Deformables ======================= -->
+<section class="section" id="deformables">
+  <div class="container">
+    <h2>Deformable simulation</h2>
+    <p class="section-intro">None of the evaluated reconstruction baselines outputs deformable assets for physical simulation, so we report capability demonstrations. Reconstructed curves, surfaces, and volumes are simulated with an inserted robot on an IPC-family contact backend and replayed in Blender for rendering.</p>
+
+    <div class="chips video-filter" role="toolbar" aria-label="Filter videos" id="video-filter">
+      <button class="chip is-active" type="button" data-filter="all" aria-pressed="true">All <small>7</small></button>
+      <button class="chip" type="button" data-filter="curve" aria-pressed="false">Curve <small>1</small></button>
+      <button class="chip" type="button" data-filter="surface" aria-pressed="false">Surface <small>2</small></button>
+      <button class="chip" type="button" data-filter="volume" aria-pressed="false">Volume <small>2</small></button>
+      <button class="chip" type="button" data-filter="artic" aria-pressed="false">Articulated &amp; embodied <small>2</small></button>
+    </div>
+
+    <div class="videos" id="videos">
+      <article class="video-card" data-kind="curve">
+        <div class="video-shell">
+          <video muted loop playsinline controls preload="none" poster="static/images/posters/phone_franka_rod_friction_closeup.webp">
+            <source src="videos/phone_franka_rod_friction_closeup.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-body">
+          <span class="tag curve">Curve · discrete elastic rod</span>
+          <h4>Telephone cord</h4>
+          <p>A Franka lifts the handset through finger contact and the coiled cord extends. The rod keeps its reconstructed coil as natural shape; peak handset lift is about 198 mm.</p>
+        </div>
+      </article>
+      <article class="video-card" data-kind="surface">
+        <div class="video-shell">
+          <video muted loop playsinline controls preload="none" poster="static/images/posters/bin_bag_detail.webp">
+            <source src="videos/bin_bag_detail.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-body">
+          <span class="tag surface">Surface · thin shell</span>
+          <h4>Plastic bag in a rigid bin</h4>
+          <p>The 0.03 mm bag deforms freely with no pinned vertices and is held through contact alone; the bin is a separate rigid body.</p>
+        </div>
+      </article>
+      <article class="video-card" data-kind="surface">
+        <div class="video-shell">
+          <video muted loop playsinline controls preload="none" poster="static/images/posters/franka_paper_fold_detail_no_text.webp">
+            <source src="videos/franka_paper_fold_detail_no_text.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-body">
+          <span class="tag surface">Surface · plastic hinges</span>
+          <h4>Robotic paper folding</h4>
+          <p>The gripper folds the sheet through 140°. With plastic hinge bending selected by behavioral testing, the crease is retained after release.</p>
+        </div>
+      </article>
+      <article class="video-card" data-kind="volume">
+        <div class="video-shell">
+          <video muted loop playsinline controls preload="none" poster="static/images/posters/chair_left_enhanced.webp">
+            <source src="videos/chair_left_enhanced.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-body">
+          <span class="tag volume">Volume · StVK–Hencky solid</span>
+          <h4>Chair cushion press</h4>
+          <p>A 70 mm rounded tool presses the cushion at three points; it indents by about 23 mm and recovers. Material and lighting are modified to make the indentation visible.</p>
+        </div>
+      </article>
+      <article class="video-card" data-kind="volume">
+        <div class="video-shell">
+          <video muted loop playsinline controls preload="none" poster="static/images/posters/beanbag_rest_shape.webp">
+            <source src="videos/beanbag_rest_shape.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-body">
+          <span class="tag volume">Volume · stable Neo-Hookean</span>
+          <h4>Beanbag rest shape</h4>
+          <p>Released under gravity without supports or damping, the reconstructed beanbag settles into its equilibrium rest shape.</p>
+        </div>
+      </article>
+      <article class="video-card" data-kind="artic">
+        <div class="video-shell">
+          <video muted loop playsinline controls preload="none" poster="static/images/posters/slide_drawer.webp">
+            <source src="videos/slide_drawer.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-body">
+          <span class="tag artic">Articulated · prismatic joint</span>
+          <h4>Drawer sliding</h4>
+          <p>The robot pulls the drawer open along the sliding direction recovered during articulated-object reconstruction.</p>
+        </div>
+      </article>
+      <article class="video-card" data-kind="artic">
+        <div class="video-shell">
+          <video muted loop playsinline controls preload="none" poster="static/images/posters/g1_walk_512.webp">
+            <source src="videos/g1_walk_512.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="video-body">
+          <span class="tag artic">Embodied · humanoid</span>
+          <h4>Humanoid walking</h4>
+          <p>A G1 humanoid walks through the reconstructed office, which serves directly as a simulation environment.</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- "Curve, surface, and volume" strips temporarily hidden
+    <div class="sub-head">
+      <p class="eyebrow">Robot interactions across all three representations</p>
+      <h3>Curve, surface, and volume</h3>
+    </div>
+    <div class="sim-strips">
+      <div class="sim-strip reveal">
+        <div><span class="tag curve">Curve</span><h4>Telephone cord</h4><p>The cord extends as the handset is raised.</p></div>
+        <img class="zoomable" src="static/images/sim_cord.webp" width="2400" height="480" loading="lazy" alt="Frames of a robot lifting a telephone handset while the reconstructed coiled cord extends.">
+      </div>
+      <div class="sim-strip reveal">
+        <div><span class="tag surface">Surface</span><h4>Paper</h4><p>The paper retains its crease after release.</p></div>
+        <img class="zoomable" src="static/images/sim_paper.webp" width="2400" height="480" loading="lazy" alt="Frames of a robot folding a sheet of paper that keeps its crease after release.">
+      </div>
+      <div class="sim-strip reveal">
+        <div><span class="tag volume">Volume</span><h4>Cushion</h4><p>The cushion indents under three presses and recovers.</p></div>
+        <img class="zoomable" src="static/images/sim_cushion.webp" width="2400" height="480" loading="lazy" alt="Frames of a rounded tool pressing a chair cushion at three locations.">
+      </div>
+    </div>
+    -->
+
+    <!-- <div class="table-card reveal">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th class="l">Object</th><th class="l">Model</th>
+              <th>ρ (kg/m³)</th><th>E (MPa)</th><th>ν</th><th>r / h (mm)</th><th>κ<sub>Y</sub> (m⁻¹)</th><th>δ (mm)</th><th>μ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="method l"><span class="tag curve">Telephone cord</span></td><td class="l">Discrete elastic rod</td><td>1600</td><td>40</td><td>0.35</td><td>1.3</td><td>–</td><td>0.15</td><td>0.60</td></tr>
+            <tr><td class="method l"><span class="tag surface">Paper</span></td><td class="l">StVK membrane, plastic hinges</td><td>761.9</td><td>2250</td><td>0.15</td><td>0.105</td><td>25</td><td>0.50</td><td>0.40</td></tr>
+            <tr><td class="method l"><span class="tag volume">Chair cushion</span></td><td class="l">StVK–Hencky solid</td><td>100</td><td>0.03</td><td>0.20</td><td>–</td><td>–</td><td>0.50</td><td>0.40</td></tr>
+            <tr><td class="method l"><span class="tag volume">Beanbag</span></td><td class="l">Stable Neo-Hookean solid</td><td>120</td><td>0.02</td><td>0.30</td><td>–</td><td>–</td><td>0.50</td><td>0.40</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-caption"><strong>Deformable simulation parameters.</strong> ρ: density; E: Young's modulus (paper: membrane and bending; cord: stretching, bending, and twisting); ν: Poisson's ratio; r/h: cord radius or shell thickness; κ<sub>Y</sub>: plastic-hinge yield curvature; δ: contact activation distance; μ: friction coefficient. Values are effective simulation parameters, not measured material properties; paper plasticity and the cushion's StVK–Hencky model were selected through behavioral testing.</p>
+    </div> -->
+
+    <!-- "Paper that springs back triggers plastic bending" temporarily hidden
+    <div class="sub-head">
+      <p class="eyebrow">Behavioral testing and revision</p>
+      <h3>Paper that springs back triggers plastic bending</h3>
+      <p class="section-intro">The first folding rollout passed every physical-validity check but sprang back after release. The agent enabled plastic hinge bending (κ<sub>Y</sub> = 25 m⁻¹, no hardening). Replaying the same 140° gripper trajectory with plasticity on and off isolates its effect — a material-model mismatch that numerical checks alone would not detect.</p>
+    </div>
+
+    <div class="split">
+      <figure class="figure reveal">
+        <div class="figure-frame">
+          <img class="zoomable" src="static/images/paper_fold_test.webp" width="1600" height="1085" loading="lazy" alt="Paper-folding test under the same robot trajectory: with elastic bending (top row) the paper springs back after release; with plastic bending (bottom row) it retains the fold.">
+        </div>
+        <figcaption class="caption">Under the same robot trajectory, elastic bending (top) springs back after release, while plastic bending (bottom) retains the fold. The elastic case is a controlled rerun with plasticity disabled.</figcaption>
+      </figure>
+      <div class="compare" id="fold-compare">
+        <div class="compare-row">
+          <header><h4>Elastic bending</h4><span class="big">4.48°<small>of 121.66° peak</small></span></header>
+          <div class="bar elastic"><i data-width="3.7"></i></div>
+          <p>3.7% of the fold retained one second after opening · 0 hinges yielded</p>
+        </div>
+        <div class="compare-row">
+          <header><h4>Plastic bending</h4><span class="big">114.97°<small>of 124.24° peak</small></span></header>
+          <div class="bar plastic"><i data-width="92.5"></i></div>
+          <p>92.5% of the fold retained one second after opening · 372 hinges yielded</p>
+        </div>
+        <div class="table-card">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr class="group"><th></th><th colspan="3"><span>Fold angle (°)</span></th><th colspan="2"></th></tr>
+                <tr><th class="l">Bending</th><th>Peak</th><th>+1 s</th><th>End</th><th>Retained (%)</th><th>Yielded</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="method l">Elastic</td><td>121.66</td><td>4.48</td><td>2.67</td><td>3.7</td><td>0</td></tr>
+                <tr class="ours"><td class="method l">Plastic</td><td>124.24</td><td class="b1">114.97</td><td class="b1">114.15</td><td class="b1">92.5</td><td>372</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-caption">+1 s: one second after opening. Retained: +1 s angle divided by peak angle. Yielded: hinges whose natural angle changes by more than 0.1 rad.</p>
+        </div>
+      </div>
+    </div>
+    -->
+
+    <!-- <details class="more reveal">
+      <summary><span>Revisions during agent-guided behavioral testing<small>Every revision triggered while testing the cord, cushion, and paper — most failures were fixed without touching the material model.</small></span></summary>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Asset</th><th>Observed failure</th><th>Attributed to</th><th>Revision</th><th>Material changed</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="tag curve">Telephone cord</span></td><td>No collision-free path in the first two plans</td><td>Motion</td><td>Re-planned trajectory</td><td>No</td></tr>
+            <tr><td><span class="tag volume">Cushion, indenter study</span></td><td>Element inversion and excess strain under large compression</td><td>Material model</td><td>Hencky logarithmic-strain elasticity</td><td><strong>Yes</strong></td></tr>
+            <tr><td><span class="tag volume">Cushion, press study</span></td><td>Element inversion and excess strain during the press</td><td>Motion</td><td>Revised press motion</td><td>No</td></tr>
+            <tr><td><span class="tag volume">Chair cushion</span></td><td>Back fragments fell under gravity; the solve did not converge</td><td>Geometry, boundary</td><td>Volume re-classified; full seat underside bonded</td><td>No</td></tr>
+            <tr><td><span class="tag volume">Chair cushion</span></td><td>Excess stretch and shallow indentation at the third point</td><td>Tool</td><td>70 mm rounded tool</td><td>No</td></tr>
+            <tr><td><span class="tag volume">Chair cushion</span></td><td>Excess stretch at the third point</td><td>Contact location</td><td>Third point moved to the cushion front</td><td>No</td></tr>
+            <tr><td><span class="tag surface">Paper</span></td><td>Crease not kept after release</td><td>Material model</td><td>Plastic hinge bending (κ<sub>Y</sub> = 25 m⁻¹)</td><td><strong>Yes</strong></td></tr>
+            <tr><td><span class="tag surface">Paper</span></td><td>Plan check failed for the first two plans</td><td>Motion</td><td>Re-planned trajectory</td><td>No</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-caption">Rows are chronological within each asset. Earlier cushion studies supply the Hencky model and E = 30 kPa used in the final cushion; setup failures, repeats, interrupted runs, and rendering are omitted.</p>
+    </details>
+
+    <div class="media-row">
+      <figure class="figure reveal">
+        <div class="figure-frame">
+          <img class="zoomable" src="static/images/rest_shape_settling.webp" width="1400" height="949" loading="lazy" alt="Rest-shape settling of the reconstructed beanbag: renders at t = 0 and 6 s, (a) vertex distance to equilibrium normalized by the bounding-box diagonal, and (b) kinetic energy over time.">
+        </div>
+      </figure>
+      <div>
+        <p class="eyebrow">Rest shape</p>
+        <h3>Settling before interaction</h3>
+        <p>Reconstructed deformable geometry is not necessarily in equilibrium under gravity, so each asset is settled first. The beanbag is released without pinned vertices, supports, or damping; its initial geometry differs from equilibrium by at most 1.1% of the bounding-box diagonal <em>D</em> = 1.75 m.</p>
+        <div class="facts">
+          <div class="fact"><strong>&lt; 10<sup>−4</sup> <em>D</em></strong><span>maximum vertex distance after 2.3 s</span></div>
+          <div class="fact"><strong>8.5 × 10<sup>−11</sup> J</strong><span>kinetic energy at 6 s (peak 0.26 J)</span></div>
+          <div class="fact"><strong>&gt; 0.91</strong><span>minimum element Jacobian — no tetrahedron inverts</span></div>
+          <div class="fact"><strong>&lt; 0.75%</strong><span>volume change during settling</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- ======================= Method ======================= -->
+<section class="section band" id="method">
+  <div class="container">
+    <h2>Method</h2>
+    <p class="section-intro">CoDimRecon takes multi-view RGB observations and proceeds in three stages. The agent first authors an editable scene using geometric context and generated meshes as references, then refines appearance, articulation, and rigid-body stability. Finally, it reconstructs deformable curves, surfaces, and volumes and tests their behavior through simulated robot interaction.</p>
+
+    <figure class="figure reveal">
+      <div class="figure-frame">
+        <img class="zoomable" src="static/images/overview.webp" width="2400" height="1589" loading="lazy" alt="Method overview in three panels: (a) scene reconstruction from multi-view RGB with 3D and semantic priors and mesh references rebuilt as editable primitives; (b) scene refinement with a render–evaluate–refine loop and articulated objects such as a sliding drawer and pressable keyboard; (c) category-wise processing of curves, surfaces, and volumes and an agent-guided behavioral verification loop.">
+      </div>
+      <figcaption class="caption"><strong>Overview.</strong> (a) Geometric context and generated meshes guide editable primitive-based scene reconstruction. (b) Render–evaluate–refine improves appearance and pose; articulated rigid objects receive joints, and rigid bodies are settled under gravity. (c) Separate sessions reconstruct solver-compatible curves, surfaces, and volumes; reusable skills initialize physical models, and agent-guided robot tests diagnose motion, geometry, or numerical issues before material changes.</figcaption>
+    </figure>
+
+    <div class="stages">
+      <article class="stage-card a reveal">
+        <span class="stage-letter">a</span>
+        <h3>Reconstruction with geometric &amp; generative references</h3>
+        <ul>
+          <li><strong>Geometric context.</strong> VGGT-Omega provides intrinsics, camera poses, depth, and point maps that the agent queries to ground object dimensions, poses, and layout.</li>
+          <li><strong>Mesh references.</strong> CropFormer masks are clustered across views into 3D tracks; SAM3D generates a mesh per track, registered to the scene. Small missing objects are recovered with REST3D.</li>
+          <li><strong>Primitive fitting.</strong> In Blender, the agent rebuilds furniture from primitives with bevel, subdivision, and lattice modifiers — compact, editable, and ready for articulation.</li>
+        </ul>
+      </article>
+      <article class="stage-card b reveal">
+        <span class="stage-letter">b</span>
+        <h3>Scene refinement</h3>
+        <ul>
+          <li><strong>Render–evaluate–refine.</strong> A quadratic color alignment <span class="math">c′ = a c² + b c + d</span> acts as a diagnostic: large gains point to lighting or materials, small gains to geometry or pose.</li>
+          <li><strong>Articulation.</strong> A joint-modeling guide covers revolute, prismatic, screw, cylindrical, universal, and spherical joints — down to keyboard keys and telephone buttons.</li>
+          <li><strong>Rigid-body stabilization.</strong> The scene is settled under gravity in MuJoCo and the resulting poses are written back as canonical placements.</li>
+        </ul>
+      </article>
+      <article class="stage-card c reveal">
+        <span class="stage-letter">c</span>
+        <h3>Category-wise deformable reconstruction &amp; simulation</h3>
+        <ul>
+          <li><strong>Separate agent sessions</strong> for curves, surfaces, and volumes; combining all instructions degrades curve reconstruction.</li>
+          <li><strong>Reusable simulator skills</strong> package constitutive models, runnable example scenes, scripts, and candidate parameters on an IPC-family contact backend.</li>
+          <li><strong>Behavioral verification.</strong> Preset robot tests check physical validity and task-level acceptance; failures trigger targeted revisions.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="sub-head">
+      <p class="eyebrow">Representation follows dimensionality</p>
+      <h3>Curves, surfaces, and volumes — each in its solver-native form</h3>
+      <p class="section-intro">Cables, cloth, and paper are thin: resolving their thickness volumetrically needs fine through-thickness resolution and can suffer locking. Codimensional models instead represent rods as curves and shells as surfaces embedded in 3D — which changes the reconstruction target itself.</p>
+    </div>
+
+    <div class="codims">
+      <article class="codim curve reveal">
+        <div class="codim-art" aria-hidden="true">
+          <svg viewBox="0 0 190 120" fill="none">
+            <path d="M14 92 C 34 92, 34 30, 54 30 S 74 92, 94 92 S 114 30, 134 30 S 154 92, 176 70" stroke="var(--curve)" stroke-width="9" stroke-linecap="round" opacity=".18"/>
+            <path d="M14 92 C 34 92, 34 30, 54 30 S 74 92, 94 92 S 114 30, 134 30 S 154 92, 176 70" stroke="var(--curve)" stroke-width="2.5" stroke-linecap="round"/>
+            <g fill="#fff" stroke="var(--curve)" stroke-width="2"><circle cx="14" cy="92" r="4"/><circle cx="54" cy="30" r="4"/><circle cx="94" cy="92" r="4"/><circle cx="134" cy="30" r="4"/><circle cx="176" cy="70" r="4"/></g>
+            <path d="M94 92 l9 9" stroke="var(--curve)" stroke-width="1.5"/>
+            <text x="106" y="112" font-family="Inter Variable, sans-serif" font-size="11" fill="var(--curve)" font-weight="600">r</text>
+          </svg>
+        </div>
+        <div class="codim-body">
+          <h3>Curves <small>1D · rod</small></h3>
+          <p class="codim-examples">e.g. the coiled telephone cord, cables</p>
+          <dl>
+            <dt>Geometry</dt><dd>Continuous centerline with radius</dd>
+            <dt>Repair</dt><dd>Path completion and radius estimation</dd>
+            <dt>Simulation</dt><dd>Discrete elastic rod with stretching, bending, and twist; the reconstructed coil is the stress-free natural shape</dd>
+          </dl>
+        </div>
+      </article>
+      <article class="codim surface reveal">
+        <div class="codim-art" aria-hidden="true">
+          <svg viewBox="0 0 190 120" fill="none">
+            <path d="M14 76 C 49 60, 79 92, 114 74 S 144 68, 150 72 L150 80 C 144 76, 149 64, 114 82 C 79 100, 49 68, 14 84 Z" fill="var(--surface)" opacity=".38"/>
+            <path d="M40 34 C 75 18, 105 50, 140 32 S 170 26, 176 30 L 150 72 C 144 68, 149 56, 114 74 C 79 92, 49 60, 14 76 Z" fill="var(--surface)" opacity=".14"/>
+            <path d="M74 27 L48 69 M108 40 L82 82 M142 32 L116 74" stroke="var(--surface)" stroke-width="1.1" opacity=".5"/>
+            <path d="M40 34 C 75 18, 105 50, 140 32 S 170 26, 176 30 L 150 72 M40 34 L14 76" stroke="var(--surface)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M14 76 C 49 60, 79 92, 114 74 S 144 68, 150 72 M14 84 C 49 68, 79 100, 114 82 S 144 76, 150 80 M14 76 v8 M150 72 v8" stroke="var(--surface)" stroke-width="2.2" stroke-linecap="round"/>
+            <path d="M160 72 v8 M157 72 h6 M157 80 h6" stroke="var(--surface)" stroke-width="1.4" stroke-linecap="round"/>
+            <text x="167" y="81" font-family="Inter Variable, sans-serif" font-size="11" fill="var(--surface)" font-weight="600">h</text>
+          </svg>
+        </div>
+        <div class="codim-body">
+          <h3>Surfaces <small>2D · shell</small></h3>
+          <p class="codim-examples">e.g. paper, plastic bags, clothing</p>
+          <dl>
+            <dt>Geometry</dt><dd>Manifold shell (midsurface) with thickness</dd>
+            <dt>Repair</dt><dd>Hole patching and fragment merging</dd>
+            <dt>Simulation</dt><dd>StVK membrane with hinge bending; plastic hinges when the task needs a lasting crease</dd>
+          </dl>
+        </div>
+      </article>
+      <article class="codim volume reveal">
+        <div class="codim-art" aria-hidden="true">
+          <svg viewBox="0 0 190 120" fill="none">
+            <path d="M40 44 L95 20 L150 44 L150 86 L95 108 L40 86 Z" fill="var(--volume)" opacity=".14"/>
+            <path d="M40 44 L95 20 L150 44 L150 86 L95 108 L40 86 Z" stroke="var(--volume)" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M40 44 L95 66 L150 44 M95 66 L95 108" stroke="var(--volume)" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M40 44 L95 108 M150 44 L95 20 M95 66 L150 86 M95 66 L40 86 M95 20 L95 66 M67 32 L122 97" stroke="var(--volume)" stroke-width="1" opacity=".5"/>
+          </svg>
+        </div>
+        <div class="codim-body">
+          <h3>Volumes <small>3D · solid</small></h3>
+          <p class="codim-examples">e.g. chair cushions, beanbags</p>
+          <dl>
+            <dt>Geometry</dt><dd>Watertight solid for tetrahedral meshing</dd>
+            <dt>Repair</dt><dd>Watertight closure; high-poly assets are bound to a closed low-poly proxy</dd>
+            <dt>Simulation</dt><dd>Solid finite elements — StVK–Hencky for large compression, stable Neo-Hookean</dd>
+          </dl>
+        </div>
+      </article>
+    </div>
+
+    <div class="sub-head">
+      <p class="eyebrow">Closing the reconstruction-to-simulation loop</p>
+      <h3>Agent-guided behavioral verification</h3>
+      <p class="section-intro">Simulator examples only initialize a deformable asset. Whether it supports the intended interaction becomes evident only when it is exercised, so the agent plans diagnostic robot manipulations, reviews each rollout, and revises in a fixed order — changing the material model only as a last resort.</p>
+    </div>
+
+    <div class="loop reveal">
+      <ol class="loop-flow">
+        <li class="loop-step"><span class="k">Initialize</span><strong>Model &amp; parameters from reusable skills</strong><p>Geometry fixes the discretization; the agent picks a material model and adapts the closest example scene.</p></li>
+        <li class="loop-step"><span class="k">Rest shape</span><strong>Settle under gravity</strong><p>Excessive sag sends the geometry back for revision; the equilibrium is written back to Blender.</p></li>
+        <li class="loop-step"><span class="k">Plan &amp; simulate</span><strong>Preset diagnostic manipulation</strong><p>Extend the cord, press the cushion, fold the paper. The agent sets grasps, approach poses, and arm motion.</p></li>
+        <li class="loop-step"><span class="k">Check</span><strong>Validity + task acceptance</strong><p>Bounds on element stretch and inversion, plus task criteria such as lift height or retained fold.</p></li>
+      </ol>
+      <div class="loop-outcomes">
+        <div class="outcome pass">
+          <h4>✓ Pass → accept &amp; freeze</h4>
+          <p>Accepted values are effective parameters under the assumed model — not measured material properties.</p>
+        </div>
+        <div class="outcome fail">
+          <h4>✗ Fail → diagnose in a fixed order</h4>
+          <ol class="ladder">
+            <li><strong>Motion</strong>commanded motion, tool, contact location</li>
+            <li><strong>Geometry</strong>shape and boundary conditions</li>
+            <li><strong>Numerics</strong>solver and contact settings</li>
+            <li><strong>Material model</strong>only if behavior still can't be reproduced</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= Results ======================= -->
+<section class="section" id="results">
+  <div class="container">
+    <h2>Compositional scene reconstruction</h2>
+    <p class="section-intro">We evaluate three Replica and three ScanNet++ scenes from the HoloScene release against HoloScene (optimization-based), ReplicateAnyScene (zero-shot compositional), and GPT-6 Astra — an agent-only baseline that shares our backbone but authors each scene in Blender directly from RGB frames.</p>
+
+    <!-- Quantitative results table temporarily hidden
+    <div class="table-card reveal">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr class="group">
+              <th colspan="2"></th>
+              <th colspan="3"><span>Geometry</span></th>
+              <th colspan="3"><span>Rendering</span></th>
+              <th colspan="2"><span>Latent similarity</span></th>
+              <th colspan="2"><span>Rigid stability (%)</span></th>
+            </tr>
+            <tr>
+              <th class="l">Dataset</th>
+              <th class="l">Method</th>
+              <th>CD ↓</th><th>F1 ↑</th><th>NC ↑</th>
+              <th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th>
+              <th>Layout ↑</th><th>Motion ↑</th>
+              <th>Ground ↑</th><th>All ↑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="dataset l" rowspan="4">Replica</td>
+              <td class="method l">HoloScene</td>
+              <td class="b2">6.79</td><td class="b1">53.48</td><td class="b2">78.76</td>
+              <td class="b1">21.22</td><td class="b1">0.6881</td><td class="b1">0.4171</td>
+              <td>94.46</td><td class="b2">95.71</td>
+              <td>77.77</td><td>49.41</td>
+            </tr>
+            <tr>
+              <td class="method l">ReplicateAnyScene</td>
+              <td>41.88</td><td>18.74</td><td>61.82</td>
+              <td>11.17</td><td>0.5529</td><td>0.6461</td>
+              <td>76.84</td><td>80.88</td>
+              <td class="b2">96.97</td><td>69.47</td>
+            </tr>
+            <tr>
+              <td class="method l">GPT-6 Astra</td>
+              <td>11.79</td><td class="b2">52.91</td><td>73.12</td>
+              <td>14.07</td><td>0.5671</td><td>0.5440</td>
+              <td class="b1">97.24</td><td>95.57</td>
+              <td>92.27</td><td class="b2">87.97</td>
+            </tr>
+            <tr class="ours">
+              <td class="method l">CoDimRecon (ours)</td>
+              <td class="b1">6.63</td><td>52.24</td><td class="b1">79.76</td>
+              <td class="b2">15.06</td><td class="b2">0.5695</td><td class="b2">0.4817</td>
+              <td class="b2">95.14</td><td class="b1">96.90</td>
+              <td class="b1">100.00</td><td class="b1">97.54</td>
+            </tr>
+            <tr class="divider">
+              <td class="dataset l" rowspan="4">ScanNet++</td>
+              <td class="method l">HoloScene</td>
+              <td>27.15</td><td>28.49</td><td>65.24</td>
+              <td class="b1">18.79</td><td class="b1">0.7134</td><td class="b2">0.3959</td>
+              <td>80.20</td><td>81.73</td>
+              <td>55.40</td><td>42.03</td>
+            </tr>
+            <tr>
+              <td class="method l">ReplicateAnyScene</td>
+              <td>50.73</td><td>19.08</td><td>54.69</td>
+              <td>8.94</td><td>0.5483</td><td>0.6710</td>
+              <td>92.87</td><td>74.87</td>
+              <td>78.66</td><td>82.72</td>
+            </tr>
+            <tr>
+              <td class="method l">GPT-6 Astra</td>
+              <td class="b2">22.73</td><td class="b2">35.90</td><td class="b2">70.14</td>
+              <td>14.22</td><td>0.5579</td><td>0.5356</td>
+              <td class="b2">94.47</td><td class="b2">96.31</td>
+              <td class="b2">96.30</td><td class="b1">96.31</td>
+            </tr>
+            <tr class="ours">
+              <td class="method l">CoDimRecon (ours)</td>
+              <td class="b1">21.66</td><td class="b1">38.28</td><td class="b1">74.91</td>
+              <td class="b2">16.68</td><td class="b2">0.6440</td><td class="b1">0.3728</td>
+              <td class="b1">96.30</td><td class="b1">97.04</td>
+              <td class="b1">97.05</td><td class="b1">96.31</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-caption"><span class="legend"><i class="l1"></i>best</span><span class="legend"><i class="l2"></i>second best</span> CD in cm; F1 at 5 cm. Rendering is measured on the input views used for reconstruction (observation fidelity, not novel-view synthesis). Layout and Motion compare source and rendered clips in a frozen V-JEPA 2.1 encoder. Stability: fraction of dynamic objects that stay in place when released individually in MuJoCo. <strong>CoDimRecon produces the most physically stable reconstructions, with the lowest CD and highest NC on both datasets, while keeping input-view rendering second only to HoloScene in PSNR and SSIM.</strong></p>
+    </div>
+    -->
+
+    <p class="section-intro">HoloScene's higher PSNR and SSIM come with visibly fragmented geometry. Pixel metrics penalize the lighting and material differences that remain in our explicitly authored scenes, whereas in the feature space of a frozen video encoder our renders are closer to the source than HoloScene's on both datasets — suggesting the gap is mainly appearance rather than missing or misplaced content.</p>
+
+    <div class="qual-head">
+      <div class="chips" role="tablist" aria-label="Qualitative comparison scene" id="qual-tabs">
+        <span class="chip-group-label">ScanNet++</span>
+        <button class="chip" role="tab" type="button" aria-selected="true" data-qual="67d702f2e8">67d702f2e8</button>
+        <button class="chip" role="tab" type="button" aria-selected="false" data-qual="7831862f02">7831862f02</button>
+        <button class="chip" role="tab" type="button" aria-selected="false" data-qual="acd69a1746">acd69a1746</button>
+        <span class="chip-group-label">Replica</span>
+        <button class="chip" role="tab" type="button" aria-selected="false" data-qual="room_0">room_0</button>
+        <button class="chip" role="tab" type="button" aria-selected="false" data-qual="room_1">room_1</button>
+        <button class="chip" role="tab" type="button" aria-selected="false" data-qual="room_2">room_2</button>
+      </div>
+      <span class="hint">Click the figure to enlarge</span>
+    </div>
+    <figure class="figure qual-figure" style="margin-top:16px">
+      <div class="figure-frame">
+        <img class="zoomable" id="qual-img" src="static/images/recon_67d702f2e8.webp" width="3201" height="939" loading="lazy" alt="Qualitative comparison on ScanNet++ scene 67d702f2e8: rendered appearance (top row) and geometry (bottom row) for ground truth, HoloScene, ReplicateAnyScene, GPT-6 Astra, and CoDimRecon.">
+      </div>
+      <figcaption class="caption" id="qual-caption"></figcaption>
+    </figure>
+
+    <div class="sub-head">
+      <p class="eyebrow">Positioning</p>
+      <h3>Capabilities at a glance</h3>
+    </div>
+    <div class="table-card reveal">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th class="l">Method</th><th class="l">Input</th><th>Deformable simulation</th>
+              <th>Geometric guidance</th><th>Generative prior</th><th>Auto instance discovery</th>
+              <th>Training-free</th><th>Agentic</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="method l">HoloScene</td><td class="l">RGB, mask, cam</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td></tr>
+            <tr><td class="method l">SimRecon</td><td class="l">RGB</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td></tr>
+            <tr><td class="method l">ReplicateAnyScene</td><td class="l">RGB</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td></tr>
+            <tr><td class="method l">VIGA</td><td class="l">Single-view RGB</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td class="method l">Lucida</td><td class="l">RGB</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td></tr>
+            <tr><td class="method l">Lumera</td><td class="l">Single-view RGB</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">✗</td><td class="yes">✓</td></tr>
+            <tr><td class="method l">LiteReality-Agent</td><td class="l">Posed RGBD</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr><td class="method l">GPT-6 Astra</td><td class="l">RGB</td><td class="no">✗</td><td class="no">✗</td><td class="no">✗</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+            <tr class="ours"><td class="method l">CoDimRecon (ours)</td><td class="l">RGB</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-caption">Comparison of compositional scene-reconstruction methods. Cam: camera parameters; RGBD: RGB images with depth. None of the compared methods reconstructs deformable curves, surfaces, and volumes for physical simulation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 3D scene gallery ======================= -->
+<!-- Scene gallery temporarily hidden (its script call in static/js/viewers.js is commented out too)
+<section class="section" id="scenes">
+  <div class="container">
+    <h2>Explore the reconstructed scenes</h2>
+    <p class="section-intro">The five remaining evaluation scenes as exported by CoDimRecon. <strong>Drag</strong> to rotate, <strong>scroll</strong> to zoom, and <strong>click</strong> any visible object to open its isolated mesh with its semantic label.</p>
+
+    <div class="gallery">
+      <div class="gallery-top">
+        <div>
+          <p class="eyebrow" id="gallery-eyebrow">ScanNet++ · 7831862f02</p>
+          <h3 id="gallery-title">Scene 783</h3>
+          <p id="gallery-desc">A reconstructed collaborative lounge with storage, seating, lighting, and small scene objects.</p>
+        </div>
+        <div class="gallery-meta" id="gallery-meta"></div>
+      </div>
+      <div class="gallery-stage">
+        <div class="gallery-canvas" id="gallery-canvas" aria-label="Interactive 3D view of the selected reconstructed scene"></div>
+        <div class="loader" id="gallery-loader" role="status">
+          <img src="previews/783.png" alt="" data-loader-img>
+          <strong data-loader-text>Preparing the reconstruction</strong>
+          <div class="loader-bar"><i data-loader-bar></i></div>
+          <small data-loader-sub>Loads when you scroll here</small>
+        </div>
+        <span class="hover-dot" id="gallery-dot" aria-hidden="true"></span>
+        <aside class="inspect" id="gallery-inspect" role="dialog" aria-label="Selected object" hidden>
+          <button class="inspect-close" type="button" aria-label="Close object information">×</button>
+          <p class="eyebrow">Selected object</p>
+          <h4 data-inspect-name>Object</h4>
+          <span data-inspect-kind></span>
+          <div class="inspect-preview" data-inspect-preview></div>
+          <small>Drag the mesh to inspect it</small>
+        </aside>
+        <div class="stage-toolbar">
+          <span class="hint">Hover for a marker · click an object to inspect its mesh</span>
+          <span class="tool-btns">
+            <button class="tool-btn" type="button" id="gallery-cutaway" aria-pressed="true">Cutaway view</button>
+          </span>
+        </div>
+      </div>
+      <div class="scene-picker" role="tablist" aria-label="Reconstructed scene" id="scene-picker">
+        <button class="scene-thumb" role="tab" type="button" aria-selected="true" data-model="models/783.glb" data-preview="previews/783.png" data-title="Scene 783" data-dataset="ScanNet++ · 7831862f02" data-desc="A reconstructed collaborative lounge with storage, seating, lighting, and small scene objects.">
+          <img src="previews/783.png" alt="" loading="lazy"><span>Scene 783<small>ScanNet++</small></span>
+        </button>
+        <button class="scene-thumb" role="tab" type="button" aria-selected="false" data-model="models/acd.glb" data-preview="previews/acd.png" data-title="Scene ACD" data-dataset="ScanNet++ · acd69a1746" data-desc="A dense office reconstruction containing desks, chairs, storage, equipment, and articulated parts.">
+          <img src="previews/acd.png" alt="" loading="lazy"><span>Scene ACD<small>ScanNet++</small></span>
+        </button>
+        <button class="scene-thumb" role="tab" type="button" aria-selected="false" data-model="models/room-0.glb" data-preview="previews/room-0.png" data-title="Room 0" data-dataset="Replica · room_0" data-desc="A reconstructed living room with upholstered furniture, tables, lamps, windows, and decor.">
+          <img src="previews/room-0.png" alt="" loading="lazy"><span>Room 0<small>Replica</small></span>
+        </button>
+        <button class="scene-thumb" role="tab" type="button" aria-selected="false" data-model="models/room-1.glb" data-preview="previews/room-1.png" data-title="Room 1" data-dataset="Replica · room_1" data-desc="A reconstructed bedroom with a bed, dresser, drawers, lighting, textiles, and small objects.">
+          <img src="previews/room-1.png" alt="" loading="lazy"><span>Room 1<small>Replica</small></span>
+        </button>
+        <button class="scene-thumb" role="tab" type="button" aria-selected="false" data-model="models/room-2.glb" data-preview="previews/room-2.png" data-title="Room 2" data-dataset="Replica · room_2" data-desc="A reconstructed meeting room with a long table, chairs, shelving, windows, and suspended lights.">
+          <img src="previews/room-2.png" alt="" loading="lazy"><span>Room 2<small>Replica</small></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- ======================= Ablations ======================= -->
+<!-- Ablation study temporarily hidden
+<section class="section" id="ablations">
+  <div class="container">
+    <h2>Ablation study</h2>
+    <p class="section-intro">We remove the geometric and generative references one at a time (ScanNet++ scene <code>67d702f2e8</code>), disable rendering refinement (RR), and compare combined versus dedicated deformable-category sessions. Because the geometry ablation covers a single scene, we read these differences as indicating the role of each reference rather than as benchmark-level gains.</p>
+
+    <div class="ablation">
+      <figure class="figure reveal">
+        <div class="figure-frame">
+          <img class="zoomable" src="static/images/ablation_priors.webp" width="1100" height="1937" loading="lazy" alt="Qualitative component ablation: the full method compared with variants without geometry priors (oversized cabinets), without generative references (coarser objects), and without rendering refinement (color shift); red arrows mark affected regions.">
+        </div>
+        <figcaption class="caption">Each row compares the full method with one component removed; red arrows mark affected regions.</figcaption>
+      </figure>
+      <div class="ablation-right">
+        <div class="table-card reveal">
+          <div class="table-scroll">
+            <table>
+              <thead>
+                <tr class="group"><th></th><th colspan="3"><span>Geometry · 67d702f2e8</span></th></tr>
+                <tr><th class="l">Variant</th><th>CD ↓</th><th>F1 ↑</th><th>NC ↑</th></tr>
+              </thead>
+              <tbody>
+                <tr class="ours"><td class="method l">Full</td><td class="b1">7.24</td><td class="b1">44.98</td><td class="b1">75.93</td></tr>
+                <tr><td class="method l">w/o geometric refs</td><td>11.94<span class="delta bad">+64.9%</span></td><td>44.53</td><td>69.70<span class="delta bad">−8.2%</span></td></tr>
+                <tr><td class="method l">w/o generative refs</td><td>9.86</td><td>39.12<span class="delta bad">−13.0%</span></td><td>68.14<span class="delta bad">−10.3%</span></td></tr>
+                <tr><td class="method l">w/o RR</td><td>7.36<span class="delta neutral">+1.7%</span></td><td>43.72</td><td>75.41</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="table-scroll" style="border-top:1px solid var(--line)">
+            <table>
+              <thead>
+                <tr class="group"><th></th><th colspan="3"><span>Rendering · ScanNet++ average</span></th></tr>
+                <tr><th class="l">Variant</th><th>PSNR ↑</th><th>SSIM ↑</th><th>LPIPS ↓</th></tr>
+              </thead>
+              <tbody>
+                <tr class="ours"><td class="method l">Full</td><td class="b1">16.68</td><td class="b1">0.6440</td><td class="b1">0.3728</td></tr>
+                <tr><td class="method l">w/o RR</td><td>15.82<span class="delta bad">−5.2%</span></td><td>0.6343<span class="delta bad">−1.5%</span></td><td>0.3938<span class="delta bad">+5.6%</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-caption"><strong>Component ablation.</strong> Geometry on ScanNet++ scene 67d702f2e8; rendering averaged over the evaluated ScanNet++ scenes. RR: rendering refinement.</p>
+        </div>
+        <ul class="note-list">
+          <li><strong>Geometric references</strong> ground scale and layout: without them CD rises by 64.9% — the largest increase — consistent with oversized cabinets.</li>
+          <li><strong>Generative references</strong> supply shape detail: without them F1 and NC drop the most, reflecting coarser objects.</li>
+          <li><strong>Rendering refinement</strong> mainly improves appearance: PSNR drops by 5.2% without it, while CD changes by only 1.7%.</li>
+        </ul>
+        <figure class="figure reveal" style="margin-top:0">
+          <div class="figure-frame">
+            <img class="zoomable" src="static/images/ablation_sessions.webp" width="1200" height="616" loading="lazy" alt="Cable reconstruction from a combined session with all deformable-category instructions (left) versus a dedicated curve session (right).">
+          </div>
+          <figcaption class="caption"><strong>Separate-session ablation on cables.</strong> Combined deformable-category instructions (left) produce coarser cable geometry than a dedicated curve session (right).</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+-->
+
+<!-- ======================= BibTeX ======================= -->
+<section class="section band" id="bibtex">
+  <div class="container narrow">
+    <h2>BibTeX</h2>
+    <div class="bibtex">
+      <button class="copy" type="button" id="copy-bibtex">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        <span>Copy</span>
+      </button>
+      <pre><code id="bibtex-code">@article{xie2026codimrecon,
+  title   = {CoDimRecon: Agentic Reconstruction of Sim-Ready 3D Scenes
+             with Deformable Curves, Surfaces, and Volumes},
+  author  = {Xie, Shuzhao and Wang, Lelin and Lin, Guying
+             and Wang, Zhi and Li, Minchen},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</code></pre>
+    </div>
+  </div>
+  <div class="container narrow ack">
+    <h2 style="margin-top:72px">Acknowledgments</h2>
+    <p>We thank Yi-Ling Qiao, Xinyu Lu, and Kemeng Huang for their guidance on using the IPC-based simulator. This work is supported in part by the National Natural Science Foundation of China (Grant Nos. 92467204 and 62472249), the Shenzhen Science and Technology Program (Grant No. KJZD20240903102300001), and gift funding from Genesis AI. Shuzhao Xie's work is supported by the Google Cloud Research Credits program. Shuzhao Xie thanks Chen Tang for help with computational resources.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© 2026 The Authors · CoDimRecon</span>
+    <span>Page design inspired by <a href="https://cubepart.github.io/">CubePart</a> and <a href="https://scenesmith.github.io/">SceneSmith</a>. <a href="#top">Back to top ↑</a></span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" type="button" aria-label="Close enlarged figure">×</button>
+  <img alt="">
+</div>
+
+<script src="static/js/main.js"></script>
+<script type="module" src="static/js/viewers.js"></script>
+</body>
+</html>

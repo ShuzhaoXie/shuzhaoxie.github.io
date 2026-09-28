@@ -1,0 +1,983 @@
+{
+  "_readme": {
+    "说明": "每个 key 是 GLB 里 ART.part.<object>.* 的物体名。null 表示待填；不适用的字段直接删掉即可。以 _ 开头的 key 不会显示在网页上。",
+    "label": "网页上显示的英文名称，可改。",
+    "type": "面板上的类型标签：static（墙/地/固定件）| rigid | articulated | curve（1D 杆/线）| surface（2D 布/纸/壳）| volume（3D 软体）。已按名字猜过，请核对。",
+    "mass": "总质量 kg。可变形体可以不填 mass，给 density 即可。",
+    "friction": "摩擦系数 μ。",
+    "material": "可变形体的本构参数。model 如 DER / StVK / Neo-Hookean / ARAP。youngs_modulus 和 poisson_ratio 用 Pa 和无量纲；curve 额外有 radius（m），surface 额外有 thickness（m）。可以自由增加字段（如 bending_stiffness、damping），网页会原样列出。",
+    "sim_mesh": "GLB 中对应的仿真离散节点（目前只有 curve 的 centerline），已自动填好，不用改。",
+    "joints": "articulated 物体的关节，name/child 已从 GLB 读出。type：revolute | prismatic；limit：[下限, 上限]，revolute 用 rad，prismatic 用 m。name 里的 * 表示同样的参数应用到所有同名关节（count 个）。",
+    "components": "物体内部的可变形子部件（如 beanbag 的提手是 curve，扶手椅软垫是 volume），各自有 type 和 material。"
+  },
+  "scene": "783",
+  "dataset": "ScanNet++ · 7831862f02",
+  "units": {
+    "mass": "kg",
+    "length": "m",
+    "density": "kg/m^3",
+    "modulus": "Pa",
+    "angle": "rad"
+  },
+  "objects": {
+    "facade_1_low": {
+      "label": "Cabinet Door",
+      "type": "articulated",
+      "mass": null,
+      "friction": null,
+      "joints": [
+        {
+          "name": "hinge",
+          "child": "leaf",
+          "type": "revolute",
+          "limit": null
+        },
+        {
+          "name": "handle_turn",
+          "child": "handle",
+          "type": "revolute",
+          "limit": null
+        }
+      ]
+    },
+    "facade_1_high": {
+      "label": "Cabinet Door",
+      "type": "articulated",
+      "mass": null,
+      "friction": null,
+      "joints": [
+        {
+          "name": "hinge",
+          "child": "leaf",
+          "type": "revolute",
+          "limit": null
+        },
+        {
+          "name": "handle_turn",
+          "child": "handle",
+          "type": "revolute",
+          "limit": null
+        }
+      ]
+    },
+    "facade_2_low": {
+      "label": "Cabinet Door",
+      "type": "articulated",
+      "mass": null,
+      "friction": null,
+      "joints": [
+        {
+          "name": "hinge",
+          "child": "leaf",
+          "type": "revolute",
+          "limit": null
+        },
+        {
+          "name": "handle_turn",
+          "child": "handle",
+          "type": "revolute",
+          "limit": null
+        }
+      ]
+    },
+    "facade_2_high": {
+      "label": "Cabinet Door",
+      "type": "articulated",
+      "mass": null,
+      "friction": null,
+      "joints": [
+        {
+          "name": "hinge",
+          "child": "leaf",
+          "type": "revolute",
+          "limit": null
+        },
+        {
+          "name": "handle_turn",
+          "child": "handle",
+          "type": "revolute",
+          "limit": null
+        }
+      ]
+    },
+    "extinguisher": {
+      "label": "Fire Extinguisher",
+      "type": "articulated",
+      "mass": null,
+      "friction": null,
+      "joints": [
+        {
+          "name": "squeeze",
+          "child": "lever",
+          "type": "revolute",
+          "limit": null
+        }
+      ],
+      "components": [
+        {
+          "part": "hose",
+          "type": "curve",
+          "sim_mesh": "extinguisher__hose_centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        }
+      ]
+    },
+    "wall_controls": {
+      "label": "Wall Switch Panel",
+      "type": "articulated",
+      "mass": null,
+      "friction": null,
+      "joints": [
+        {
+          "name": "rocker_*",
+          "count": 4,
+          "type": "revolute",
+          "limit": null
+        }
+      ]
+    },
+    "floor_lamp_1": {
+      "label": "Floor Lamp",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "floor_lamp_2": {
+      "label": "Floor Lamp",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "floor": {
+      "label": "Floor",
+      "type": "static",
+      "friction": null
+    },
+    "wall_front": {
+      "label": "Wall",
+      "type": "static",
+      "friction": null
+    },
+    "wall_whiteboard": {
+      "label": "Whiteboard Wall",
+      "type": "static",
+      "friction": null
+    },
+    "window_wall": {
+      "label": "Window Wall",
+      "type": "static",
+      "friction": null
+    },
+    "window_1": {
+      "label": "Window",
+      "type": "static",
+      "friction": null
+    },
+    "window_2": {
+      "label": "Window",
+      "type": "static",
+      "friction": null
+    },
+    "window_3": {
+      "label": "Window",
+      "type": "static",
+      "friction": null
+    },
+    "ceiling": {
+      "label": "Ceiling",
+      "type": "static",
+      "friction": null
+    },
+    "divider": {
+      "label": "Room Divider",
+      "type": "static",
+      "friction": null
+    },
+    "armchair_green": {
+      "label": "Armchair",
+      "type": "rigid",
+      "mass": null,
+      "friction": null,
+      "components": [
+        {
+          "part": "soft_upholstery",
+          "type": "volume",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null
+          }
+        }
+      ]
+    },
+    "projector": {
+      "label": "Projector",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "pendant_1": {
+      "label": "Pendant Light",
+      "type": "rigid",
+      "mass": null,
+      "friction": null,
+      "components": [
+        {
+          "part": "suspension_01",
+          "type": "curve",
+          "sim_mesh": "pendant_1_suspension_01_centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        },
+        {
+          "part": "suspension_02",
+          "type": "curve",
+          "sim_mesh": "pendant_1_suspension_02_centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        },
+        {
+          "part": "suspension_03",
+          "type": "curve",
+          "sim_mesh": "pendant_1_suspension_03_centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        }
+      ]
+    },
+    "pendant_2": {
+      "label": "Pendant Light",
+      "type": "rigid",
+      "mass": null,
+      "friction": null,
+      "components": [
+        {
+          "part": "suspension_01",
+          "type": "curve",
+          "sim_mesh": "pendant_2_suspension_01_centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        },
+        {
+          "part": "suspension_02",
+          "type": "curve",
+          "sim_mesh": "pendant_2_suspension_02_centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        },
+        {
+          "part": "suspension_03",
+          "type": "curve",
+          "sim_mesh": "pendant_2_suspension_03_centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        }
+      ]
+    },
+    "pendant_3": {
+      "label": "Pendant Light",
+      "type": "rigid",
+      "mass": null,
+      "friction": null,
+      "components": [
+        {
+          "part": "suspension_01",
+          "type": "curve",
+          "sim_mesh": "pendant_3_suspension_01_centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        },
+        {
+          "part": "suspension_02",
+          "type": "curve",
+          "sim_mesh": "pendant_3_suspension_02_centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        },
+        {
+          "part": "suspension_03",
+          "type": "curve",
+          "sim_mesh": "pendant_3_suspension_03_centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        }
+      ]
+    },
+    "stool_stack_1": {
+      "label": "Stool Stack",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "stool_stack_2": {
+      "label": "Stool Stack",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "stool_stack_3": {
+      "label": "Stool Stack",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "stored_panel": {
+      "label": "Stored Panel",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "stored_rod_1": {
+      "label": "Stored Rod",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "stored_rod_2": {
+      "label": "Stored Rod",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "stored_rod_3": {
+      "label": "Stored Rod",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "floor_cable_entry": {
+      "label": "Floor Cable Coil",
+      "type": "curve",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null,
+        "radius": null
+      }
+    },
+    "floor_cable_window": {
+      "label": "Floor Cable Coil",
+      "type": "curve",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null,
+        "radius": null
+      }
+    },
+    "floor_cable_divider": {
+      "label": "Floor Cable Coil",
+      "type": "curve",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null,
+        "radius": null
+      }
+    },
+    "ceiling_spotlight_1": {
+      "label": "Ceiling Spotlight",
+      "type": "static",
+      "friction": null
+    },
+    "ceiling_spotlight_2": {
+      "label": "Ceiling Spotlight",
+      "type": "static",
+      "friction": null
+    },
+    "ceiling_spotlight_3": {
+      "label": "Ceiling Spotlight",
+      "type": "static",
+      "friction": null
+    },
+    "cabinet_aux": {
+      "label": "Cabinet",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "white_display_panel": {
+      "label": "Display Panel",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "floor_cable_lectern": {
+      "label": "Floor Cable Coil",
+      "type": "curve",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null,
+        "radius": null
+      }
+    },
+    "cable_lectern_black_01": {
+      "label": "Cable",
+      "type": "curve",
+      "mass": null,
+      "friction": null,
+      "sim_mesh": "cable_lectern_black_01_centerline",
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null,
+        "radius": null
+      }
+    },
+    "cable_lectern_gray_02": {
+      "label": "Cable",
+      "type": "curve",
+      "mass": null,
+      "friction": null,
+      "sim_mesh": "cable_lectern_gray_02_centerline",
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null,
+        "radius": null
+      }
+    },
+    "cable_entry_power_01": {
+      "label": "Power Cable",
+      "type": "curve",
+      "mass": null,
+      "friction": null,
+      "sim_mesh": "cable_entry_power_01_centerline",
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null,
+        "radius": null
+      }
+    },
+    "entry_bag": {
+      "label": "Bag",
+      "type": "rigid",
+      "mass": null,
+      "friction": null,
+      "components": [
+        {
+          "part": "handle",
+          "type": "curve",
+          "sim_mesh": "entry_bag__handle__centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        }
+      ]
+    },
+    "cable_lectern_gray_01": {
+      "label": "Cable",
+      "type": "curve",
+      "mass": null,
+      "friction": null,
+      "sim_mesh": "cable_lectern_gray_01_centerline",
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null,
+        "radius": null
+      }
+    },
+    "beanbag_center": {
+      "label": "Beanbag",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      },
+      "components": [
+        {
+          "part": "side_handle",
+          "type": "curve",
+          "sim_mesh": "beanbag_center__side_handle__centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        }
+      ]
+    },
+    "beanbag_corner": {
+      "label": "Beanbag",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      },
+      "components": [
+        {
+          "part": "side_handle",
+          "type": "curve",
+          "sim_mesh": "beanbag_corner__side_handle__centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        }
+      ]
+    },
+    "beanbag_divider_left": {
+      "label": "Beanbag",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      },
+      "components": [
+        {
+          "part": "side_handle",
+          "type": "curve",
+          "sim_mesh": "beanbag_divider_left__side_handle__centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        }
+      ]
+    },
+    "beanbag_divider_right": {
+      "label": "Beanbag",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      },
+      "components": [
+        {
+          "part": "side_handle",
+          "type": "curve",
+          "sim_mesh": "beanbag_divider_right__side_handle__centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        }
+      ]
+    },
+    "beanbag_front": {
+      "label": "Beanbag",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      },
+      "components": [
+        {
+          "part": "side_handle",
+          "type": "curve",
+          "sim_mesh": "beanbag_front__side_handle__centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        }
+      ]
+    },
+    "beanbag_window": {
+      "label": "Beanbag",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      },
+      "components": [
+        {
+          "part": "side_handle",
+          "type": "curve",
+          "sim_mesh": "beanbag_window__side_handle__centerline",
+          "material": {
+            "model": null,
+            "youngs_modulus": null,
+            "poisson_ratio": null,
+            "density": null,
+            "radius": null
+          }
+        }
+      ]
+    },
+    "bench_center": {
+      "label": "Bench",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "cushion_center_1": {
+      "label": "Seat Cushion",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      }
+    },
+    "cushion_center_2": {
+      "label": "Seat Cushion",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      }
+    },
+    "cushion_center_3": {
+      "label": "Seat Cushion",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      }
+    },
+    "cushion_center_4": {
+      "label": "Seat Cushion",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      }
+    },
+    "cushion_center_5": {
+      "label": "Seat Cushion",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      }
+    },
+    "bench_wall": {
+      "label": "Bench",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "cushion_wall_1": {
+      "label": "Seat Cushion",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      }
+    },
+    "cushion_wall_2": {
+      "label": "Seat Cushion",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      }
+    },
+    "cushion_wall_3": {
+      "label": "Seat Cushion",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      }
+    },
+    "cushion_wall_4": {
+      "label": "Seat Cushion",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      }
+    },
+    "cushion_wall_5": {
+      "label": "Seat Cushion",
+      "type": "volume",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null
+      }
+    },
+    "bench_whiteboard": {
+      "label": "Bench",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "console_papers": {
+      "label": "Paper Booklet",
+      "type": "surface",
+      "mass": null,
+      "friction": null,
+      "material": {
+        "model": null,
+        "youngs_modulus": null,
+        "poisson_ratio": null,
+        "density": null,
+        "thickness": null
+      }
+    },
+    "console_window": {
+      "label": "Console Table",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "cube_blue": {
+      "label": "Cube Seat",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "cube_lightblue": {
+      "label": "Cube Seat",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "cube_red": {
+      "label": "Cube Seat",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "cube_yellow_a": {
+      "label": "Cube Seat",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "cube_yellow_b": {
+      "label": "Cube Seat",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "lectern": {
+      "label": "Lectern",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "remote_left": {
+      "label": "Remote Control",
+      "type": "articulated",
+      "mass": null,
+      "friction": null,
+      "joints": [
+        {
+          "name": "press",
+          "child": "button",
+          "type": "prismatic",
+          "limit": null
+        }
+      ]
+    },
+    "remote_long": {
+      "label": "Remote Control",
+      "type": "articulated",
+      "mass": null,
+      "friction": null,
+      "joints": [
+        {
+          "name": "press_*",
+          "count": 37,
+          "type": "prismatic",
+          "limit": null
+        }
+      ]
+    },
+    "remote_right": {
+      "label": "Remote Control",
+      "type": "articulated",
+      "mass": null,
+      "friction": null,
+      "joints": [
+        {
+          "name": "press",
+          "child": "button",
+          "type": "prismatic",
+          "limit": null
+        }
+      ]
+    },
+    "stool_green_divider": {
+      "label": "Stool",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "stool_orange_center": {
+      "label": "Stool",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "stool_orange_divider": {
+      "label": "Stool",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "stool_white_divider": {
+      "label": "Stool",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "stool_white_wall": {
+      "label": "Stool",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    },
+    "wood_cube": {
+      "label": "Wooden Cube",
+      "type": "rigid",
+      "mass": null,
+      "friction": null
+    }
+  }
+}
