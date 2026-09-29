@@ -1062,7 +1062,7 @@ const PHYS_TYPE = {
   volume: { label: "Volume", tag: "volume" },
 };
 const PHYS_COLOR = { articulated: "#4d6a86", curve: "#c8662f", surface: "#6c56c2", volume: "#23806c" };
-const SIM_COLOR = { ...PHYS_COLOR, collision: "#34405a" };
+const SIM_COLOR = { ...PHYS_COLOR, collision: "#34405a", bonded: "#d9412b" };
 const JOINT_TYPE = { revolute: "Revolute", prismatic: "Prismatic", cylindrical: "Cylindrical", screw: "Screw" };
 const SUPERSCRIPT = { "-": "⁻", 0: "⁰", 1: "¹", 2: "²", 3: "³", 4: "⁴", 5: "⁵", 6: "⁶", 7: "⁷", 8: "⁸", 9: "⁹" };
 
@@ -1375,6 +1375,13 @@ function createPhysPreview(container) {
               const wire = new THREE.Mesh(geo, own(new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: 0.6, depthWrite: false })));
               wire.renderOrder = 3;
               g.add(wire);
+              if (s.proxy.bonded) { // vertices bonded to a host part
+                const P = s.proxy.positions;
+                const bonded = own(new THREE.BufferGeometry().setFromPoints(s.proxy.bonded.map((i) => new THREE.Vector3(P[3 * i], P[3 * i + 1], P[3 * i + 2]))));
+                const dots = new THREE.Points(bonded, own(new THREE.PointsMaterial({ color: SIM_COLOR.bonded, size: 5, sizeAttenuation: false, depthTest: false, transparent: true })));
+                dots.renderOrder = 4;
+                g.add(dots);
+              }
             }
             if (s.points) {
               const geo = own(new THREE.BufferGeometry().setFromPoints(s.points));
@@ -1536,6 +1543,7 @@ function initPhysicsInspector() {
     if (o.friction != null) facts.push(["Friction μ", sig(o.friction)]);
     if (o.contact_distance != null) facts.push(["Contact distance δ", fmt.mm(o.contact_distance)]);
     if (o.fixed_base) facts.push(["Base", "Fixed to the world"]);
+    else if (o.fixed_base === false) facts.push(["Base", "Free, 6 DOF"]);
     if (o.fixed) facts.push(["Mobility", "Fixed in place"]);
     if (o.inside && objects[o.inside]) facts.push(["Placed inside", objects[o.inside].label]);
     if (o.pinned === false) facts.push(["Constraints", "None, held by contact only"]);
@@ -1583,6 +1591,10 @@ function initPhysicsInspector() {
         if (c.friction != null) rows.push(["Friction μ", sig(c.friction)]);
         if (c.contact_distance != null) rows.push(["Contact distance δ", fmt.mm(c.contact_distance)]);
         if (c.derived_mass != null) rows.push(["Mass", `≈ ${fmt.mass(c.derived_mass)}`, "ρ × geometry"]);
+        if (c.attachment) {
+          const a = c.attachment;
+          rows.push(["Attachment", `${prettyPart(a.region)} bonded to the ${a.host}, ${fmt.mm(a.band_width)} strip`, a.breakable === false ? "permanent" : null]);
+        }
         if (c.rest) rows.push(["Rest state", c.rest]);
         card.append(head, fillRows(el("dl", "phys-rows"), rows));
         s.append(card);
@@ -1627,10 +1639,12 @@ function initPhysicsInspector() {
       const list = parts.filter((p) => p.role === role);
       if (list.length) bits.push(`${count(list, noun)} · ${list.reduce((n, p) => n + p.points.length, 0).toLocaleString()} vertices`);
     });
-    [["volume_proxy", "volume proxy"], ["collision", "collision proxy"]].forEach(([role, noun]) => {
+    [["volume_proxy", "volume proxy"], ["collision", "collision proxy"], ["shell", "simulated shell"]].forEach(([role, noun]) => {
       const list = parts.filter((p) => p.role === role);
       if (list.length) bits.push(`${count(list, noun)} · ${Math.round(list.reduce((n, p) => n + tris(p), 0)).toLocaleString()} triangles`);
     });
+    const bonded = parts.reduce((n, p) => n + (p.proxy?.bonded?.length || 0), 0);
+    if (bonded) bits.push(`${bonded} bonded vertices (dots)`);
     parts.filter((p) => p.role === "visual" && p.kind === "surface").forEach((p) => bits.push(`Shell mesh · ${Math.round(tris(p)).toLocaleString()} triangles`));
     if (parts.some((p) => p.role === "visual" && p.kind === "volume")) bits.push("Watertight solid for tetrahedral meshing");
     return bits.join(" · ");

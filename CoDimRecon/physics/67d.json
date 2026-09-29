@@ -566,6 +566,7 @@
       "type": "rigid",
       "mass": 0.008,
       "friction": 0.4,
+      "inside": "pen_cup_right",
       "material": {
         "model": "Affine body",
         "rigidity_penalty": 1000000000.0
@@ -580,6 +581,7 @@
       "type": "rigid",
       "mass": 0.008,
       "friction": 0.4,
+      "inside": "pen_cup_right",
       "material": {
         "model": "Affine body",
         "rigidity_penalty": 1000000000.0
@@ -594,6 +596,7 @@
       "type": "rigid",
       "mass": 0.008,
       "friction": 0.4,
+      "inside": "pen_cup_right",
       "material": {
         "model": "Affine body",
         "rigidity_penalty": 1000000000.0
@@ -608,6 +611,7 @@
       "type": "rigid",
       "mass": 0.008,
       "friction": 0.4,
+      "inside": "pen_cup_right",
       "material": {
         "model": "Affine body",
         "rigidity_penalty": 1000000000.0
@@ -622,6 +626,7 @@
       "type": "rigid",
       "mass": 0.008,
       "friction": 0.4,
+      "inside": "pen_cup_right",
       "material": {
         "model": "Affine body",
         "rigidity_penalty": 1000000000.0
@@ -636,6 +641,7 @@
       "type": "rigid",
       "mass": 0.008,
       "friction": 0.4,
+      "inside": "pen_cup_right",
       "material": {
         "model": "Affine body",
         "rigidity_penalty": 1000000000.0
@@ -650,6 +656,7 @@
       "type": "rigid",
       "mass": 0.008,
       "friction": 0.4,
+      "inside": "pen_cup_right",
       "material": {
         "model": "Affine body",
         "rigidity_penalty": 1000000000.0
@@ -861,6 +868,7 @@
           ]
         }
       ],
+      "fixed_base": false,
       "rest": "Settled under gravity, free base",
       "sim_geometry": [
         "QIPC_free_headset_collision"
@@ -1414,7 +1422,41 @@
             0.0
           ]
         }
-      ]
+      ],
+      "components": [
+        {
+          "part": "paper_note",
+          "id": "monitor_left_paper_note",
+          "label": "Blue Paper Note",
+          "type": "surface",
+          "representation": "single_layer_shell",
+          "material": {
+            "name": "ordinary paper, isotropic elastic approximation",
+            "model": "StVK shell, discrete-shell bending",
+            "youngs_modulus": 2000000000.0,
+            "bending_youngs_modulus": 2000000000.0,
+            "poisson_ratio": 0.3,
+            "density": 800,
+            "thickness": 0.00016
+          },
+          "friction": 0.5,
+          "rest": "Settled under gravity, upper edge bonded to the panel",
+          "nodes": [
+            "monitor_left__part_007"
+          ],
+          "sim_geometry": [
+            "monitor_left_paper_shell"
+          ],
+          "derived_mass": 0.0005236,
+          "attachment": {
+            "host": "panel",
+            "region": "upper edge",
+            "band_width": 0.003,
+            "breakable": false
+          }
+        }
+      ],
+      "mass_note": "includes the paper note"
     },
     "monitor_right": {
       "label": "Monitor",

@@ -326,6 +326,16 @@ button {
   margin-left: 1px;
 }
 
+.authors a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.authors a:hover,
+.authors a:focus-visible {
+  text-decoration: underline;
+}
+
 .affiliations {
   display: flex;
   flex-wrap: wrap;
