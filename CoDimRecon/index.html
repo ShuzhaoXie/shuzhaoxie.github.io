@@ -40,7 +40,7 @@
     </a>
     <nav aria-label="Page sections">
       <ul class="nav-links">
-        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#overview">Overview</a></li>
         <!-- <li><a href="#explore">Interactive</a></li> -->
         <li><a href="#physics">Physics</a></li>
         <li><a href="#deformables">Deformables</a></li>
@@ -129,23 +129,22 @@
         <figcaption><span class="reel-label"><i>3D</i>Volume <small>· chair cushion → solid</small></span></figcaption>
       </figure>
     </div>
+  </div>
+</section>
 
+<!-- ======================= Overview ======================= -->
+<section class="section" id="overview">
+  <div class="container">
+    <h2>Overview</h2>
     <figure class="figure reveal" id="teaser">
       <div class="figure-frame">
         <img class="zoomable" src="static/images/teaser.webp" width="2600" height="1115" alt="Teaser: input views of an office (left), the reconstructed sim-ready scene with a chair cushion, telephone cord, plastic bag in a rigid bin, and a sliding drawer (center), and robot interactions with the curve, surface, and volume (right)." fetchpriority="high">
       </div>
-      <figcaption class="caption"><strong>CoDimRecon reconstructs a simulation-ready scene from multi-view RGB images.</strong> Left: input views of an office. Center: top-down reconstruction with an articulated drawer and deformable examples — a coiled telephone cord (curve), plastic bag (surface), and chair cushion (volume). The bin and the bag are separate objects, rigid and deformable, respectively. Right: robot interactions with the reconstructed cord, plastic bag, and cushion.</figcaption>
     </figure>
   </div>
-</section>
-
-<!-- ======================= Abstract ======================= -->
-<section class="section" id="abstract">
   <div class="container narrow abstract">
-    <h2>Abstract</h2>
-    <p>Reconstructing simulation-ready 3D scenes from real-world observations enables robotics, gaming, and immersive applications, yet existing methods largely assume rigid objects. This leaves an important gap for deformables, whose simulation-ready geometry depends on dimensionality — curves, surfaces, or volumes — and whose behavior may require models beyond elasticity.</p>
-    <p>We present <strong>CoDimRecon</strong>, an agentic framework that reconstructs editable scenes containing rigid, articulated, and deformable objects from multi-view RGB observations. Scene-level geometric priors ground scale and layout, while object-level generated meshes guide the agent toward detailed, compact geometry; articulated rigid objects are decomposed into movable parts with explicit joints. For deformables, category-wise agent sessions reconstruct <em>curves</em> as centerlines with radii, <em>surfaces</em> as manifold shells with thickness, and <em>volumes</em> as watertight solids for volumetric meshing. Reusable simulator skills initialize compatible physical models and parameters, while agent-guided behavioral tests expose mismatches and trigger targeted revisions of motion, geometry, numerics, or material modeling.</p>
-    <p>On evaluated Replica and ScanNet++ scenes, CoDimRecon achieves competitive compositional reconstruction accuracy while additionally producing deformable assets for rod, shell, and solid simulation. We further demonstrate robot interactions across all three representations, including a controlled paper-folding case in which behavioral testing motivates plastic bending.</p>
+    <p><strong>CoDimRecon</strong> is an agentic framework that turns multi-view RGB images into an editable, simulation-ready scene of rigid, articulated, and deformable objects. Scene-level geometric priors ground scale and layout, object-level generated meshes guide the agent toward detailed, compact geometry, and articulated objects such as the office drawer above are split into movable parts with explicit joints.</p>
+    <p>Deformables are reconstructed by dimensionality in dedicated agent sessions: <em>curves</em> such as the telephone cord become centerlines with radii, <em>surfaces</em> such as the plastic bag become manifold shells with thickness — kept separate from its rigid bin — and <em>volumes</em> such as the chair cushion become watertight solids for volumetric meshing. Reusable simulator skills then initialize compatible physical models and parameters, and agent-guided robot tests expose mismatches and trigger targeted revisions of motion, geometry, numerics, or material modeling, yielding a scene that robots can directly interact with in simulation.</p>
 
     <!-- Stats cards temporarily hidden
     <div class="stats">
