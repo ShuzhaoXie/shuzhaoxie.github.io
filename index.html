@@ -8,367 +8,279 @@
   <meta name="author" content="Shuzhao Xie">
   <link rel="icon" type="image/png" href="images/steel_ball.png">
 
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Arimo:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "outline-variant": "#e0e0e0",
-            "border-subtle": "#e0e0e0",
-            "surface-container-low": "#fafafa",
-            "surface-container": "#f5f5f5",
-            "background": "#ffffff",
-            "surface": "#ffffff",
-            "on-surface": "#1b1b1b",
-            "on-surface-variant": "#616161",
-            "outline": "#9e9e9e",
-            "primary": "#000000",
-            "on-primary": "#ffffff",
-            "secondary": "#424242",
-            "tertiary": "#616161",
-            "accent": "#005da7"
-          },
-          borderRadius: {
-            DEFAULT: "0.125rem",
-            lg: "0.25rem",
-            xl: "0.5rem"
-          },
-          spacing: {
-            "margin-mobile": "20px",
-            "margin-desktop": "64px",
-            "gutter": "24px",
-            "stack-lg": "64px",
-            "stack-md": "32px",
-            "stack-sm": "16px"
-          },
-          fontFamily: {
-            sans: ["Nunito", "Inter", "Segoe UI", "Arial", "sans-serif"],
-            label: ["Arimo", "sans-serif"]
-          },
-          fontSize: {
-            "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "700" }],
-            "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "700" }],
-            "headline-md": ["20px", { lineHeight: "28px", fontWeight: "600" }],
-            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
-            "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
-            "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
-            "label-md": ["14px", { lineHeight: "16px", letterSpacing: "0.05em", fontWeight: "500" }],
-            "label-sm": ["12px", { lineHeight: "14px", letterSpacing: "0.05em", fontWeight: "500" }],
-            "caption": ["12px", { lineHeight: "1.4", fontWeight: "400" }]
-          }
-        }
-      }
-    }
+  <script>
+    // Apply a saved light/dark choice before first paint.
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
   </script>
 
-  <style>
-    body {
-      background-color: #ffffff;
-      color: #1b1b1b;
-      font-family: 'Nunito', 'Inter', 'Segoe UI', Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-    }
-    .link-minimal {
-      position: relative;
-      display: inline-block;
-    }
-    .link-minimal::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 1px;
-      bottom: -1px;
-      left: 0;
-      background-color: currentColor;
-      transform: scaleX(0);
-      transform-origin: bottom right;
-      transition: transform 0.3s ease-out;
-    }
-    .link-minimal:hover::after {
-      transform: scaleX(1);
-      transform-origin: bottom left;
-    }
-    .paper-title {
-      font-weight: 600;
-      color: #000000;
-    }
-    .paper-link {
-      color: #000000;
-      font-weight: 600;
-      transition: opacity 0.2s ease;
-    }
-    .paper-link:hover {
-      opacity: 0.6;
-      text-decoration: underline;
-    }
-    .inline-link {
-      color: #000000;
-      text-decoration: underline;
-      text-decoration-color: #c0c0c0;
-      text-underline-offset: 2px;
-      transition: text-decoration-color 0.2s ease;
-    }
-    .inline-link:hover {
-      text-decoration-color: #000000;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400..600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/site.css">
 </head>
 
-<body class="selection:bg-primary selection:text-white">
+<body>
+
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.8 6.8 8.2 6.2 8.2-6.2"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></symbol>
+      <symbol id="i-cap" viewBox="0 0 24 24"><path d="M2 9.5 12 4.5l10 5-10 5z"/><path d="M6 11.6v4.6c0 1.5 2.7 2.8 6 2.8s6-1.3 6-2.8v-4.6M22 9.5v5"/></symbol>
+      <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" stroke="none" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></symbol>
+      <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="m8.5 7-5 5 5 5M15.5 7l5 5-5 5"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.3l-5.6 2.9 1.1-6.3L2.9 9.5l6.3-.9z"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+    </defs>
+  </svg>
 
   <!-- Top Navigation -->
-  <nav class="fixed top-0 z-50 w-full bg-background border-b border-border-subtle">
-    <div class="max-w-[800px] mx-auto px-margin-mobile flex justify-between items-center h-16">
-      <a href="#home" class="text-headline-md font-bold tracking-tight text-primary">Shuzhao Xie</a>
-      <div class="hidden md:flex items-center gap-stack-sm">
-        <a class="text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#home">Home</a>
-        <a class="text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#publications">Publications</a>
-        <a class="text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#service">Service</a>
-        <a class="ml-4 px-4 py-2 bg-primary text-on-primary text-label-sm rounded-lg hover:opacity-80 transition-opacity" href="mailto:xiesz99@gmail.com">Contact</a>
-      </div>
-      <a class="md:hidden material-symbols-outlined text-primary" href="mailto:xiesz99@gmail.com">mail</a>
+  <header class="site-header">
+    <div class="wrap site-header__inner">
+      <a class="wordmark" href="#home"><span class="wordmark__splat" aria-hidden="true"></span>Shuzhao Xie</a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#home">Home</a>
+        <a href="#publications">Publications</a>
+        <a href="#service">Service</a>
+        <a class="nav-contact" href="mailto:xiesz99@gmail.com">Contact</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon t-moon" aria-hidden="true"><use href="#i-moon"/></svg>
+          <svg class="icon t-sun" aria-hidden="true"><use href="#i-sun"/></svg>
+        </button>
+      </nav>
     </div>
-  </nav>
+    <span class="scroll-progress" aria-hidden="true"></span>
+  </header>
 
-  <main class="max-w-[800px] mx-auto px-margin-mobile pt-32 pb-stack-lg">
+  <main>
 
     <!-- Header / Intro -->
-    <header id="home" class="mb-stack-lg flex flex-col md:flex-row gap-gutter items-start">
-      <div class="flex-1 order-2 md:order-1">
-        <h1 class="text-display-lg mb-stack-sm text-primary">Shuzhao Xie</h1>
-        <p class="text-body-lg text-on-surface mb-stack-sm leading-relaxed">
-          I am a PhD student at <a class="inline-link" href="https://www.sigs.tsinghua.edu.cn">Tsinghua SIGS</a>,
-          working with Prof. <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a> on 3D Vision.
-          Previously M.E. at <a class="inline-link" href="https://www.tsinghua.edu.cn">Tsinghua</a> (2023) and B.S. at <a class="inline-link" href="https://en.wikipedia.org/wiki/Beijing_Normal_University">BNU</a> (2020).
+    <section id="home" class="hero">
+      <canvas class="splats" aria-hidden="true"></canvas>
+      <div class="wrap hero__grid">
+        <figure class="portrait">
+          <a href="images/ShuzhaoXie_v2.png">
+            <img src="images/ShuzhaoXie_v2.png" alt="Shuzhao Xie" width="2080" height="1558">
+          </a>
+        </figure>
+        <div class="hero__text">
+          <h1 class="hero__name">Shuzhao Xie</h1>
+          <p class="hero__bio">
+            I am a PhD student at <a class="ilink" href="https://www.sigs.tsinghua.edu.cn">Tsinghua SIGS</a>,
+            working with Prof. <a class="ilink" href="http://zwang.inflexionlab.org">Zhi Wang</a> on 3D Vision.
+            Previously M.E. at <a class="ilink" href="https://www.tsinghua.edu.cn">Tsinghua</a> (2023) and B.S. at <a class="ilink" href="https://en.wikipedia.org/wiki/Beijing_Normal_University">BNU</a> (2020).
+            I visited <a class="ilink" href="https://graphics.cs.cmu.edu/">Carnegie Mellon University</a> in 2026, where I fortunately worked with Prof. <a class="ilink" href="https://www.cs.cmu.edu/~minchenl/">Minchen Li</a>.
+          </p>
+          <p class="callout">
+            <span class="callout__dot" aria-hidden="true"></span>
+            <span>I am actively looking for full-time positions (<strong>Research Scientist / Research Engineer</strong>) — feel free to <a class="ilink" href="mailto:xiesz99@gmail.com">reach out</a>!</span>
+          </p>
+          <div class="hero__links">
+            <a class="chip" href="mailto:xiesz99@gmail.com"><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>Email</a>
+            <a class="chip" href="data/ShuzhaoXie-CV.pdf"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>CV <span class="chip__meta">2025.07</span></a>
+            <a class="chip" href="https://scholar.google.com/citations?user=_2QNPGYAAAAJ&amp;hl=en"><svg class="icon" aria-hidden="true"><use href="#i-cap"/></svg>Google Scholar</a>
+            <a class="chip" href="https://github.com/ShuzhaoXie/"><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>Github</a>
+            <a class="chip" href="https://x.com/xiesz99"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Twitter</a>
+            <a class="chip" href="https://calendar.google.com/calendar/u/0?cid=eGllc3o5OUBnbWFpbC5jb20"><svg class="icon" aria-hidden="true"><use href="#i-cal"/></svg>Calendar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+
+      <!-- Research Interests -->
+      <section class="section" id="research">
+        <div class="section__head">
+          <h2 class="section__title"><span class="section__num">01</span>Research Interests</h2>
+        </div>
+        <p class="statement">
+          My research focuses on computer graphics and computer vision, particularly on <mark>3D reconstruction</mark> and <mark class="warm">simulation</mark> techniques that facilitate effective robot learning.
         </p>
-        <div class="flex flex-wrap gap-x-5 gap-y-2 mt-stack-sm text-label-sm text-on-surface-variant">
-          <a class="link-minimal" href="mailto:xiesz99@gmail.com">Email</a>
-          <a class="link-minimal" href="data/ShuzhaoXie-CV.pdf">CV [2025.07]</a>
-          <a class="link-minimal" href="https://scholar.google.com/citations?user=_2QNPGYAAAAJ&hl=en">Google Scholar</a>
-          <a class="link-minimal" href="https://github.com/ShuzhaoXie/">Github</a>
-          <a class="link-minimal" href="https://x.com/xiesz99">Twitter</a>
-          <a class="link-minimal" href="https://calendar.google.com/calendar/u/0?cid=eGllc3o5OUBnbWFpbC5jb20">Calendar</a>
+      </section>
+
+      <!-- Publications -->
+      <section class="section" id="publications">
+        <div class="section__head">
+          <h2 class="section__title"><span class="section__num">02</span>Selected Publications</h2>
+          <a class="more-link" href="publications.html">Full Publications <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
         </div>
-      </div>
-      <div class="w-48 md:w-[230px] shrink-0 order-1 md:order-2">
-        <a href="images/ShuzhaoXie_v2.png">
-          <img class="w-full h-auto rounded-xl shadow-sm" alt="Shuzhao Xie" src="images/ShuzhaoXie_v2.png">
-        </a>
-      </div>
-    </header>
+        <p class="kicker">Selected First-Author Works</p>
 
-    <!-- Research Interests -->
-    <section class="mb-stack-lg pt-stack-md border-t border-border-subtle">
-      <h2 class="text-headline-lg text-primary mb-stack-sm">Research Interests</h2>
-      <p class="text-body-md text-on-surface leading-relaxed">
-        My research focuses on computer graphics and computer vision, particularly on 3D reconstruction and simulation techniques that facilitate effective robot learning.
-      </p>
-    </section>
+        <ol class="pubs">
 
-    <!-- Publications -->
-    <section id="publications" class="mb-stack-lg pt-stack-md border-t border-border-subtle">
-      <div class="flex justify-between items-baseline mb-stack-md gap-4 flex-wrap">
-        <h2 class="text-headline-lg text-primary">Selected Publications</h2>
-        <a href="publications.html" class="text-label-sm text-on-surface-variant uppercase tracking-wider link-minimal">Full Publications &nbsp;→</a>
-      </div>
-      <p class="text-caption text-on-surface-variant mb-stack-md uppercase tracking-wider">Selected First-Author Works</p>
-
-      <div class="divide-y divide-border-subtle">
-
-        <!-- ACM MM 2025 - SizeGS -->
-        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
-          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
-            <img class="w-full h-auto object-cover" src="images/25-mm-sizegs.png" alt="SizeGS">
-          </div>
-          <div class="flex-1">
-            <div class="flex flex-wrap items-center gap-2 mb-1">
-              <span class="text-caption text-on-surface-variant uppercase tracking-wider">ACM Multimedia, 2025</span>
-              <span class="px-2 py-0.5 bg-primary text-on-primary text-[10px] uppercase tracking-wider rounded-lg">Best Paper Candidate · Top 0.5%</span>
+          <!-- ACM MM 2025 - SizeGS -->
+          <li class="pub reveal">
+            <a class="pub__media" href="https://shuzhaoxie.github.io/sizegs/" tabindex="-1" aria-hidden="true">
+              <img src="images/25-mm-sizegs.png" alt="SizeGS" loading="lazy">
+            </a>
+            <div class="pub__body">
+              <div class="pub__meta">
+                <span class="pub__venue">ACM Multimedia</span><span class="pub__year">2025</span>
+                <span class="badge"><svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>Best Paper Candidate · Top 0.5%</span>
+              </div>
+              <h3 class="pub__title">SizeGS: Size-aware Compression of 3D Gaussian Splatting via Mixed Integer Programming</h3>
+              <p class="pub__authors">
+                <span class="me">Shuzhao Xie*</span>,
+                Jiahang Liu*,
+                <a href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+                Shijia Ge, Sicheng Pan,
+                <a href="https://www.chentang.cc">Chen Tang</a>,
+                <a href="https://bbaaii.github.io/">Yunpeng Bai</a>,
+                <a href="https://scholar.google.com/citations?user=hTBtRI0AAAAJ&amp;hl=en">Cong Zhang</a>,
+                <a href="https://scholar.google.com/citations?hl=en&amp;user=z2EohmgAAAAJ&amp;view_op=list_works&amp;sortby=pubdate">Xiaoyi Fan</a>,
+                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
+              </p>
+              <p class="pub__note">*Equal contribution</p>
+              <div class="pub__links">
+                <a class="pill" href="./data/25-mm-sizegs.pdf"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>Paper</a>
+                <a class="pill" href="https://shuzhaoxie.github.io/sizegs/"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg>Project</a>
+                <a class="pill" href="https://github.com/mmlab-sigs/sizegs"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+              </div>
             </div>
-            <h3 class="text-headline-md paper-title mb-2">SizeGS: Size-aware Compression of 3D Gaussian Splatting via Mixed Integer Programming</h3>
-            <p class="text-body-md text-on-surface-variant mb-3">
-              <span class="font-bold text-on-surface">Shuzhao Xie*</span>,
-              Jiahang Liu*,
-              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
-              Shijia Ge, Sicheng Pan,
-              <a class="inline-link" href="https://www.chentang.cc">Chen Tang</a>,
-              <a class="inline-link" href="https://bbaaii.github.io/">Yunpeng Bai</a>,
-              <a class="inline-link" href="https://scholar.google.com/citations?user=hTBtRI0AAAAJ&hl=en">Cong Zhang</a>,
-              <a class="inline-link" href="https://scholar.google.com/citations?hl=en&user=z2EohmgAAAAJ&view_op=list_works&sortby=pubdate">Xiaoyi Fan</a>,
-              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
-              <span class="text-caption block mt-1">*Equal contribution</span>
-            </p>
-            <div class="flex flex-wrap gap-x-4 text-label-sm">
-              <a class="paper-link" href="./data/25-mm-sizegs.pdf">[paper]</a>
-              <a class="paper-link" href="https://shuzhaoxie.github.io/sizegs/">[project]</a>
-              <a class="paper-link" href="https://github.com/mmlab-sigs/sizegs">[code]</a>
+          </li>
+
+          <!-- ECCV 2024 - MesonGS -->
+          <li class="pub reveal">
+            <a class="pub__media" href="https://shuzhaoxie.github.io/mesongs/" tabindex="-1" aria-hidden="true">
+              <img src="images/24-eccv-mesongs.png" alt="MesonGS" loading="lazy">
+            </a>
+            <div class="pub__body">
+              <div class="pub__meta">
+                <span class="pub__venue">ECCV</span><span class="pub__year">2024</span>
+              </div>
+              <h3 class="pub__title">MesonGS: Post-training Compression of 3D Gaussians via Efficient Attribute Transformation</h3>
+              <p class="pub__authors">
+                <span class="me">Shuzhao Xie</span>,
+                <a href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
+                <a href="https://www.chentang.cc">Chen Tang</a>,
+                <a href="https://bbaaii.github.io/">Yunpeng Bai</a>,
+                Rongwei Lu, Shijia Ge,
+                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
+              </p>
+              <div class="pub__links">
+                <a class="pill" href="data/24-eccv-mesongs.pdf"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>Paper</a>
+                <a class="pill" href="https://shuzhaoxie.github.io/mesongs/"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg>Project</a>
+                <a class="pill" href="https://github.com/ShuzhaoXie/MesonGS"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+              </div>
             </div>
-          </div>
-        </article>
+          </li>
 
-        <!-- ECCV 2024 - MesonGS -->
-        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
-          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
-            <img class="w-full h-auto object-cover" src="images/24-eccv-mesongs.png" alt="MesonGS">
-          </div>
-          <div class="flex-1">
-            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">ECCV, 2024</span>
-            <h3 class="text-headline-md paper-title mb-2">MesonGS: Post-training Compression of 3D Gaussians via Efficient Attribute Transformation</h3>
-            <p class="text-body-md text-on-surface-variant mb-3">
-              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
-              <a class="inline-link" href="https://weixiang-zhang.github.io">Weixiang Zhang</a>,
-              <a class="inline-link" href="https://www.chentang.cc">Chen Tang</a>,
-              <a class="inline-link" href="https://bbaaii.github.io/">Yunpeng Bai</a>,
-              Rongwei Lu, Shijia Ge,
-              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
-            </p>
-            <div class="flex flex-wrap gap-x-4 text-label-sm">
-              <a class="paper-link" href="data/24-eccv-mesongs.pdf">[paper]</a>
-              <a class="paper-link" href="https://shuzhaoxie.github.io/mesongs/">[project]</a>
-              <a class="paper-link" href="https://github.com/ShuzhaoXie/MesonGS">[code]</a>
+          <!-- TMM 2024 - SkyML -->
+          <li class="pub reveal">
+            <a class="pub__media" href="data/24-tmm-skyml.pdf" tabindex="-1" aria-hidden="true">
+              <img src="images/2024-tmm-skyml.png" alt="SkyML" loading="lazy">
+            </a>
+            <div class="pub__body">
+              <div class="pub__meta">
+                <span class="pub__venue">TMM</span><span class="pub__year">2024</span>
+              </div>
+              <h3 class="pub__title">SkyML: A MLaaS Federation Design for Multicloud-based Multimedia Analytics</h3>
+              <p class="pub__authors">
+                <span class="me">Shuzhao Xie</span>,
+                Yuan Xue, Yifei Zhu,
+                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
+              </p>
+              <div class="pub__links">
+                <a class="pill" href="data/24-tmm-skyml.pdf"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>Paper</a>
+                <a class="pill" href="https://github.com/ShuzhaoXie/Armol"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+              </div>
             </div>
-          </div>
-        </article>
+          </li>
 
-        <!-- TMM 2024 - SkyML -->
-        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
-          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
-            <img class="w-full h-auto object-cover" src="images/2024-tmm-skyml.png" alt="SkyML">
-          </div>
-          <div class="flex-1">
-            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">TMM, 2024</span>
-            <h3 class="text-headline-md paper-title mb-2">SkyML: A MLaaS Federation Design for Multicloud-based Multimedia Analytics</h3>
-            <p class="text-body-md text-on-surface-variant mb-3">
-              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
-              Yuan Xue, Yifei Zhu,
-              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
-            </p>
-            <div class="flex flex-wrap gap-x-4 text-label-sm">
-              <a class="paper-link" href="data/24-tmm-skyml.pdf">[paper]</a>
-              <a class="paper-link" href="https://github.com/ShuzhaoXie/Armol">[code]</a>
+          <!-- INFOCOM 2022 -->
+          <li class="pub reveal">
+            <a class="pub__media" href="https://mmlabsigs.notion.site/Cost-Effective-MLaaS-Federation-A-Combinatorial-Reinforcement-Learning-Approach-fd27b02a403240f3b55ec26ad5ba00db" tabindex="-1" aria-hidden="true">
+              <img src="images/22-infocom-armol.png" alt="Armol" loading="lazy">
+            </a>
+            <div class="pub__body">
+              <div class="pub__meta">
+                <span class="pub__venue">INFOCOM</span><span class="pub__year">2022</span>
+              </div>
+              <h3 class="pub__title">Cost Effective MLaaS Federation: A Combinatorial Reinforcement Learning Approach</h3>
+              <p class="pub__authors">
+                <span class="me">Shuzhao Xie</span>,
+                Yuan Xue,
+                <a href="https://sites.ji.sjtu.edu.cn/yifei-zhu/">Yifei Zhu</a>,
+                <a href="http://zwang.inflexionlab.org">Zhi Wang</a>
+              </p>
+              <div class="pub__links">
+                <a class="pill" href="data/22-infocom-armol.pdf"><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg>Paper</a>
+                <a class="pill" href="https://mmlabsigs.notion.site/Cost-Effective-MLaaS-Federation-A-Combinatorial-Reinforcement-Learning-Approach-fd27b02a403240f3b55ec26ad5ba00db"><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg>Project</a>
+                <a class="pill" href="https://github.com/ShuzhaoXie/Armol"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg>Code</a>
+              </div>
+              <p class="pub__desc">
+                As naively using multiple ML APIs can lead to lower analytical accuracy and poor user experience, we employ reinforcement learning to select the optimal combination of MLaaSes, thus maximizing accuracy while minimizing cost.
+              </p>
             </div>
-          </div>
-        </article>
+          </li>
 
-        <!-- INFOCOM 2022 -->
-        <article class="flex flex-col md:flex-row gap-gutter py-stack-md">
-          <div class="w-full md:w-1/3 shrink-0 overflow-hidden bg-surface-container-low rounded-xl">
-            <img class="w-full h-auto object-cover" src="images/22-infocom-armol.png" alt="Armol">
-          </div>
-          <div class="flex-1">
-            <span class="text-caption text-on-surface-variant mb-1 block uppercase tracking-wider">INFOCOM, 2022</span>
-            <h3 class="text-headline-md paper-title mb-2">Cost Effective MLaaS Federation: A Combinatorial Reinforcement Learning Approach</h3>
-            <p class="text-body-md text-on-surface-variant mb-3">
-              <span class="font-bold text-on-surface">Shuzhao Xie</span>,
-              Yuan Xue,
-              <a class="inline-link" href="https://sites.ji.sjtu.edu.cn/yifei-zhu/">Yifei Zhu</a>,
-              <a class="inline-link" href="http://zwang.inflexionlab.org">Zhi Wang</a>
-            </p>
-            <div class="flex flex-wrap gap-x-4 text-label-sm mb-3">
-              <a class="paper-link" href="data/22-infocom-armol.pdf">[paper]</a>
-              <a class="paper-link" href="https://mmlabsigs.notion.site/Cost-Effective-MLaaS-Federation-A-Combinatorial-Reinforcement-Learning-Approach-fd27b02a403240f3b55ec26ad5ba00db">[project]</a>
-              <a class="paper-link" href="https://github.com/ShuzhaoXie/Armol">[code]</a>
+        </ol>
+      </section>
+
+      <!-- Professional Service & Teaching -->
+      <section class="section" id="service">
+        <div class="twocol">
+
+          <div class="reveal">
+            <div class="section__head">
+              <h2 class="section__title"><span class="section__num">03</span>Service</h2>
             </div>
-            <p class="text-body-sm text-on-surface-variant leading-relaxed">
-              As naively using multiple ML APIs can lead to lower analytical accuracy and poor user experience, we employ reinforcement learning to select the optimal combination of MLaaSes, thus maximizing accuracy while minimizing cost.
-            </p>
+            <p class="kicker">Journal &amp; Conference Reviewer</p>
+            <ul class="leaders">
+              <li><span class="leaders__k">CVPR</span><span class="leaders__dots"></span><span class="leaders__v">2025</span></li>
+              <li><span class="leaders__k">ICCV</span><span class="leaders__dots"></span><span class="leaders__v">2025</span></li>
+              <li><span class="leaders__k">ACM MM</span><span class="leaders__dots"></span><span class="leaders__v">2024 – 2025</span></li>
+              <li><span class="leaders__k">ICASSP</span><span class="leaders__dots"></span><span class="leaders__v">2023 – 2025</span></li>
+              <li><span class="leaders__k">IJCNN</span><span class="leaders__dots"></span><span class="leaders__v">2025</span></li>
+            </ul>
           </div>
-        </article>
 
-      </div>
+          <div class="reveal">
+            <div class="section__head">
+              <h2 class="section__title"><span class="section__num">04</span>Teaching</h2>
+            </div>
+            <p class="kicker">Teaching Assistant</p>
+            <ul class="courses">
+              <li>
+                <span class="course__name">Big Data System (B)</span>
+                <span class="course__meta">Tsinghua University · Fall 2021</span>
+              </li>
+              <li>
+                <span class="course__name">Distributed Machine Learning</span>
+                <span class="course__meta">Tsinghua University · Fall 2024</span>
+              </li>
+            </ul>
+          </div>
 
-      <div class="pt-stack-sm text-right">
-        <a href="publications.html" class="text-label-sm text-on-surface-variant uppercase tracking-wider link-minimal">View Full Publications List &nbsp;→</a>
-      </div>
-    </section>
-
-    <!-- Professional Service & Teaching -->
-    <section id="service" class="mb-stack-lg pt-stack-md border-t border-border-subtle">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
-
-        <div>
-          <h2 class="text-headline-lg text-primary mb-stack-sm">Service</h2>
-          <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-3">Journal & Conference Reviewer</p>
-          <ul class="space-y-2">
-            <li class="flex items-baseline gap-4">
-              <span class="text-label-sm text-on-surface-variant w-24 uppercase tracking-wider">CVPR</span>
-              <span class="text-body-md">2025</span>
-            </li>
-            <li class="flex items-baseline gap-4">
-              <span class="text-label-sm text-on-surface-variant w-24 uppercase tracking-wider">ICCV</span>
-              <span class="text-body-md">2025</span>
-            </li>
-            <li class="flex items-baseline gap-4">
-              <span class="text-label-sm text-on-surface-variant w-24 uppercase tracking-wider">ACM MM</span>
-              <span class="text-body-md">2024 – 2025</span>
-            </li>
-            <li class="flex items-baseline gap-4">
-              <span class="text-label-sm text-on-surface-variant w-24 uppercase tracking-wider">ICASSP</span>
-              <span class="text-body-md">2023 – 2025</span>
-            </li>
-            <li class="flex items-baseline gap-4">
-              <span class="text-label-sm text-on-surface-variant w-24 uppercase tracking-wider">IJCNN</span>
-              <span class="text-body-md">2025</span>
-            </li>
-          </ul>
         </div>
+      </section>
 
-        <div>
-          <h2 class="text-headline-lg text-primary mb-stack-sm">Teaching</h2>
-          <p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-3">Teaching Assistant</p>
-          <ul class="space-y-4">
-            <li class="flex flex-col">
-              <span class="text-body-md font-bold">Big Data System (B)</span>
-              <span class="text-caption text-on-surface-variant">Tsinghua University · Fall 2021</span>
-            </li>
-            <li class="flex flex-col">
-              <span class="text-body-md font-bold">Distributed Machine Learning</span>
-              <span class="text-caption text-on-surface-variant">Tsinghua University · Fall 2024</span>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
+    </div>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-background border-t border-border-subtle py-stack-md">
-    <div class="max-w-[800px] mx-auto px-margin-mobile flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
-      <div class="text-label-md uppercase tracking-widest text-primary font-bold">© 2025 Shuzhao Xie</div>
-      <div class="flex gap-4 text-caption text-on-surface-variant">
+  <footer class="site-footer">
+    <div class="wrap footer__inner">
+      <span class="footer__copy">© 2025 Shuzhao Xie</span>
+      <div class="footer__meta">
         <span>Last updated: July 2025</span>
         <span>Tsinghua SIGS</span>
-        <span>Template inspired by <a class="inline-link" href="https://jonbarron.info">Jon Barron</a></span>
+        <span>Template inspired by <a class="ilink" href="https://jonbarron.info">Jon Barron</a></span>
       </div>
     </div>
   </footer>
 
-  <script>
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href.length > 1) {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-          }
-        }
-      });
-    });
-  </script>
+  <script src="assets/site.js"></script>
 </body>
 </html>
