@@ -50,7 +50,7 @@
   var QUAL = {
     "67d702f2e8": {
       src: "static/images/recon_67d702f2e8.webp", w: 3201, h: 939, name: "ScanNet++ scene 67d702f2e8", holoSceneLabel: "HoloScene",
-      caption: "<strong>Qualitative comparison on ScanNet++ scene 67d702f2e8</strong> — rendered appearance (top) and geometry (bottom). To reduce the influence of upstream pose and segmentation errors, HoloScene (official release) and ReplicateAnyScene (our reimplementation) use ScanNet++ SfM camera poses and manually annotated instance masks from the HoloScene release. These configurations differ from the paper's quantitative evaluation, where HoloScene<sup>*</sup> uses our estimated inputs with normal supervision disabled. GPT-6 Astra reconstructs directly from RGB images; CoDimRecon uses camera poses, depth, and instance masks estimated from multi-view RGB images."
+      caption: "<strong>Qualitative comparison on ScanNet++ scene 67d702f2e8</strong> — rendered appearance (top) and geometry (bottom). To reduce the influence of upstream pose and segmentation errors, HoloScene (official release) and ReplicateAnyScene (our reimplementation) use ScanNet++ SfM camera poses and manually annotated instance masks from the HoloScene release. GPT-6 Astra reconstructs directly from RGB images; CoDimRecon uses camera poses, depth, and instance masks estimated from multi-view RGB images."
     },
     "7831862f02": { src: "static/images/recon_7831862f02.webp", w: 2400, h: 652, name: "ScanNet++ scene 7831862f02", holoSceneLabel: "HoloScene*" },
     "acd69a1746": { src: "static/images/recon_acd69a1746.webp", w: 2400, h: 652, name: "ScanNet++ scene acd69a1746", holoSceneLabel: "HoloScene*" },
