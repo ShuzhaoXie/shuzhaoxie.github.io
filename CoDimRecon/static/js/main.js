@@ -49,14 +49,14 @@
   /* ---------- Qualitative comparison tabs ---------- */
   var QUAL = {
     "67d702f2e8": {
-      src: "static/images/recon_67d702f2e8.webp", w: 3201, h: 939, name: "ScanNet++ scene 67d702f2e8",
-      caption: "<strong>Qualitative comparison on ScanNet++ scene 67d702f2e8</strong> — rendered appearance (top) and geometry (bottom). Our method reconstructs complete, compact object geometry at faithful scale, from the rear door and wall shelf to the bookcase contents and swivel chair. HoloScene's surfaces are fragmented, ReplicateAnyScene omits the doors and poster, and GPT-6 Astra enlarges the rear door. Our rendering is clean, without the blur and artifacts around the chair and bookcase in HoloScene's rendering."
+      src: "static/images/recon_67d702f2e8.webp", w: 3201, h: 939, name: "ScanNet++ scene 67d702f2e8", holoSceneLabel: "HoloScene",
+      caption: "<strong>Qualitative comparison on ScanNet++ scene 67d702f2e8</strong> — rendered appearance (top) and geometry (bottom). To reduce the influence of upstream pose and segmentation errors, HoloScene (official release) and ReplicateAnyScene (our reimplementation) use ScanNet++ SfM camera poses and manually annotated instance masks from the HoloScene release. These configurations differ from the paper's quantitative evaluation, where HoloScene<sup>*</sup> uses our estimated inputs with normal supervision disabled. GPT-6 Astra reconstructs directly from RGB images; CoDimRecon uses camera poses, depth, and instance masks estimated from multi-view RGB images."
     },
-    "7831862f02": { src: "static/images/recon_7831862f02.webp", w: 2400, h: 652, name: "ScanNet++ scene 7831862f02" },
-    "acd69a1746": { src: "static/images/recon_acd69a1746.webp", w: 2400, h: 652, name: "ScanNet++ scene acd69a1746" },
-    "room_0": { src: "static/images/recon_room_0.webp", w: 2400, h: 978, name: "Replica room_0" },
-    "room_1": { src: "static/images/recon_room_1.webp", w: 2400, h: 978, name: "Replica room_1" },
-    "room_2": { src: "static/images/recon_room_2.webp", w: 2400, h: 978, name: "Replica room_2" }
+    "7831862f02": { src: "static/images/recon_7831862f02.webp", w: 2400, h: 652, name: "ScanNet++ scene 7831862f02", holoSceneLabel: "HoloScene*" },
+    "acd69a1746": { src: "static/images/recon_acd69a1746.webp", w: 2400, h: 652, name: "ScanNet++ scene acd69a1746", holoSceneLabel: "HoloScene*" },
+    "room_0": { src: "static/images/recon_room_0.webp", w: 2400, h: 978, name: "Replica room_0", holoSceneLabel: "HoloScene*" },
+    "room_1": { src: "static/images/recon_room_1.webp", w: 2400, h: 978, name: "Replica room_1", holoSceneLabel: "HoloScene*" },
+    "room_2": { src: "static/images/recon_room_2.webp", w: 2400, h: 978, name: "Replica room_2", holoSceneLabel: "HoloScene*" }
   };
   var qualImg = $("#qual-img");
   var qualCaption = $("#qual-caption");
@@ -66,7 +66,7 @@
     if (!q) return;
     qualTabs.forEach(function (t) { t.setAttribute("aria-selected", String(t.dataset.qual === key)); });
     qualCaption.innerHTML = q.caption ||
-      "<strong>Qualitative comparison on " + q.name + "</strong> — rendered appearance (top) and geometry (bottom) for each method from the same input view: ground truth, HoloScene, ReplicateAnyScene, GPT-6 Astra, and ours.";
+      "<strong>Qualitative comparison on " + q.name + "</strong> — rendered appearance (top) and geometry (bottom) from the same input view. HoloScene<sup>*</sup> disables normal supervision and uses the same VGGT-Omega camera poses and depth and mask-clustering instance masks as CoDimRecon, all estimated from multi-view RGB images. ReplicateAnyScene is our reimplementation using manually annotated instance masks from the HoloScene release; its quantitative results instead use the default VLM + SAM3 segmentation. GPT-6 Astra reconstructs directly from RGB images.";
     if (qualImg.getAttribute("src") === q.src) return;
     qualImg.classList.add("is-loading");
     var next = new Image();
@@ -74,7 +74,7 @@
       qualImg.src = q.src;
       qualImg.width = q.w;
       qualImg.height = q.h;
-      qualImg.alt = "Qualitative comparison on " + q.name + ": rendered appearance (top row) and geometry (bottom row) for ground truth, HoloScene, ReplicateAnyScene, GPT-6 Astra, and CoDimRecon.";
+      qualImg.alt = "Qualitative comparison on " + q.name + ": rendered appearance (top row) and geometry (bottom row) for ground truth, " + q.holoSceneLabel + ", ReplicateAnyScene, GPT-6 Astra, and CoDimRecon.";
       qualImg.classList.remove("is-loading");
     };
     next.src = q.src;
