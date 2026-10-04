@@ -66,7 +66,7 @@
     if (!q) return;
     qualTabs.forEach(function (t) { t.setAttribute("aria-selected", String(t.dataset.qual === key)); });
     qualCaption.innerHTML = q.caption ||
-      "<strong>Qualitative comparison on " + q.name + "</strong> — rendered appearance (top) and geometry (bottom) from the same input view. HoloScene<sup>*</sup> disables normal supervision and uses the same VGGT-Omega camera poses and depth and mask-clustering instance masks as CoDimRecon, all estimated from multi-view RGB images. ReplicateAnyScene is our reimplementation using manually annotated instance masks from the HoloScene release; its quantitative results instead use the default VLM + SAM3 segmentation. GPT-6 Astra reconstructs directly from RGB images.";
+      "<strong>Qualitative comparison on " + q.name + "</strong> — rendered appearance (top) and geometry (bottom) from the same input view. HoloScene<sup>*</sup> disables normal supervision and uses the same VGGT-Omega camera poses and depth and mask-clustering instance masks as CoDimRecon, all estimated from multi-view RGB images. ReplicateAnyScene is our reimplementation using manually annotated instance masks from the HoloScene release. GPT-6 Astra reconstructs directly from RGB images.";
     if (qualImg.getAttribute("src") === q.src) return;
     qualImg.classList.add("is-loading");
     var next = new Image();
